@@ -61,6 +61,7 @@ h3 {
 .contents {
   list-style: none;
   padding-left: 3%;
+  margin-bottom: 30px;
 }
 
 .contents li {
