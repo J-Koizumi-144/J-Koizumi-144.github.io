@@ -1,0 +1,87 @@
+@font-face {
+  font-family: "Computer Modern";
+  src: url("font/cmunrm.ttf") format("truetype")
+}
+
+@font-face {
+  font-family: "Computer Modern Bold";
+  src: url("font/cmunbx.ttf") format("truetype")
+}
+
+html{
+  background-color: #b8ccd9;
+}
+
+body {
+  font-family: 'Computer Modern', serif;
+  max-width: 800px;
+  min-height: 100vh;
+  margin: 0px auto;
+  padding: 5%;
+  line-height: 1.4;
+  background-color: #fcfcfc;
+  color: #333;
+  font-size: 18px;
+}
+
+h1, h2, h3 {
+  text-align: center;
+}
+
+h1 {
+  font-variant-caps: small-caps;
+  font-family: 'Computer Modern Bold', serif;
+  font-size: 22px;
+  margin-bottom: 40px;
+}
+
+h2 {
+  font-variant-caps: small-caps;
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+h3 {
+  font-family: 'Computer Modern Bold', serif;
+  font-size: 18px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.abstract {
+  text-align: justify;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.contents {
+  list-style: none;
+  padding: 0;
+}
+
+.contents li {
+  margin: 5px 0;
+}
+
+.paper {
+  margin-bottom: 40px;
+}      
+.journal {
+
+}
+
+a {
+  text-decoration: none;
+  color: #007acc;
+}
+
+.normal{
+  text-indent: 1rem;
+}
+
+.myname{
+  font-size: 16px;
+  margin-bottom: 40px;
+}
