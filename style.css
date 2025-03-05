@@ -9,7 +9,7 @@
 }
 
 html{
-  background-color: #b8ccd9;
+  background-color: rgb(198, 206, 197);
 }
 
 body {
@@ -51,7 +51,8 @@ h3 {
 
 .abstract {
   text-align: justify;
-  padding-left: 10px;
+  padding-left: 10%;
+  padding-right: 10%;
   margin-bottom: 20px;
   font-size: 16px;
 }
