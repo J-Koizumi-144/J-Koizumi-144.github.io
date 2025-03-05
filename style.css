@@ -52,15 +52,15 @@ h3 {
 
 .abstract {
   text-align: justify;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-left: 5%;
+  padding-right: 5%;
   margin-bottom: 20px;
   font-size: 16px;
 }
 
 .contents {
   list-style: none;
-  padding: 0;
+  padding-left: 3%;
 }
 
 .contents li {
@@ -76,7 +76,7 @@ h3 {
 
 a {
   text-decoration: none;
-  color: #007acc;
+  color: rgb(12, 146, 150);
 }
 
 .normal{
