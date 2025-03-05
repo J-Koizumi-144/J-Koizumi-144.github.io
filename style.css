@@ -33,14 +33,14 @@ h1 {
   font-variant-caps: small-caps;
   font-family: 'Computer Modern Bold', serif;
   font-size: 22px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 h2 {
   font-variant-caps: small-caps;
   font-size: 20px;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 h3 {
@@ -52,8 +52,8 @@ h3 {
 
 .abstract {
   text-align: justify;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
   margin-bottom: 20px;
   font-size: 16px;
 }
@@ -85,5 +85,5 @@ a {
 
 .myname{
   font-size: 16px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
