@@ -95,7 +95,7 @@ body {
 
 	</head>
 	<body>
-		<audio id="se_click" src="se_click.ogg" preload="auto"></audio>
+		<audio id="se_select" src="select.wav" preload="auto"></audio>
 		<canvas id="canvas">
 			Your browser does not support the canvas tag.
 		</canvas>
@@ -218,7 +218,7 @@ const engine = new Engine(GODOT_CONFIG);
 		</script>
 		<script>
 			window.playSE = function() {
-			  const se = document.getElementById("se_click");
+			  const se = document.getElementById("se_select");
 			  if (se) {
 				se.currentTime = 0;
 				se.play().catch(e => console.warn("Audio play failed:", e));
