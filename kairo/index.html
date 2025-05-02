@@ -95,7 +95,12 @@ body {
 
 	</head>
 	<body>
+		<audio id="se_click" src="click_short.wav" preload="auto"></audio>
+		<audio id="se_on" src="on_short.wav" preload="auto"></audio>
+		<audio id="se_reset" src="reset_short.wav" preload="auto"></audio>
+		<audio id="se_clear" src="piano.wav" preload="auto"></audio>
 		<audio id="se_select" src="select.wav" preload="auto"></audio>
+
 		<canvas id="canvas">
 			Your browser does not support the canvas tag.
 		</canvas>
@@ -112,7 +117,7 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":1074624,"index.wasm":43699190},"focusCanvas":true,"gdextensionLibs":[]};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":1074976,"index.wasm":43699190},"focusCanvas":true,"gdextensionLibs":[]};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
@@ -217,14 +222,43 @@ const engine = new Engine(GODOT_CONFIG);
 }());
 		</script>
 		<script>
-			window.playSE = function() {
-			  const se = document.getElementById("se_select");
-			  if (se) {
+		window.playSE_click = function() {
+			const se = document.getElementById("se_click");
+			if (se) {
 				se.currentTime = 0;
 				se.play().catch(e => console.warn("Audio play failed:", e));
-			  }
 			}
-		  </script>		  
+		}
+		window.playSE_on = function() {
+			const se = document.getElementById("se_on");
+			if (se) {
+				se.currentTime = 0;
+				se.play().catch(e => console.warn("Audio play failed:", e));
+			}
+		}
+		window.playSE_reset = function() {
+			const se = document.getElementById("se_reset");
+			if (se) {
+				se.currentTime = 0;
+				se.play().catch(e => console.warn("Audio play failed:", e));
+			}
+		}
+		window.playSE_clear = function() {
+			const se = document.getElementById("se_clear");
+			if (se) {
+				se.currentTime = 0;
+				se.play().catch(e => console.warn("Audio play failed:", e));
+			}
+		}
+		window.playSE_select = function() {
+			const se = document.getElementById("se_select");
+			if (se) {
+				se.currentTime = 0;
+				se.play().catch(e => console.warn("Audio play failed:", e));
+			}
+		}
+		</script>
 	</body>
+	  
 </html>
 
