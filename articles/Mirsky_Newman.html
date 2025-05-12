@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junnosuke Koizumi - Expository Notes</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+
+</head>
+<body>
+    <div class="navigation">
+        <a href="../index.html">Home</a> > <a href="../notes.html">Expository Notes</a> > <a href="Mirsky_Newman.html">Mirsky-Newmanの定理</a>
+    </div>
+    <h2>Mirsky-Newmanの定理</h2>
+    <p>
+        有限個の等差数列による整数全体の被覆は被覆系（covering system）と呼ばれており、Erdősをはじめとする多くの数学者により研究されてきた。
+        例えば
+        \[
+        2\mathbb{Z},\ 3\mathbb{Z},\ 4\mathbb{Z}+1,\ 6\mathbb{Z}+5,\ 12\mathbb{Z}+7
+        \]
+        は被覆系をなす。本記事の主題は被覆系に関する以下の定理である。
+    </p>
+    <div class="theorem">
+        <b class="theoremname">定理1</b>
+        \(n\geq 2\)とする。どの二つも互いに交わらないような被覆系
+        \[
+            a_1\mathbb{Z} + b_1,\dots,a_n\mathbb{Z} + b_n
+        \]
+        に対し、公差\(a_1,\dots,a_n\)のうち最大のものは二つ以上存在する。
+    </div>
+    <p>
+        この定理は1950年にErdősにより予想され、その後すぐにMirskyとNewmanより証明されたが、証明は出版されなかった。
+        同じ結果は独立にDavenportとRadoによっても得られている。
+        ここでは私が考えた簡潔な証明を紹介したい。
+    </p>
+    <p>
+        <b class="theoremname">証明</b>
+        各々の等差数列に一つの色を割り当てることで、整数全体を\(n\)色に塗り分ける。
+        \(a_1,\dots,a_n\)の最小公倍数を\(N\)とすると塗り分けは周期\(N\)で繰り返すので、正\(N\)角形の頂点が\(n\)色に塗り分けられているとみなせる。
+        正\(N\)角形の頂点を\(z^N=1\)の解全体と自然に同一視すると、色\(i\)で塗られた頂点は\(z^{c_i}=\alpha_i\)の解と対応する。
+        ただし\(c_i=N/a_i\)であり、\(\alpha_i\)は絶対値が\(1\)の複素数である。
+        よって
+        \[
+        z^N-1=\prod_{i=1}^n(z^{c_i}-\alpha_i)
+        \]
+        が成り立つ。
+        \(c_1,\dots,c_n\)の最小値を\(c\)とし、上の式の両辺の\(z^c\)の係数を比較すると、\(c_i=c\)となる\(i\)が二つ以上存在することがわかる。
+        よって\(a_1,\dots,a_n\)のうち最大のものは二つ以上存在する。
+    </p>
+</body>
+</html>
