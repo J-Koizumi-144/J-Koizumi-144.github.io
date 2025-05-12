@@ -22,7 +22,7 @@ body {
   line-height: 1.3;
   background-color: #fcfcfc;
   color: #333;
-  font-size: 18px;
+  font-size: 17px;
 }
 
 h1, h2, h3 {
@@ -45,7 +45,8 @@ h2 {
 }
 
 h3 {
-  font-family: 'Computer Modern Bold', serif;
+  font-weight: bold;
+  font-family: 'Computer Modern Bold', sans-serif;
   font-size: 18px;
   margin-top: 20px;
   text-align: left;
@@ -79,7 +80,7 @@ a {
 }
 
 .normal{
-  text-indent: 1rem;
+  /*text-indent: 1rem;*/
 }
 
 .myname{
@@ -89,4 +90,8 @@ a {
 
 img {
   max-width: 200px;
+}
+
+.navigation{
+  font-size: 16px;
 }
