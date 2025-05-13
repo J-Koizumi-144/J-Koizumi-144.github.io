@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junnosuke Koizumi - Expository Notes</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+
+</head>
+<body>
+    <div class="navigation">
+        <a href="../index.html">Home</a> > <a href="../notes.html">Expository Notes</a> > <a href="lattice_cube.html">格子立方体</a>
+    </div>
+    <h2>格子立方体</h2>
+    <p>
+        平面上の格子点を頂点とする正方形の一辺の長さは、非負整数\(a,b\)を用いて\(\sqrt{a^2+b^2}\)と表すことができる。
+        逆にこのように表せる正の実数は、格子点を頂点とする正方形の一辺の長さとして実現される。
+    </p>
+    <p>
+        では、三次元空間内の格子点を頂点とする立方体の一辺の長さはどのようになるだろうか。
+        明らかに一辺の長さは非負整数\(a,b,c\)を用いて\(\sqrt{a^2+b^2+c^2}\)と表すことができる。
+        しかし三次元の場合、この形の実数が全て実現可能なわけではない。
+        実際、格子点を頂点とする立方体の体積は整数を成分とする行列の行列式として表せるため、整数になる。
+        したがって一辺の長さを\(D\)とすると\(D^2,D^3\)がどちらも整数となるため、\(D\)は整数でなければならない。
+    </p>
+    <p>
+        さらに四次元空間内の格子点を頂点とする超立方体の一辺の長さについても考えよう。
+        明らかに一辺の長さは非負整数\(a,b,c,d\)を用いて\(\sqrt{a^2+b^2+c^2+d^2}\)と表すことができる。
+        一方、Lagrangeの四平方和定理より、任意の正整数\(D\)は非負整数\(a,b,c,d\)を用いて
+        \[
+        D=a^2+b^2+c^2+d^2
+        \]
+        と表すことができる。そこで四つのベクトル
+        \[
+        \begin{pmatrix}a\\b\\c\\d\end{pmatrix},\ 
+        \begin{pmatrix}b\\-a\\d\\-c\end{pmatrix},\ 
+        \begin{pmatrix}c\\-d\\-a\\b\end{pmatrix},\ 
+        \begin{pmatrix}d\\c\\-b\\-a\end{pmatrix}
+        \]
+        で張られる超立方体を考えると、この超立方体の頂点は格子点であり、その一辺の長さは\(\sqrt{D}\)となる。
+        以上より、四次元空間内の格子点を頂点とする超立方体の一辺の長さとしてありうる値の集合は\(\{\sqrt{D}\mid D\in \mathbb{Z}_{>0}\}\)となる。
+    </p>
+    <p>
+        一般に\(n\)次元空間内の格子点を頂点とする\(n\)次元超立方体の一辺の長さとしてあり得る集合を\(L(n)\)で表す。
+        すでに見たように
+        \[
+        L(2)=\{\sqrt{a^2+b^2}\mid a,b\in \mathbb{Z}_{\geq 0},\ (a,b)\neq (0,0)\}
+        \]
+        \[
+        L(3)=\mathbb{Z}_{>0}
+        \]
+        \[
+        L(4)=\{\sqrt{D}\mid D\in \mathbb{Z}_{>0}\}
+        \]
+        である。
+        一般に\(n\)が正の奇数のとき、\(n=3\)の場合と同様の議論により\(L(n)=\mathbb{Z}_{>0}\)が示せる。
+        また\(n\)が\(4\)の倍数のときは、\(n=4\)の場合の構成の直積を考えることで
+        \[
+        L(n)=\{\sqrt{D}\mid D\in \mathbb{Z}_{>0}\}
+        \]
+        が示せる。
+    </p>
+    <p>
+        残るは\(n\equiv 2\pmod 4\)の場合である。
+        この場合に\(L(n)\)を求める問題は<a href="https://mathoverflow.net/questions/161141/characterization-of-volumes-of-lattice-cubes">2014年のMathOverflowの投稿</a>で問われ、Elkiesにより鮮やかな解答が与えられた：
+    </p>
+    <div class="theorem">
+        <b class="theoremname">定理1</b>\(n\equiv 2\pmod 4\)のとき、
+        \[
+        L(n)=\{\sqrt{a^2+b^2}\mid a,b\in \mathbb{Z}_{\geq 0},\ (a,b)\neq (0,0)\}.
+        \]
+    </div>
+    <p>
+        以下ではこの定理のElkiesによる証明を紹介する。
+    </p>
+    <h3>Wittの消去定理</h3>
+    <p>
+    定理1の証明にはWittの消去定理という二次形式論の定理を用いる。
+    \(K\)を標数が\(2\)でない体とする。
+    有限次元\(K\)ベクトル空間\(V\)上の対称双線形形式とは、双線形写像
+    \[
+    B\colon V\times V\to K
+    \]
+    であって\(B(v,w)=B(w,v)\)を満たすものを指す。
+    有限次元\(K\)ベクトル空間\(V\)とその上の対称双線形形式\(B\)の組\((V,B)\)のことを\(K\)上の二次空間と呼ぶ。
+    二つの二次空間\((V,B),(V',B')\)が同型であるとは、\(K\)ベクトル空間の同型\(\varphi\colon V\to V'\)であって
+    \[
+        B(v,w)=B'(\varphi(v),\varphi(w))
+    \]
+    を満たすものが存在することを指す。
+    </p>
+    <div class="theorem">
+        <b class="theoremname">定理2（Wittの消去定理）</b>\(V_1,V_2,V_1',V_2'\)を\(K\)上の二次空間とする。
+        このとき、\(V_1\oplus V_2\cong V_1'\oplus V_2'\)かつ\(V_1\cong V_1'\)ならば\(V_2\cong V_2'\)が成り立つ。
+    </div>
+    <p>
+        Wittの消去定理の証明は割愛する。
+    </p>
+    <h3>定理1の証明</h3>
+    <p>
+        \(n\equiv 2\pmod 4\)とし、\(\mathbb{Q}^n\)の標準的な内積を\(B\)で表す。
+        \(D\in L(n)\)とすると、どの二つも直交する長さ\(D\)のベクトル\(v_1,\dots,v_n\in \mathbb{Q}^n\)が存在する。
+        \(\mathbb{Q}^n\)の標準基底\(e_1,\dots,e_n\)を\(v_1,\dots,v_n\)にうつす\(\mathbb{Q}\)ベクトル空間の同型を\(\varphi\)とすると
+        \[
+        B(\varphi(e_i),\varphi(e_j))=B(v_i,v_j)=D^2B(e_i,e_j)
+        \]
+        となるため、二次空間として
+        \[
+        (\mathbb{Q}^n,D^2B)\cong (\mathbb{Q}^n,B)
+        \]
+        となる。一方で\(D^2\in \mathbb{Z}\)より\(D\in L(4)\)なので
+        \[
+        (\mathbb{Q}^4,D^2B)\cong (\mathbb{Q}^4,B)
+        \]
+        である。よってWittの消去定理を繰り返し用いることで
+        \[
+        (\mathbb{Q}^2,D^2B)\cong (\mathbb{Q}^2,B)
+        \]
+        が得られる。すなわち\(\mathbb{Q}\)ベクトル空間の同型\(\psi\colon \mathbb{Q}^2\to \mathbb{Q}^2\)であって
+        \[
+        B(\psi(v),\psi(w))=D^2B(v,w)
+        \]
+        を満たすものが存在する。
+        \[
+        \psi(e_1)=\begin{pmatrix}p\\q\end{pmatrix}
+        \]
+        とすると\(D^2=D^2(B(e_1,e_1))=B(\psi(e_1),\psi(e_1))=p^2+q^2\)となる。
+        特にある正整数\(N\)に対し、\(N^2D^2\)は二つの非負整数の平方和で表せる。
+        二平方和定理より、正整数が二つの非負整数の平方和で表せるかどうかはその非平方部分のみに依るので、\(D^2\)も二つの非負整数の平方和で表せる。
+        以上で定理1が示された。
+    </p>
+</body>
+</html>
