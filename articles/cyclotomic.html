@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junnosuke Koizumi - Expository Notes</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+
+</head>
+<body>
+    <div class="navigation">
+        <a href="../index.html">Home</a> > <a href="../notes.html">Expository Notes</a> > <a href="cyclotomic.html">円分多項式はなぜ既約なのか？</a>
+    </div>
+    <h2>円分多項式はなぜ既約なのか？</h2>
+    <p>
+        円分多項式の既約性は古典的な定理だが、その証明はどれもそれなりに技巧的である。
+        私はこの定理を初めて学んだ時からずっと、何かもっと概念的に整理された説明ができないものかと思っていた。
+        この記事では、今のところ私が最も理解しやすいと思う形で、円分多項式の既約性のDedekindによる証明を整理しようと思う。
+    </p>
+    <p>
+        以下では環と言ったら単位元を持つ可換環のことを指す。
+        一般に整数係数多項式\(f(T)\)があると、任意の環\(A\)において方程式\(f(x)=0\)を考えることができる。
+        環\(A\)に対して集合\(Z_f(A)\)を
+        \[
+        Z_f(A):=\{x\in A\mid f(x)=0\}
+        \]
+        により定めよう。
+        すると環準同型\(\varphi\colon A\to B\)に対して
+        \[
+        \varphi_*\colon Z_f(A)\to Z_f(B);\quad x\mapsto \varphi(x)
+        \]
+        という写像が存在する。
+        つまり\(Z_f\)は環の圏から集合の圏への関手を定める。
+        例えば\(f(T)=T^n-1\)の場合、対応する関手\(Z_f\)は\(1\)の\(n\)乗根全体を与える関手
+        \[
+        \mu_n\colon A\mapsto \{x\in A\mid x^n=1\}
+        \]
+        に他ならない。
+        このように多項式\(f(T)\)の代わりに関手\(Z_f\)を考えるというものの見方（いわゆるfunctor of pointsの視点）を採用することがこの記事のポイントである。
+    </p>
+    <p>
+        以下、\(n\)を正整数とし、\(\zeta_n=e^{2\pi i/n}\in \mathbb{C}\)と定める。
+        円分多項式\(\Phi_n(T)\)は整数係数モニック多項式であり、その根は\(1\)の原始\(n\)乗根全体、すなわち
+        \[
+        \{\zeta_n^i\mid [i]\in (\mathbb{Z}/n\mathbb{Z})^\times\}
+        \]
+        であった。
+        \(\Phi_n(T)\)に対応する環の圏から集合の圏への関手を\(\mu'_n\)で表す：
+        \[
+        \mu'_n(A) = \{x\in A\mid \Phi_n(x)=0\}.
+        \]
+        \(\Phi_n(T)\)は\(T^n-1\)を割り切るので、\(\mu'_n\)は\(\mu_n\)の部分関手となる。
+    </p>
+    <div class="theorem">
+        <b class="theoremname">補題1</b>体\(K\)において\(n\)が可逆ならば
+        \[
+        \mu_n(K)=\coprod_{d\mid n}\mu'_d(K).
+        \]
+    </div>
+    <p>
+        <b class="theoremname">証明</b>円分多項式の定義より
+        \[
+        T^n-1=\prod_{d\mid n}\Phi_d(T)
+        \]
+        という分解が存在する。
+        左辺が\(K\)において重根を持たないことを示せばよい。これは\(K[T]\)において\((T^n-1)'=nT^{n-1}\neq 0\)であることからわかる。\(\square\)
+    </p>
+    <p>
+        上の補題は、ある意味で関手\(\mu_n\)が関手\(\mu'_d\)たちに『直和分解』されることを主張している。
+        ただし上の補題において\(K\)を一般の環に置き換えたものは成立しないため、環の圏から集合の圏への関手としての直和分解が存在するわけではない。
+        スキーム論を知っている読者に向けて補足すると、これは\(\mathbb{Z}[1/n]\)上のアファインスキームの圏上のZariski層としての直和分解を与えている。
+    </p>
+    <p>
+        さて、円分多項式の既約性を示すために、\(\Phi_n(T)\)が
+        \[
+        \Phi_n(T)=f(T)g(T)
+        \]
+        と二つの整数係数多項式の積に分解されたと仮定しよう。
+        \(f(T),g(T)\)に対応する環の圏から集合の圏への関手をそれぞれ\(F,G\)で表す。
+        これらは\(\mu'_n\)の部分関手となり、補題1と同様に次のような分解が生じる：
+    </p>
+    <div class="theorem">
+        <b class="theoremname">補題2</b>体\(K\)において\(n\)が可逆ならば
+        \[
+        \mu'_n(K)=F(K)\sqcup G(K).
+        \]
+    </div>
+    <p>
+        特に\(\mu'_n(\mathbb{C})=F(\mathbb{C})\sqcup G(\mathbb{C})\)となる。
+        ここで、\(n\)と互いに素な素数\(p\)に対して
+        \[
+        \tag{1}\alpha\in F(\mathbb{C})\implies \alpha^p\in F(\mathbb{C})
+        \]
+        を示そう。
+        \(\alpha\in F(\mathbb{C})\)かつ\(\alpha^p\in G(\mathbb{C})\)と仮定して矛盾を導く。
+        \(\alpha\)で生成される代数体\(K=\mathbb{Q}(\alpha)\)の整数環\(\mathcal{O}_K\)を考えると、\(\alpha\)は代数的整数なので
+        \[
+        \alpha\in F(\mathcal{O}_K),\quad \alpha^p\in G(\mathcal{O}_K)
+        \]
+        となる。\(p\)の上にある\(\mathcal{O}_K\)の素イデアル\(\mathfrak{p}\)を取ると、関手性から
+        \[
+        [\alpha]\in F(\mathcal{O}_K/\mathfrak{p}),\quad [\alpha^p]\in G(\mathcal{O}_K/\mathfrak{p})
+        \]
+        となる。一方でFrobenius自己準同型
+        \[
+        \mathcal{O}_K/\mathfrak{p}\to \mathcal{O}_K/\mathfrak{p};\quad x\mapsto x^p
+        \]
+        に対する関手性から\([\alpha^p]\in F(\mathcal{O}_K/\mathfrak{p})\)でなければならない。
+        これは補題2に矛盾している。
+        以上で(1)が示された。
+    </p>
+    <p>
+        いま\(f(T)\)が定数でないとすると、\(F(\mathbb{C})\)は空でない。
+        さらに\((\mathbb{Z}/n\mathbb{Z})^\times\)の\(\mu'_n(\mathbb{C})\)への自然な作用
+        \[
+        (\mathbb{Z}/n\mathbb{Z})^\times\times \mu'_n(\mathbb{C})\to \mu'_n(\mathbb{C});\quad ([k],x) \mapsto x^k
+        \]
+        は推移的であり、\((\mathbb{Z}/n\mathbb{Z})^\times\)は\(n\)と互いに素な素数の剰余類で生成されるので、(1)より\(F(\mathbb{C})=\mu'_n(\mathbb{C})\)となる。
+        これは\(g(T)\)が定数であることを意味する。
+        以上で\(\Phi_n(T)\)が既約であることが示された。
+    </p>
+    <p>
+        以上の証明は次のように要約できる：
+    </p>
+    <div class="theorem">
+        円分多項式\(\Phi_n(T)\)の因数分解は対応する関手\(\mu'_n\)の『直和分解』を誘導する（補題2）。
+        しかしこのような『直和分解』のされ方には、標数\(p\)の世界におけるFrobenius自己準同型の存在から来る制約が付く。
+        この制約を様々な\(p\)にわたってまとめ上げることで、非自明な『直和分解』が存在しないことが帰結される。
+    </div>
+    <p>
+        なお、上の証明をスキーム論の言葉で整理すると次のようになる。
+        円分多項式\(\Phi_n(T)\)の既約因子はスキーム\(X:=\mathop{\mathrm{Spec}} \mathbb{Z}[1/n][T]/(\Phi_n(T))\)の連結成分と対応する。
+        \(n\)と互いに素な素数\(p\)に対し、\(X\)の自己同型\(T\mapsto T^p\)は\((p)\in \mathop{\mathrm{Spec}} \mathbb{Z}[1/n]\)のファイバー上でFrobenius自己同型に一致するため、\(X\)の連結成分を保つ。
+        一方でこれらの自己同型は\(X\otimes\mathbb{C}\)に推移的に作用するため、\(X\)の連結成分にも推移的に作用する。
+        よって\(X\)は連結であり、\(\Phi_n(T)\)は既約である。
+    </p>
+</body>
+</html>
