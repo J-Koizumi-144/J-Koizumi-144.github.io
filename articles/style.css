@@ -110,3 +110,7 @@ p{
 .navigation{
   font-size: 16px;
 }
+
+.spoiler-content {
+  display: none;
+}
