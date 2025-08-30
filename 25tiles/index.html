@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>25TILES</title>
+<style>
+  :root { --tile-size: 100px; --gap: 6px; --mini: 20px; }
+  body {
+    margin: 0; min-height: 100vh;
+    display: grid; place-items: center;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto,
+                 "Hiragino Sans", "Noto Sans JP", sans-serif;
+    background: #f6f7f9;
+  }
+  main { text-align: center; width: min(680px, 96vw); }
+
+  /* ヘッダー：お手本プレビューと状態表示 */
+  .header {
+    display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center;
+    margin-bottom: 12px;
+  }
+  .preview-card {
+    width: 112px;
+    display: flex; align-items: center; gap: 12px;
+    background: #ddd; border: 1px solid #e2e6ef; border-radius: 12px;
+    padding: 10px 12px; box-shadow: 0 4px 16px rgba(0,0,0,.06);
+  }
+  .preview-card .label { font-weight: 600; color: #394150; }
+  .mini {
+    display: grid; grid-template-columns: repeat(5, var(--mini)); gap: 3px;
+  }
+  .mini-tile {
+    width: var(--mini); height: var(--mini);
+    border-radius: 3px; background: #fff; border: none;
+  }
+  .mini-tile.black { background: #111;}
+  .mini-tile.red { background: #5bc;}
+
+  .status-area { text-align: right; }
+  .status-text { font-weight: 600; color: #6b7280; font-size: 24px; }
+  .btn {
+    margin-left: .5rem; padding: .5rem .75rem;
+    border-radius: 10px; border: 2px solid #333333; background: #fff;
+    cursor: pointer; transition: transform .05s ease;
+    color: #222;
+  }
+  .btn:active { transform: scale(.98); }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
+  .btn.primary { background: #111; color: #fff; border-color: #111; }
+
+  .board-wrap { background: #ddd; border-radius: 12px; box-shadow: 0 6px 24px rgba(0,0,0,.08); padding: 16px; position: relative; }
+  .board-wrap.cleared { background: rgb(249, 223, 146); }
+  .board-wrap::before {
+    content: "";
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 0; height: 0;
+    border: 20px solid rgb(249, 223, 146); border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 5;
+  }
+  
+  .board-wrap.is-cleared::before {
+    animation: ring-grow 400ms ease-out forwards;
+  }
+
+  @keyframes ring-grow {
+    0%   { width: 100px; height: 100px; opacity: 1.0; }
+    70%  { opacity: 0.8; }
+    100% { width: 400px; height: 400px; opacity: 0; }
+  }
+
+  .board {
+    display: grid;
+    grid-template-columns: auto repeat(5, var(--tile-size));
+    grid-template-rows: auto repeat(5, var(--tile-size));
+    gap: var(--gap);
+    align-items: center;
+    justify-items: center;
+    padding: 20px;
+  }
+
+  .tile {
+    width: var(--tile-size); height: var(--tile-size);
+    border-radius: 6px; background: #fff;
+    transition: background-color .15s ease, box-shadow .15s ease;
+  }
+  .tile.black { background: #222;}
+  .tile.red { background: #2bc;}
+
+  .ctrl {
+    width: 54px; height: 54px; border-radius: 50%; margin: 5px;
+    border: none; background: #fff; cursor: pointer;
+    display: grid; place-items: center; position: relative;
+    transition: transform .05s ease, background .15s ease, border-color .15s ease;
+  }
+  .ctrl:active { transform: scale(.96); }
+
+  /* オーバーレイ（タイトル/結果） */
+  .overlay {
+    position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
+    padding: 24px; background: rgba(15,18,24,.5); z-index: 10;
+  }
+  .overlay.show { display: flex; }
+  .modal {
+    background: #fff; border: 1px solid #e6e8f0; border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.15); width: min(560px, 92vw);
+    padding: 24px; text-align: center;
+  }
+  .modal h1, .modal h2 { margin: 0 0 8px; color: #111827; }
+  .modal p { margin: 4px 0 16px; color: #4b5563; }
+  .modal .actions { display: flex; gap: 8px; justify-content: center; }
+
+  @media (max-width: 480px) {
+    :root { --tile-size: 44px; }
+    .ctrl, .top-left { width: 30px; height: 30px; }
+  }
+
+  #timerText {
+    display: inline-block;
+    min-width: 100px; /* 必要な幅に合わせて調整 */
+    text-align: left; /* または center */
+  }
+
+  #statusText {
+    display: inline-block;
+    min-width: 200px; /* 必要な幅に合わせて調整 */
+    text-align: left; /* または center */
+  }
+
+  #resultText {
+    font-size: 24px;
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="header">
+    <div class="preview-card">
+      <div class="mini" id="targetPreview" aria-label="お手本プレビュー"></div>
+    </div>
+    <div class="status-area">
+      <span id="statusText" class="status-text" aria-live="polite">SCORE: 0</span>
+      <span id="timerText" class="status-text" aria-live="polite">30.0</span>
+      <button id="newBtn" class="btn" type="button">NEXT</button>
+      <button id="resetBtn" class="btn" type="button">RESET</button>
+    </div>
+  </div>
+
+  <div class="board-wrap" id="boardWrap">
+    <div class="board" id="board" aria-label="タイル盤">
+      <div class="top-left" aria-hidden="true" style="width:36px;height:36px;"></div>
+      <!-- 以降はJSで生成 -->
+    </div>
+  </div>
+</main>
+
+<!-- タイトル画面 -->
+<div id="titleScreen" class="overlay show" aria-modal="true" role="dialog">
+  <div class="modal">
+    <h1>25TILES</h1>
+    <p>A random pattern will appear in the upper-left corner.</br>左上にランダムな模様が表示されます。</p>
+    <p>Color rows and columns and recreate the pattern.</br>行や列に色を塗って同じ模様を作ってください。</p>
+    <p>Pressing a button multiple times will cycle through the available colors.</br>ボタンを複数回押すと塗られる色が変わります。</p>
+    <div class="actions">
+      <button id="startBtn" class="btn primary" type="button">START</button>
+    </div>
+  </div>
+</div>
+
+<!-- 結果画面 -->
+<div id="resultScreen" class="overlay" aria-modal="true" role="dialog" aria-hidden="true">
+  <div class="modal">
+    <h2>TIME'S UP!</h2>
+    <p id="resultText"></p>
+    <div style = "margin: 10px;">
+      <button id="tweetBtn" class="btn" type="button">TWEET</button>
+    </div>
+    <div class="actions">
+      <button id="retryBtn" class="btn primary" type="button">PLAY AGAIN</button>
+      <button id="toTitleBtn" class="btn" type="button">BACK TO TITLE</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const N = 5;
+  const DURATION_MS = 60000;
+  const board = document.getElementById('board');
+  const preview = document.getElementById('targetPreview');
+  const statusText = document.getElementById('statusText');
+  const timerText = document.getElementById('timerText');
+  const newBtn = document.getElementById('newBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const titleScreen = document.getElementById('titleScreen');
+  const resultScreen = document.getElementById('resultScreen');
+  const resultText = document.getElementById('resultText');
+  const startBtn = document.getElementById('startBtn');
+  const retryBtn = document.getElementById('retryBtn');
+  const toTitleBtn = document.getElementById('toTitleBtn');
+  const boardWrap = document.getElementById('boardWrap');
+
+  // 上部：各列のボタン
+  for (let c = 0; c < N; c++) {
+    const btn = document.createElement('button');
+    btn.className = 'ctrl';
+    btn.type = 'button';
+    btn.dataset.type = 'col';
+    btn.dataset.index = String(c);
+    btn.setAttribute('aria-label', `列 ${c + 1} を操作`);
+    btn.style.gridColumn = (c + 2);
+    btn.style.gridRow = 1;
+    board.appendChild(btn);
+  }
+
+  // 左側：各行のボタン と 6×6のタイル
+  for (let r = 0; r < N; r++) {
+    const btn = document.createElement('button');
+    btn.className = 'ctrl';
+    btn.type = 'button';
+    btn.dataset.type = 'row';
+    btn.dataset.index = String(r);
+    btn.setAttribute('aria-label', `行 ${r + 1} を操作`);
+    btn.style.gridColumn = 1;
+    btn.style.gridRow = (r + 2);
+    board.appendChild(btn);
+
+    for (let c = 0; c < N; c++) {
+      const tile = document.createElement('div');
+      tile.className = 'tile';
+      tile.dataset.row = String(r);
+      tile.dataset.col = String(c);
+      tile.style.gridColumn = (c + 2);
+      tile.style.gridRow = (r + 2);
+      board.appendChild(tile);
+    }
+  }
+
+  // 塗りモードと直前ターゲット
+  let colormode = 1
+  let lastTarget = null; // {type:'row'|'col', index:number} または null
+
+  // お手本（到達可能）行列
+  let targetMatrix = Array.from({length: N}, () => Array(N).fill(false));
+
+  // セッション・スコア・タイマー
+  let inSession = false;
+  let clearedCurrent = false;
+  let solvedCount = 0;
+  let timerId = null;
+  let endTime = 0;
+
+  function paintRow(r, color) {
+    board.querySelectorAll(`.tile[data-row="${r}"]`).forEach(el => {
+      if (color == 0) {
+        el.classList.toggle('black', false);
+        el.classList.toggle('red', false);
+      } else if (color == 1) {
+        el.classList.toggle('black', true);
+        el.classList.toggle('red', false);
+      } else if (color == 2) {
+        el.classList.toggle('black', false);
+        el.classList.toggle('red', true);
+      }
+    });
+  }
+  function paintCol(c, color) {
+    board.querySelectorAll(`.tile[data-col="${c}"]`).forEach(el => {
+      if (color == 0) {
+        el.classList.toggle('black', false);
+        el.classList.toggle('red', false);
+      } else if (color == 1) {
+        el.classList.toggle('black', true);
+        el.classList.toggle('red', false);
+      } else if (color == 2) {
+        el.classList.toggle('black', false);
+        el.classList.toggle('red', true);
+      }
+    });
+  }
+  function getBoardState() {
+    const A = Array.from({length: N}, () => Array(N).fill(0));
+    board.querySelectorAll('.tile').forEach(tile => {
+      const r = Number(tile.dataset.row), c = Number(tile.dataset.col);
+      if (tile.classList.contains('black')) {
+        A[r][c] = 1
+      } else if (tile.classList.contains('red')) {
+        A[r][c] = 2
+      } else {
+        A[r][c] = 0
+      }
+    });
+    return A;
+  }
+  function sameMatrix(A, B) {
+    for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) if (A[r][c] !== B[r][c]) return false;
+    return true;
+  }
+  function renderTargetPreview() {
+    preview.innerHTML = '';
+    for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) {
+      const m = document.createElement('div');
+      if (targetMatrix[r][c] == 1) {
+        m.className = 'mini-tile black'
+      } else if (targetMatrix[r][c] == 2) {
+        m.className = 'mini-tile red'
+      } else {
+        m.className = 'mini-tile'
+      }
+      preview.appendChild(m);
+    }
+  }
+  function boardAllWhite() {
+    board.querySelectorAll('.tile').forEach(el => el.classList.remove('black'));
+    board.querySelectorAll('.tile').forEach(el => el.classList.remove('red'));
+    color = 1; lastTarget = null;
+    boardWrap.classList.remove('cleared');
+    resetBtn.disabled = false;
+    board.querySelectorAll('.ctrl').forEach(el => el.disabled = false);
+  }
+  function ensureNonTrivial(M) {
+    // 真っ白や完全黒を避ける。最低1マス黒、かつ全黒は避ける
+    let cnt = 0; for (let r=0;r<N;r++) for (let c=0;c<N;c++) if (M[r][c] != 0) cnt++;
+    if (cnt === 0) {
+      const rr = Math.floor(Math.random()*N);
+      for (let c=0;c<N;c++) M[rr][c] = 1; // 1行黒
+    }
+  }
+  function generateReachableTarget() {
+    // 盤面と同じルールでランダム操作して生成
+    const M = Array.from({length:N}, () => Array(N).fill(0));
+    let tLast = null;
+    let steps = 0;
+    if (solvedCount < 5) {
+        steps = 5;
+    } else if (solvedCount < 10) {
+        steps = 10;
+    } else if (solvedCount < 20) {
+        steps = 30;
+    } else {
+        steps = 100;
+    }
+
+    for (let k = 0; k < steps; k++) {
+      const type = Math.random() < 0.5 ? 'row' : 'col';
+      const color = Math.floor(Math.random() * 3);
+      const index = Math.floor(Math.random() * N);
+      if (type === 'row') {
+        for (let c = 0; c < N; c++) M[index][c] = color;
+      } else {
+        for (let r = 0; r < N; r++) M[r][index] = color;
+      }
+    }
+    ensureNonTrivial(M);
+    targetMatrix = M;
+    renderTargetPreview();
+    // クリアするまで「次のお手本」は押せない
+    newBtn.disabled = true;
+    clearedCurrent = false;
+  }
+
+  function updateTimerDisplay(msLeft) {
+    const sec = Math.max(0, msLeft)/1000;
+    timerText.textContent = `${sec.toFixed(1)}`;
+  }
+  function startTimer() {
+    let duration = 60000;
+    if (solvedCount < 5) {
+        duration = 60000;
+    } else if (solvedCount < 10) {
+        duration = 50000;
+    } else if (solvedCount < 20) {
+        duration = 40000;
+    } else if (solvedCount < 30) {
+        duration = 30000;
+    } else {
+        duration = 25000;
+    }
+    endTime = Date.now() + duration;
+    updateTimerDisplay(duration);
+    if (timerId) clearInterval(timerId);
+    timerId = setInterval(() => {
+      const now = Date.now();
+      const left = endTime - now;
+      updateTimerDisplay(left);
+      if (left <= 0) {
+        clearInterval(timerId);
+        timerId = null;
+        onTimeUp();
+      }
+    }, 100);
+  }
+  function stopTimer() {
+    if (timerId) { clearInterval(timerId); timerId = null; }
+  }
+
+
+  function triggerClearEffect() {
+    boardWrap.classList.add('is-cleared');
+    // アニメーションが終わったらクラスを外す
+    // 擬似要素には直接 animationend イベントは来ないので、
+    // ラッパーにタイマーをかけておくのが簡単です。
+    setTimeout(() => {
+      boardWrap.classList.remove('is-cleared');
+    }, 1000); // アニメーション時間(800ms)より少し長めに
+  }
+
+
+  function checkWin() {
+    if (!inSession) return;
+    const ok = sameMatrix(getBoardState(), targetMatrix);
+    if (ok) {
+      if (!clearedCurrent) {
+        solvedCount += 1;
+        clearedCurrent = true;
+        stopTimer(); // 1問解くごとにタイマーをリセット
+      }
+      triggerClearEffect();
+      statusText.textContent = `SCORE: ${solvedCount * 10}`;
+      boardWrap.classList.add('cleared');
+      newBtn.disabled = false;
+      resetBtn.disabled = true;
+      board.querySelectorAll('.ctrl').forEach(el => el.disabled = true);
+      //boardAllWhite();
+      //generateReachableTarget();
+    }
+  }
+  
+  function onTimeUp() {
+    inSession = false;
+    newBtn.disabled = true;
+    resultText.textContent = `SCORE: ${solvedCount * 10}`;
+    resultScreen.classList.add('show');
+    resultScreen.removeAttribute('aria-hidden');
+
+    // ツイートボタンのクリック動作をセット
+    const tweetBtn = document.getElementById('tweetBtn');
+    const text = encodeURIComponent(`I scored ${solvedCount * 10} points in #25TILES https://jkoizumi144.com/25tiles/`);
+    const url = `https://twitter.com/intent/tweet?text=${text}`;
+    tweetBtn.onclick = () => window.open(url, '_blank', 'noopener,noreferrer');
+  }
+
+  function startSession() {
+    solvedCount = 0;
+    inSession = true;
+    statusText.textContent = `SCORE: 0`;
+    boardAllWhite();
+    generateReachableTarget();
+    startTimer();
+  }
+
+  function endSessionToTitle() {
+    inSession = false;
+    stopTimer();
+    newBtn.disabled = true;
+    updateTimerDisplay(DURATION_MS);
+    targetMatrix = Array.from({length:N}, () => Array(N).fill(false));
+    renderTargetPreview();
+    boardAllWhite();
+    statusText.textContent = `SCORE: 0`;
+  }
+
+  // クリック系
+  board.addEventListener('click', (e) => {
+    const target = e.target.closest('.ctrl');
+    if (!target || !inSession) return;
+    const type = target.dataset.type; // 'row' or 'col'
+    const i = Number(target.dataset.index);
+
+    if (lastTarget && lastTarget.type === type && lastTarget.index === i) {
+      colormode = (colormode + 1) % 3;
+    } else {
+      colormode = 1;     // 違うなら黒にリセット
+      lastTarget = { type, index: i };
+    }
+
+    if (type === 'row') {
+      paintRow(i, colormode);
+    } else {
+      paintCol(i, colormode);
+    }
+    checkWin();
+  });
+
+  resetBtn.addEventListener('click', () => {
+    if (!inSession) return;
+    boardAllWhite();
+    checkWin();
+  });
+  newBtn.addEventListener('click', () => {
+    if (!inSession || newBtn.disabled) return; // 保険
+    boardAllWhite();
+    generateReachableTarget();
+    startTimer();
+  });
+
+  // タイトル/結果のボタン
+  startBtn.addEventListener('click', () => {
+    titleScreen.classList.remove('show');
+    startSession();
+  });
+  retryBtn.addEventListener('click', () => {
+    resultScreen.classList.remove('show');
+    startSession();
+  });
+  toTitleBtn.addEventListener('click', () => {
+    resultScreen.classList.remove('show');
+    titleScreen.classList.add('show');
+    endSessionToTitle();
+  });
+
+  // 初期状態：タイトルを表示、操作はできない
+  inSession = false;
+  newBtn.disabled = true;
+  updateTimerDisplay(DURATION_MS);
+  renderTargetPreview();
+})();
+</script>
+</body>
+</html>
