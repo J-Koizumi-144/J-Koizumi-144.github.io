@@ -138,10 +138,48 @@
   /*ダブルタップ対策*/
   html, body { touch-action: manipulation; }
   button, .ctrl { touch-action: manipulation; }
+
+  #leaderboard {
+    margin-top: 100px;
+  }
+
+  #leaderboardTable {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  #leaderboardTable th,
+  #leaderboardTable td {
+    padding: 4px 8px;
+    text-align: left;
+    border: none; /* 枠なし */
+  }
+
+  .form-group {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+  }
+
+  .form-group label {
+    width: 140px;           /* ラベル幅を固定して左右を揃える */
+    font-weight: 600;
+  }
+
+  .input {
+    flex: 1;                /* 残りの幅いっぱいを入力欄に */
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+
 </style>
 </head>
 <body>
 <main>
+  <div style="margin: 20%;"></div>
   <div class="header">
     <div class="preview-card">
       <div class="mini" id="targetPreview" aria-label="お手本プレビュー"></div>
@@ -160,6 +198,22 @@
       <!-- 以降はJSで生成 -->
     </div>
   </div>
+
+  <div id="leaderboard">
+    <h3 style="color: #555;">Ranking</h3>
+    <table id="leaderboardTable" style="color: #555;">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div style="margin: 20%;"></div>
 </main>
 
 <!-- タイトル画面 -->
@@ -183,12 +237,35 @@
     <div style = "margin: 10px;">
       <button id="tweetBtn" class="btn" type="button">TWEET</button>
     </div>
+    <div style = "margin: 10px;">
+      <button id="scoreRegBtn" class="btn" type="button">SUBMIT SCORE</button>
+    </div>
     <div class="actions">
-      <button id="retryBtn" class="btn primary" type="button">PLAY AGAIN</button>
-      <button id="toTitleBtn" class="btn" type="button">BACK TO TITLE</button>
+      <button id="toTitleBtn" class="btn primary" type="button">BACK TO TITLE</button>
     </div>
   </div>
 </div>
+
+<!-- Score Registration Modal -->
+<div id="scoreModal" class="overlay" aria-modal="true" role="dialog" aria-hidden="true">
+  <div class="modal">
+    <h2>Score Registration</h2>
+    <div class="form-group">
+      <label for="regName">Name</label>
+      <input type="text" id="regName" class="input" />
+    </div>
+    <div class="form-group">
+      <label for="regID">User ID (private)</label>
+      <input type="text" id="regID" class="input" />
+    </div>
+    <div class="actions">
+      <button id="submitScoreBtn" class="btn primary" type="button">Register</button>
+      <button id="closeScoreModalBtn" class="btn" type="button">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
 
 <script>
 (() => {
@@ -204,9 +281,14 @@
   const resultScreen = document.getElementById('resultScreen');
   const resultText = document.getElementById('resultText');
   const startBtn = document.getElementById('startBtn');
-  const retryBtn = document.getElementById('retryBtn');
   const toTitleBtn = document.getElementById('toTitleBtn');
   const boardWrap = document.getElementById('boardWrap');
+  const scoreRegBtn = document.getElementById("scoreRegBtn");
+  const scoreModal = document.getElementById("scoreModal");
+  const submitScoreBtn = document.getElementById("submitScoreBtn");
+  const closeScoreModalBtn = document.getElementById("closeScoreModalBtn");
+  const regName = document.getElementById("regName");
+  const regID = document.getElementById("regID");
 
   // 上部：各列のボタン
   for (let c = 0; c < N; c++) {
@@ -507,21 +589,122 @@
     titleScreen.classList.remove('show');
     startSession();
   });
-  retryBtn.addEventListener('click', () => {
-    resultScreen.classList.remove('show');
-    startSession();
-  });
   toTitleBtn.addEventListener('click', () => {
     resultScreen.classList.remove('show');
     titleScreen.classList.add('show');
     endSessionToTitle();
   });
+  scoreRegBtn.addEventListener('click', () => {
+    openScoreModal()
+  });
+
+  //スコア登録画面
+  function openScoreModal() {
+    resultScreen.classList.remove('show');
+    scoreModal.classList.add("show");
+    scoreModal.removeAttribute("aria-hidden");
+    updateSubmitButtonState()
+  }
+  
+  function closeScoreModal() {
+    resultScreen.classList.add('show');
+    scoreModal.classList.remove("show");
+    scoreModal.setAttribute("aria-hidden", "true");
+  }
+
+  closeScoreModalBtn.addEventListener("click", closeScoreModal);
+
+  // スコア登録ボタン押下時の処理
+  submitScoreBtn.addEventListener("click", async () => {
+    const name = document.getElementById("regName").value.trim();
+    const ID = document.getElementById("regID").value;
+    const score = solvedCount * 10
+    submitScore(name, ID, score)
+    /// console.log("Register:", { name, ID /*, score: solvedCount */ });
+    closeScoreModal();
+  });
+
+  // 入力チェック関数
+  function updateSubmitButtonState() {
+    const nameFilled = regName.value.trim().length > 0;
+    const idFilled = regID.value.trim().length > 0;
+    submitScoreBtn.disabled = !(nameFilled && idFilled);
+  }
+
+  // 入力イベントでチェック
+  regName.addEventListener("input", updateSubmitButtonState);
+  regID.addEventListener("input", updateSubmitButtonState);
+
+
+  //スコア送信
+  const apiUrl = "https://script.google.com/macros/s/AKfycbwS0AE2AI3BkTqgu1mdmrGVgsCdfwMw87eMHSIATSUzRDUPpOI3_3xxooqFUAKPiIWkQQ/exec"
+  
+  async function userIdFrom(ID) {
+    const enc = new TextEncoder().encode(`${ID}`);
+    const hash = await crypto.subtle.digest('SHA-256', enc);
+    return [...new Uint8Array(hash)].map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  // 送信時は application/json をやめて「text/plain」で投げる（プリフライト回避）
+  async function submitScore(username, ID, score) {
+    const userId = await userIdFrom(ID); // これは以前のまま
+    const payload = JSON.stringify({ userId, name: username, score });
+
+    const res = await fetch(apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: payload,
+      // credentials も付けない（= same-origin の既定のまま）
+    });
+    if (!res.ok) throw new Error('submit failed');
+    return res.json();
+  }
+
+  // ランキング取得は普通の GET（プリフライトなし）
+  async function fetchLeaderboard() {
+    try {
+      const res = await fetch(apiUrl);  // GET リクエスト
+      if (!res.ok) throw new Error("HTTP error " + res.status);
+      const data = await res.json();    // { rows: [{name, max}, ...] }
+      renderLeaderboard(data.rows.slice(0, 20));
+    } catch (e) {
+      console.error(e);
+      document.getElementById("leaderboardList").innerHTML =
+        "<li>ランキングを取得できませんでした</li>";
+    }
+  }
+
+  function renderLeaderboard(rows) {
+    const tbody = document.querySelector("#leaderboardTable tbody");
+    tbody.innerHTML = "";
+    rows.forEach((row, i) => {
+      const tr = document.createElement("tr");
+
+      const rank = document.createElement("td");
+      rank.textContent = `${i + 1}`;
+      tr.appendChild(rank);
+
+      const name = document.createElement("td");
+      name.textContent = row.name;
+      tr.appendChild(name);
+
+      const score = document.createElement("td");
+      score.textContent = row.max;
+      tr.appendChild(score);
+
+      tbody.appendChild(tr);
+    });
+  }
+
+  window.addEventListener("load", fetchLeaderboard);
 
   // 初期状態：タイトルを表示、操作はできない
   inSession = false;
   newBtn.disabled = true;
   updateTimerDisplay(DURATION_MS);
   renderTargetPreview();
+
+  
 })();
 </script>
 </body>
