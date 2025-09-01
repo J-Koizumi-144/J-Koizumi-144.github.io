@@ -139,10 +139,6 @@
   html, body { touch-action: manipulation; }
   button, .ctrl { touch-action: manipulation; }
 
-  #leaderboard {
-    margin-top: 100px;
-  }
-
   #leaderboardTable {
     border-collapse: collapse;
     width: 100%;
@@ -199,20 +195,6 @@
     </div>
   </div>
 
-  <div id="leaderboard">
-    <h3 style="color: #555;">Ranking</h3>
-    <table id="leaderboardTable" style="color: #555;">
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Name</th>
-          <th>Score</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
-
   <div style="margin: 20%;"></div>
 </main>
 
@@ -225,6 +207,29 @@
     <p>Pressing a button multiple times will cycle through the available colors.</br>ボタンを複数回押すと塗られる色が変わります。</p>
     <div class="actions">
       <button id="startBtn" class="btn primary" type="button">START</button>
+      <button id="rankingBtn" class="btn" type="button">RANKING</button>
+    </div>
+  </div>
+</div>
+
+<!-- ランキング画面 -->
+<div id="rankingScreen" class="overlay" aria-modal="true" role="dialog">
+  <div class="modal">
+    <h1>Ranking</h1>
+    <div id="leaderboard">
+      <table id="leaderboardTable" style="color: #555;">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="actions">
+      <button id="rankingCloseBtn" class="btn" type="button">BACK</button>
     </div>
   </div>
 </div>
@@ -250,6 +255,7 @@
 <div id="scoreModal" class="overlay" aria-modal="true" role="dialog" aria-hidden="true">
   <div class="modal">
     <h2>Score Registration</h2>
+    <p>Please use the same User ID each time.</br>User IDは毎回同じものを用いてください。</p>
     <div class="form-group">
       <label for="regName">Name</label>
       <input type="text" id="regName" class="input" />
@@ -259,8 +265,8 @@
       <input type="text" id="regID" class="input" />
     </div>
     <div class="actions">
-      <button id="submitScoreBtn" class="btn primary" type="button">Register</button>
-      <button id="closeScoreModalBtn" class="btn" type="button">Cancel</button>
+      <button id="submitScoreBtn" class="btn primary" type="button">REGISTER</button>
+      <button id="closeScoreModalBtn" class="btn" type="button">CANCEL</button>
     </div>
   </div>
 </div>
@@ -289,6 +295,20 @@
   const closeScoreModalBtn = document.getElementById("closeScoreModalBtn");
   const regName = document.getElementById("regName");
   const regID = document.getElementById("regID");
+  const rankingScreen = document.getElementById("rankingScreen");
+  const rankingBtn = document.getElementById('rankingBtn');
+  const rankingCloseBtn = document.getElementById('rankingCloseBtn');
+
+  // ランキング
+  rankingBtn.addEventListener('click', () => {
+    titleScreen.classList.remove('show');
+    rankingScreen.classList.add('show');
+  });
+
+  rankingCloseBtn.addEventListener('click', () => {
+    titleScreen.classList.add('show');
+    rankingScreen.classList.remove('show');
+  });
 
   // 上部：各列のボタン
   for (let c = 0; c < N; c++) {
@@ -522,6 +542,7 @@
     resultText.textContent = `SCORE: ${solvedCount * 10}`;
     resultScreen.classList.add('show');
     resultScreen.removeAttribute('aria-hidden');
+    scoreRegBtn.disabled = false;
 
     // ツイートボタンのクリック動作をセット
     const tweetBtn = document.getElementById('tweetBtn');
@@ -622,6 +643,7 @@
     submitScore(name, ID, score)
     /// console.log("Register:", { name, ID /*, score: solvedCount */ });
     closeScoreModal();
+    scoreRegBtn.disabled = true;
   });
 
   // 入力チェック関数
@@ -636,7 +658,7 @@
   regID.addEventListener("input", updateSubmitButtonState);
 
 
-  //スコア送信
+  // スコア送信
   const apiUrl = "https://script.google.com/macros/s/AKfycbwS0AE2AI3BkTqgu1mdmrGVgsCdfwMw87eMHSIATSUzRDUPpOI3_3xxooqFUAKPiIWkQQ/exec"
   
   async function userIdFrom(ID) {
@@ -645,22 +667,21 @@
     return [...new Uint8Array(hash)].map(b => b.toString(16).padStart(2, '0')).join('');
   }
 
-  // 送信時は application/json をやめて「text/plain」で投げる（プリフライト回避）
   async function submitScore(username, ID, score) {
-    const userId = await userIdFrom(ID); // これは以前のまま
+    const userId = await userIdFrom(ID);
     const payload = JSON.stringify({ userId, name: username, score });
 
     const res = await fetch(apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: payload,
-      // credentials も付けない（= same-origin の既定のまま）
     });
     if (!res.ok) throw new Error('submit failed');
+    fetchLeaderboard();
     return res.json();
   }
 
-  // ランキング取得は普通の GET（プリフライトなし）
+  // ランキング取得
   async function fetchLeaderboard() {
     try {
       const res = await fetch(apiUrl);  // GET リクエスト
