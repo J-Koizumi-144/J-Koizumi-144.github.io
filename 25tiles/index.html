@@ -205,11 +205,17 @@
     <p>A random pattern will appear in the upper-left corner.</br>左上にランダムな模様が表示されます。</p>
     <p>Color rows and columns and recreate the pattern.</br>行や列に色を塗って同じ模様を作ってください。</p>
     <p>Pressing a button multiple times will cycle through the available colors.</br>ボタンを複数回押すと塗られる色が変わります。</p>
-    <p style="color:#d33;">The score registration feature is currently under maintenance.</br>現在スコア登録機能はメンテナンス中です。</p>
     <div class="actions">
       <button id="startBtn" class="btn primary" type="button">START</button>
       <button id="rankingBtn" class="btn" type="button">RANKING</button>
     </div>
+  </div>
+</div>
+
+<!-- ロード画面 -->
+<div id="loadScreen" class="overlay" aria-modal="true" role="dialog">
+  <div class="modal">
+    <h1>Loading...</h1>
   </div>
 </div>
 
@@ -299,6 +305,7 @@
   const rankingScreen = document.getElementById("rankingScreen");
   const rankingBtn = document.getElementById('rankingBtn');
   const rankingCloseBtn = document.getElementById('rankingCloseBtn');
+  const loadScreen = document.getElementById("loadScreen");
 
   // ランキング
   rankingBtn.addEventListener('click', () => {
@@ -509,11 +516,9 @@
   function triggerClearEffect() {
     boardWrap.classList.add('is-cleared');
     // アニメーションが終わったらクラスを外す
-    // 擬似要素には直接 animationend イベントは来ないので、
-    // ラッパーにタイマーをかけておくのが簡単です。
     setTimeout(() => {
       boardWrap.classList.remove('is-cleared');
-    }, 1000); // アニメーション時間(800ms)より少し長めに
+    }, 1000);
   }
 
 
@@ -525,6 +530,7 @@
         solvedCount += 1;
         clearedCurrent = true;
         stopTimer(); // 1問解くごとにタイマーをリセット
+        hitSession();
       }
       triggerClearEffect();
       statusText.textContent = `SCORE: ${solvedCount * 10}`;
@@ -607,15 +613,22 @@
   });
 
   // タイトル/結果のボタン
-  startBtn.addEventListener('click', () => {
+  startBtn.addEventListener('click', async () => {
     titleScreen.classList.remove('show');
+    loadScreen.classList.add('show');
+    await startGASSession();
+    loadScreen.classList.remove('show');
     startSession();
   });
+
+
   toTitleBtn.addEventListener('click', () => {
     resultScreen.classList.remove('show');
     titleScreen.classList.add('show');
     endSessionToTitle();
+    endSessionOnServer(API_URL, currentSessionId)
   });
+
   scoreRegBtn.addEventListener('click', () => {
     openScoreModal()
   });
@@ -640,12 +653,18 @@
   submitScoreBtn.addEventListener("click", async () => {
     const name = document.getElementById("regName").value.trim();
     const ID = document.getElementById("regID").value;
-    const score = solvedCount * 10
-    submitScore(name, ID, score)
+    const hashedID = await userIdFrom(ID);
+    submitScore(hashedID, name)
     /// console.log("Register:", { name, ID /*, score: solvedCount */ });
     closeScoreModal();
     scoreRegBtn.disabled = true;
   });
+
+  async function userIdFrom(ID) {
+    const enc = new TextEncoder().encode(`${ID}`);
+    const hash = await crypto.subtle.digest('SHA-256', enc);
+    return [...new Uint8Array(hash)].map(b => b.toString(16).padStart(2, '0')).join('');
+  }
 
   // 入力チェック関数
   function updateSubmitButtonState() {
@@ -659,33 +678,55 @@
   regID.addEventListener("input", updateSubmitButtonState);
 
 
-  // スコア送信
-  const apiUrl = "https://script.google.com/macros/s/AKfycbwS0AE2AI3BkTqgu1mdmrGVgsCdfwMw87eMHSIATSUzRDUPpOI3_3xxooqFUAKPiIWkQQ/exec"
-  
-  async function userIdFrom(ID) {
-    const enc = new TextEncoder().encode(`${ID}`);
-    const hash = await crypto.subtle.digest('SHA-256', enc);
-    return [...new Uint8Array(hash)].map(b => b.toString(16).padStart(2, '0')).join('');
-  }
+  // Apps Script Web アプリの /exec URL を指定してください
+  const API_URL = "https://script.google.com/macros/s/AKfycbxP9MIIngoXWBDzLGhaCPgjHKVzLkl1-k0fHZi_GVOd94eXI5iq_w30Uuo0v6hmujA3PA/exec";
 
-  async function submitScore(username, ID, score) {
-    const userId = await userIdFrom(ID);
-    const payload = JSON.stringify({ userId, name: username, score });
+  let currentSessionId = null;
 
-    const res = await fetch(apiUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: payload,
+  // セッション開始（ゲームスタート時に呼ぶ）
+  async function startGASSession() {
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ action: "start" })
     });
-    if (!res.ok) throw new Error('submit failed');
-    fetchLeaderboard();
-    return res.json();
+    if (!res.ok) throw new Error("startSession failed");
+    const data = await res.json();
+    currentSessionId = data.sessionId;
+    return data; // { sessionId, expiresAt }
   }
 
-  // ランキング取得
+  async function hitSession() {
+    if (!currentSessionId) throw new Error("no active session");
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ action: "hit", sessionId: currentSessionId })
+    });
+    if (!res.ok) throw new Error("hitSession failed");
+    const data = await res.json();
+    return data; // { ok:true, count: ... } or { ok:false, reason:... }
+  }
+
+  async function submitScore(userId, name) {
+    if (!currentSessionId) throw new Error("no active session");
+    const payload = { action: "submit", sessionId: currentSessionId, userId, name };
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error("submitScore failed");
+    const data = await res.json();
+    fetchLeaderboard();
+    return data; // { ok:true, max:..., count:... }
+  }
+
+
+  // ランキング取得（必要なら ?limit=20 など）
   async function fetchLeaderboard() {
     try {
-      const res = await fetch(apiUrl);  // GET リクエスト
+      const res = await fetch(API_URL);  // GET リクエスト
       if (!res.ok) throw new Error("HTTP error " + res.status);
       const data = await res.json();    // { rows: [{name, max}, ...] }
       renderLeaderboard(data.rows.slice(0, 20));
@@ -711,11 +752,25 @@
       tr.appendChild(name);
 
       const score = document.createElement("td");
-      score.textContent = row.max;
+      score.textContent = row.max * 10;
       tr.appendChild(score);
 
       tbody.appendChild(tr);
     });
+  }
+
+  async function endSessionOnServer(apiUrl, sessionId) {
+    if (!sessionId) return;
+    try {
+      await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // プリフライト回避
+        body: JSON.stringify({ action: 'end', sessionId })
+      });
+    } catch (e) {
+      // 通信失敗時は無視（再開できないようならローカルでも sessionId を破棄）
+      console.warn('end failed', e);
+    }
   }
 
   window.addEventListener("load", fetchLeaderboard);
