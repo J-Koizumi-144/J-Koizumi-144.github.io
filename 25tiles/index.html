@@ -259,7 +259,7 @@
 </div>
 
 <!-- Score Registration Modal -->
-<div id="scoreModal" class="overlay" aria-modal="true" role="dialog" aria-hidden="true">
+<div id="scoreModal" class="overlay" aria-modal="true" role="dialog">
   <div class="modal">
     <h2>Score Registration</h2>
     <p>Please use the same User ID each time.</br>User IDは毎回同じものを用いてください。</p>
@@ -626,7 +626,6 @@
     resultScreen.classList.remove('show');
     titleScreen.classList.add('show');
     endSessionToTitle();
-    endSessionOnServer(API_URL, currentSessionId)
   });
 
   scoreRegBtn.addEventListener('click', () => {
@@ -637,14 +636,12 @@
   function openScoreModal() {
     resultScreen.classList.remove('show');
     scoreModal.classList.add("show");
-    scoreModal.removeAttribute("aria-hidden");
     updateSubmitButtonState()
   }
   
   function closeScoreModal() {
     resultScreen.classList.add('show');
     scoreModal.classList.remove("show");
-    scoreModal.setAttribute("aria-hidden", "true");
   }
 
   closeScoreModalBtn.addEventListener("click", closeScoreModal);
@@ -679,7 +676,7 @@
 
 
   // Apps Script Web アプリの /exec URL を指定してください
-  const API_URL = "https://script.google.com/macros/s/AKfycbxP9MIIngoXWBDzLGhaCPgjHKVzLkl1-k0fHZi_GVOd94eXI5iq_w30Uuo0v6hmujA3PA/exec";
+  const API_URL = "https://script.google.com/macros/s/AKfycbxPg6JtRLwVKhVZNJWC9036Kg4UOWcq-F0bRdjaUv_dIF2TBDKLK0cXxq1VHQhz7OnM_g/exec";
 
   let currentSessionId = null;
 
@@ -757,20 +754,6 @@
 
       tbody.appendChild(tr);
     });
-  }
-
-  async function endSessionOnServer(apiUrl, sessionId) {
-    if (!sessionId) return;
-    try {
-      await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // プリフライト回避
-        body: JSON.stringify({ action: 'end', sessionId })
-      });
-    } catch (e) {
-      // 通信失敗時は無視（再開できないようならローカルでも sessionId を破棄）
-      console.warn('end failed', e);
-    }
   }
 
   window.addEventListener("load", fetchLeaderboard);
