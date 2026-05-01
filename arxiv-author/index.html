@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>arXiv Author Categories</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar" aria-label="Search">
+        <div>
+          <p class="eyebrow">arXiv</p>
+          <h1>Author Categories</h1>
+        </div>
+        <form class="search" id="searchForm">
+          <label class="sr-only" for="authorInput">著者名</label>
+          <input id="authorInput" name="author" type="search" placeholder="例: Terence Tao" autocomplete="name" />
+          <button type="submit">Search</button>
+        </form>
+      </section>
+
+      <section class="status-row" aria-live="polite">
+        <div id="statusText">著者名を入力して Enter</div>
+        <button id="loadMoreButton" class="ghost hidden" type="button">続きを取得</button>
+      </section>
+
+      <section class="workspace">
+        <aside class="category-pane" aria-label="カテゴリ一覧">
+          <div class="pane-heading">
+            <h2>Categories</h2>
+            <span id="categoryCount">0</span>
+          </div>
+          <div id="categoryList" class="category-list empty-state">No data</div>
+        </aside>
+
+        <section class="paper-pane" aria-label="論文一覧">
+          <div class="pane-heading">
+            <h2 id="paperHeading">Papers</h2>
+            <span id="paperCount">0</span>
+          </div>
+          <canvas id="categoryCanvas" class="category-canvas" width="960" height="220" aria-hidden="true"></canvas>
+          <div id="paperList" class="paper-list empty-state">No papers selected</div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./config.js"></script>
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>
