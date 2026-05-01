@@ -20,6 +20,7 @@ let totalResults = 0;
 let papers = [];
 let selectedCategory = "";
 let loading = false;
+let loadError = "";
 
 function textFrom(parent, localName) {
   const node = Array.from(parent.getElementsByTagName("*")).find((item) => item.localName === localName);
@@ -257,6 +258,11 @@ function updateStatus() {
     return;
   }
 
+  if (loadError) {
+    statusText.textContent = loadError;
+    return;
+  }
+
   if (!arxivApiEndpoint) {
     statusText.textContent = "config.js に arXiv APIプロキシのURLを設定してください";
     return;
@@ -300,6 +306,10 @@ async function fetchPage(author, start) {
   const response = await fetch(url.toString());
 
   if (!response.ok) {
+    if (response.status === 429) {
+      throw new Error("arXiv APIの利用制限に当たっています。数分おいてから再検索してください。");
+    }
+
     throw new Error(`arXiv検索に失敗しました (${response.status})`);
   }
 
@@ -317,6 +327,7 @@ async function loadAuthor(author, append = false) {
     nextStart = 0;
     totalResults = 0;
   }
+  loadError = "";
   render();
 
   try {
@@ -326,7 +337,7 @@ async function loadAuthor(author, append = false) {
     nextStart = papers.length;
     selectedCategory = selectedCategory || categoryStats()[0]?.category || "";
   } catch (error) {
-    statusText.textContent = error instanceof Error ? error.message : "検索に失敗しました";
+    loadError = error instanceof Error ? error.message : "検索に失敗しました";
   } finally {
     loading = false;
     render();
