@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Magnitude Visualizer</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --panel: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #d7dce6;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.12);
+      --danger: #dc2626;
+      --negative: #c2410c;
+      --shadow: 0 10px 24px rgba(15, 23, 42, 0.10);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    header {
+      padding: 16px 20px 12px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 1px 0 rgba(15, 23, 42, 0.03);
+      z-index: 2;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      line-height: 1.3;
+      letter-spacing: 0.01em;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .metric {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      min-height: 34px;
+      padding: 7px 10px;
+      background: #f9fafb;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+
+    .metric strong {
+      font-variant-numeric: tabular-nums;
+      font-size: 18px;
+    }
+
+    .control {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 34px;
+    }
+
+    .control input[type="range"] {
+      width: 150px;
+    }
+
+    button {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 7px 11px;
+      font: inherit;
+      cursor: pointer;
+      transition: background 120ms ease, border-color 120ms ease, transform 80ms ease;
+    }
+
+    button:hover { background: #f9fafb; border-color: #b8c0d1; }
+    button:active { transform: translateY(1px); }
+    button:disabled { opacity: 0.45; cursor: default; transform: none; }
+    button.danger { color: var(--danger); }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(360px, 1fr) 300px;
+      gap: 16px;
+      padding: 16px;
+      min-height: 0;
+    }
+
+    .canvas-wrap {
+      position: relative;
+      min-height: 480px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      touch-action: none;
+      cursor: crosshair;
+    }
+
+    .hint {
+      position: absolute;
+      left: 16px;
+      bottom: 14px;
+      max-width: min(680px, calc(100% - 32px));
+      padding: 9px 12px;
+      border: 1px solid rgba(215, 220, 230, 0.9);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.90);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      backdrop-filter: blur(6px);
+      pointer-events: none;
+    }
+
+    aside {
+      min-height: 0;
+      display: grid;
+      gap: 12px;
+      grid-template-rows: auto 1fr;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h2 {
+      margin: 0 0 9px;
+      font-size: 15px;
+    }
+
+    .formula {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .weights {
+      min-height: 0;
+      overflow: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th, td {
+      padding: 7px 6px;
+      border-bottom: 1px solid #edf0f5;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    th:first-child, td:first-child { text-align: left; }
+    tr.selected { background: var(--accent-soft); }
+
+    .empty {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      padding: 10px 2px;
+    }
+
+    .status {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 860px) {
+      main {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(470px, 1fr) auto;
+      }
+      aside { grid-template-rows: auto auto; }
+      .weights { max-height: 260px; }
+      .control input[type="range"] { width: 110px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Magnitude Visualizer</h1>
+      <div class="toolbar">
+        <div class="metric">Magnitude <strong id="magnitude">0.000000</strong></div>
+        <div class="metric">点の数 <strong id="count">0</strong></div>
+        <div class="metric">選択 <strong id="selectedLabel">なし</strong></div>
+        <label class="control">距離スケール
+          <input id="scale" type="range" min="30" max="240" step="1" value="100" />
+          <span id="scaleLabel">100 px = 1</span>
+        </label>
+        <button id="deleteBtn" class="danger" disabled>選択点を削除</button>
+        <button id="clearBtn">全削除</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="canvas-wrap" id="canvasWrap">
+        <canvas id="canvas" aria-label="点集合を配置するキャンバス"></canvas>
+        <div class="hint">
+          余白をクリックすると点を追加します。点をクリックすると選択し、そのままドラッグできます。Delete / Backspace キーでも選択点を削除できます。円の面積は重み w<sub>i</sub> に比例します．
+        </div>
+      </section>
+
+      <aside>
+        <section class="card">
+          <h2>解説</h2>
+          <div class="formula">
+            Magnitudeは「塊の個数」のような量です。<br><br>
+            配置された点 x<sub>1</sub>,...,x<sub>n</sub> に対し、<br>
+            各点の重み w<sub>i</sub> が定まります。<br>
+            重み w<sub>i</sub> の総和がMagnitudeです。<br><br>
+            重みの計算方法は以下の通りです。<br>
+            A<sub>ij</sub> = exp(-d(x<sub>i</sub>, x<sub>j</sub>)) と置くとき、<br>
+            方程式 Aw = (1,...,1) の解 w が重みです。<br>
+            ここで d はキャンバス上の距離をスケール値で割ったユークリッド距離です。<br>
+          </div>
+          <div class="status" id="status">点を配置してください。</div>
+        </section>
+
+        <section class="card weights">
+          <h2>重み w</h2>
+          <div id="weightsContent" class="empty">まだ点がありません。</div>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <script>
+    (() => {
+      'use strict';
+
+      const canvas = document.getElementById('canvas');
+      const wrap = document.getElementById('canvasWrap');
+      const ctx = canvas.getContext('2d');
+      const magnitudeEl = document.getElementById('magnitude');
+      const countEl = document.getElementById('count');
+      const selectedLabelEl = document.getElementById('selectedLabel');
+      const scaleInput = document.getElementById('scale');
+      const scaleLabel = document.getElementById('scaleLabel');
+      const deleteBtn = document.getElementById('deleteBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const weightsContent = document.getElementById('weightsContent');
+      const statusEl = document.getElementById('status');
+
+      const state = {
+        points: [],
+        selected: -1,
+        dragging: false,
+        dragIndex: -1,
+        dragStart: null,
+        movedDuringDrag: false,
+        dpr: window.devicePixelRatio || 1,
+        width: 0,
+        height: 0,
+        scale: Number(scaleInput.value),
+        regularized: false,
+        solveFailed: false
+      };
+
+      const HIT_RADIUS = 18;
+      const EPSILON = 1e-12;
+
+      function clamp(value, min, max) {
+        return Math.max(min, Math.min(max, value));
+      }
+
+      function formatNumber(value, digits = 6) {
+        if (!Number.isFinite(value)) return '—';
+        if (Math.abs(value) >= 10000 || (Math.abs(value) > 0 && Math.abs(value) < 0.0001)) {
+          return value.toExponential(4);
+        }
+        return value.toFixed(digits);
+      }
+
+      const RADIUS_SCALE = 22;
+
+      function pointRadius(weight) {
+        if (!Number.isFinite(weight)) return 0;
+        return RADIUS_SCALE * Math.sqrt(Math.abs(weight));
+      }
+
+      function resizeCanvas() {
+        const rect = wrap.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        state.dpr = dpr;
+        state.width = Math.max(1, rect.width);
+        state.height = Math.max(1, rect.height);
+        canvas.width = Math.round(state.width * dpr);
+        canvas.height = Math.round(state.height * dpr);
+        canvas.style.width = `${state.width}px`;
+        canvas.style.height = `${state.height}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        draw();
+      }
+
+      function getPointerPosition(event) {
+        const rect = canvas.getBoundingClientRect();
+        return {
+          x: event.clientX - rect.left,
+          y: event.clientY - rect.top
+        };
+      }
+
+      function findPointAt(x, y) {
+        for (let i = state.points.length - 1; i >= 0; i--) {
+          const p = state.points[i];
+          const radius = Math.max(HIT_RADIUS, pointRadius(p.w) + 5);
+          if (Math.hypot(p.x - x, p.y - y) <= radius) return i;
+        }
+        return -1;
+      }
+
+      function addPoint(x, y) {
+        state.points.push({ x, y, w: 1 });
+        state.selected = state.points.length - 1;
+        recompute();
+      }
+
+      function deleteSelected() {
+        if (state.selected < 0) return;
+        state.points.splice(state.selected, 1);
+        state.selected = Math.min(state.selected, state.points.length - 1);
+        recompute();
+      }
+
+      function clearPoints() {
+        state.points = [];
+        state.selected = -1;
+        recompute();
+      }
+
+      function buildMatrix() {
+        const n = state.points.length;
+        const A = Array.from({ length: n }, () => Array(n).fill(0));
+        for (let i = 0; i < n; i++) {
+          for (let j = 0; j < n; j++) {
+            const dx = state.points[i].x - state.points[j].x;
+            const dy = state.points[i].y - state.points[j].y;
+            const d = Math.hypot(dx, dy) / state.scale;
+            A[i][j] = Math.exp(-d);
+          }
+        }
+        return A;
+      }
+
+      function cloneMatrixWithRegularization(A, lambda) {
+        return A.map((row, i) => row.map((value, j) => value + (i === j ? lambda : 0)));
+      }
+
+      function gaussianSolve(A, b) {
+        const n = A.length;
+        const M = A.map((row, i) => row.concat([b[i]]));
+
+        for (let col = 0; col < n; col++) {
+          let pivotRow = col;
+          let pivotValue = Math.abs(M[col][col]);
+          for (let r = col + 1; r < n; r++) {
+            const value = Math.abs(M[r][col]);
+            if (value > pivotValue) {
+              pivotValue = value;
+              pivotRow = r;
+            }
+          }
+
+          if (pivotValue < EPSILON) {
+            return null;
+          }
+
+          if (pivotRow !== col) {
+            const tmp = M[col];
+            M[col] = M[pivotRow];
+            M[pivotRow] = tmp;
+          }
+
+          const pivot = M[col][col];
+          for (let c = col; c <= n; c++) M[col][c] /= pivot;
+
+          for (let r = 0; r < n; r++) {
+            if (r === col) continue;
+            const factor = M[r][col];
+            if (Math.abs(factor) < EPSILON) continue;
+            for (let c = col; c <= n; c++) {
+              M[r][c] -= factor * M[col][c];
+            }
+          }
+        }
+
+        return M.map(row => row[n]);
+      }
+
+      function solveWeights() {
+        const n = state.points.length;
+        if (n === 0) return { weights: [], regularized: false, failed: false };
+
+        const A = buildMatrix();
+        const b = Array(n).fill(1);
+        const lambdas = [0, 1e-10, 1e-8, 1e-6];
+
+        for (const lambda of lambdas) {
+          const candidate = gaussianSolve(cloneMatrixWithRegularization(A, lambda), b);
+          if (candidate && candidate.every(Number.isFinite)) {
+            return { weights: candidate, regularized: lambda > 0, failed: false };
+          }
+        }
+
+        return { weights: Array(n).fill(NaN), regularized: false, failed: true };
+      }
+
+      function recompute() {
+        const result = solveWeights();
+        result.weights.forEach((w, i) => { state.points[i].w = w; });
+        state.regularized = result.regularized;
+        state.solveFailed = result.failed;
+        updateUI();
+        draw();
+      }
+
+      function updateUI() {
+        const n = state.points.length;
+        const magnitude = state.points.reduce((sum, p) => sum + (Number.isFinite(p.w) ? p.w : 0), 0);
+
+        magnitudeEl.textContent = formatNumber(magnitude, 6);
+        countEl.textContent = String(n);
+        selectedLabelEl.textContent = state.selected >= 0 ? `x${state.selected + 1}` : 'なし';
+        scaleLabel.textContent = `${state.scale} px = 1`;
+        deleteBtn.disabled = state.selected < 0;
+
+        if (n === 0) {
+          statusEl.textContent = '点を配置してください。';
+        } else if (state.solveFailed) {
+          statusEl.textContent = '線形方程式を安定に解けません。点が重なりすぎている可能性があります。';
+        } else if (state.regularized) {
+          statusEl.textContent = '行列がほぼ特異なため、ごく小さい正則化を加えて解いています。';
+        } else {
+          statusEl.textContent = 'Aw = (1,...,1) を通常のガウス消去法で解いています。';
+        }
+
+        renderWeightsTable();
+      }
+
+      function renderWeightsTable() {
+        if (state.points.length === 0) {
+          weightsContent.className = 'empty';
+          weightsContent.textContent = 'まだ点がありません。';
+          return;
+        }
+
+        weightsContent.className = '';
+        const rows = state.points.map((p, i) => {
+          const cls = i === state.selected ? ' class="selected"' : '';
+          return `<tr${cls}><td>x${i + 1}</td><td>${formatNumber(p.x / state.scale, 3)}</td><td>${formatNumber((state.height - p.y) / state.scale, 3)}</td><td>${formatNumber(p.w, 6)}</td></tr>`;
+        }).join('');
+
+        weightsContent.innerHTML = `
+          <table>
+            <thead><tr><th>点</th><th>x</th><th>y</th><th>w_i</th></tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
+        `;
+      }
+
+      function drawGrid() {
+        ctx.save();
+        ctx.clearRect(0, 0, state.width, state.height);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, state.width, state.height);
+
+        const step = state.scale;
+        const minor = step / 2;
+        ctx.lineWidth = 1;
+
+        ctx.strokeStyle = '#f0f3f8';
+        ctx.beginPath();
+        for (let x = 0; x <= state.width; x += minor) {
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, state.height);
+        }
+        for (let y = 0; y <= state.height; y += minor) {
+          ctx.moveTo(0, y);
+          ctx.lineTo(state.width, y);
+        }
+        ctx.stroke();
+
+        ctx.strokeStyle = '#dde4ef';
+        ctx.beginPath();
+        for (let x = 0; x <= state.width; x += step) {
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, state.height);
+        }
+        for (let y = 0; y <= state.height; y += step) {
+          ctx.moveTo(0, y);
+          ctx.lineTo(state.width, y);
+        }
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function drawKernelLinks() {
+        const n = state.points.length;
+        if (n < 2) return;
+
+        ctx.save();
+        for (let i = 0; i < n; i++) {
+          for (let j = i + 1; j < n; j++) {
+            const p = state.points[i];
+            const q = state.points[j];
+            const d = Math.hypot(p.x - q.x, p.y - q.y) / state.scale;
+            const affinity = Math.exp(-d);
+            if (affinity < 0.06) continue;
+            ctx.strokeStyle = `rgba(37, 99, 235, ${0.06 + 0.22 * affinity})`;
+            ctx.lineWidth = 1 + 3 * affinity;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.stroke();
+          }
+        }
+        ctx.restore();
+      }
+
+      function drawPoints() {
+        ctx.save();
+        ctx.font = '12px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        state.points.forEach((p, i) => {
+          const r = pointRadius(p.w);
+          const isSelected = i === state.selected;
+          const isNegative = Number.isFinite(p.w) && p.w < 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+          ctx.fillStyle = isNegative ? 'rgba(194, 65, 12, 0.22)' : 'rgba(37, 99, 235, 0.20)';
+          ctx.fill();
+
+          ctx.lineWidth = isSelected ? 3 : 1.6;
+          ctx.strokeStyle = isSelected ? '#111827' : (isNegative ? '#c2410c' : '#2563eb');
+          ctx.stroke();
+
+          ctx.fillStyle = '#111827';
+          ctx.fillText(`x${i + 1}`, p.x, p.y - r - 11);
+
+          ctx.fillStyle = isNegative ? '#9a3412' : '#1d4ed8';
+          ctx.fillText(formatNumber(p.w, 3), p.x, p.y + r + 13);
+        });
+        ctx.restore();
+      }
+
+      function drawEmptyMessage() {
+        if (state.points.length > 0) return;
+        ctx.save();
+        ctx.fillStyle = '#6b7280';
+        ctx.font = '16px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('クリックして点を配置してください', state.width / 2, state.height / 2);
+        ctx.restore();
+      }
+
+      function draw() {
+        if (!ctx) return;
+        ctx.setTransform(state.dpr, 0, 0, state.dpr, 0, 0);
+        drawGrid();
+        drawKernelLinks();
+        drawPoints();
+        drawEmptyMessage();
+      }
+
+      canvas.addEventListener('pointerdown', event => {
+        const pos = getPointerPosition(event);
+        const index = findPointAt(pos.x, pos.y);
+
+        canvas.setPointerCapture(event.pointerId);
+
+        if (index >= 0) {
+          state.selected = index;
+          state.dragging = true;
+          state.dragIndex = index;
+          state.dragStart = { x: pos.x, y: pos.y };
+          state.movedDuringDrag = false;
+          canvas.style.cursor = 'grabbing';
+          updateUI();
+          draw();
+        } else {
+          addPoint(clamp(pos.x, 0, state.width), clamp(pos.y, 0, state.height));
+        }
+      });
+
+      canvas.addEventListener('pointermove', event => {
+        const pos = getPointerPosition(event);
+        const hoverIndex = findPointAt(pos.x, pos.y);
+        if (!state.dragging) {
+          canvas.style.cursor = hoverIndex >= 0 ? 'grab' : 'crosshair';
+          return;
+        }
+
+        const p = state.points[state.dragIndex];
+        if (!p) return;
+        p.x = clamp(pos.x, 0, state.width);
+        p.y = clamp(pos.y, 0, state.height);
+        if (state.dragStart && Math.hypot(pos.x - state.dragStart.x, pos.y - state.dragStart.y) > 1.5) {
+          state.movedDuringDrag = true;
+        }
+        recompute();
+      });
+
+      canvas.addEventListener('pointerup', event => {
+        if (canvas.hasPointerCapture(event.pointerId)) {
+          canvas.releasePointerCapture(event.pointerId);
+        }
+        state.dragging = false;
+        state.dragIndex = -1;
+        state.dragStart = null;
+        state.movedDuringDrag = false;
+        canvas.style.cursor = 'crosshair';
+      });
+
+      canvas.addEventListener('pointercancel', event => {
+        if (canvas.hasPointerCapture(event.pointerId)) {
+          canvas.releasePointerCapture(event.pointerId);
+        }
+        state.dragging = false;
+        state.dragIndex = -1;
+        state.dragStart = null;
+        state.movedDuringDrag = false;
+        canvas.style.cursor = 'crosshair';
+      });
+
+      deleteBtn.addEventListener('click', deleteSelected);
+      clearBtn.addEventListener('click', clearPoints);
+
+      scaleInput.addEventListener('input', () => {
+        state.scale = Number(scaleInput.value);
+        recompute();
+      });
+
+      window.addEventListener('keydown', event => {
+        if ((event.key === 'Delete' || event.key === 'Backspace') && state.selected >= 0) {
+          event.preventDefault();
+          deleteSelected();
+        }
+      });
+
+      window.addEventListener('resize', resizeCanvas);
+
+      resizeCanvas();
+      recompute();
+    })();
+  </script>
+</body>
+</html>
