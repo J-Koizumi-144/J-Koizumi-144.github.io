@@ -110,3 +110,7 @@ p{
 .spoiler-content {
   display: none;
 }
+
+strong {
+  font-family: "Computer Modern Bold";
+}
