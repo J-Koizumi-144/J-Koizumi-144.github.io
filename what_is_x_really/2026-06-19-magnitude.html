@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnitude って要するに何なの？</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <div class="navigation">
+        <a href="index.html">Home</a> > <a href="what_is_x_really.html">What is X, really?</a>
+    </div>
+
+    <main>
+        <h2>Magnitude って要するに何なの？</h2>
+
+        <p>
+            Magnitude は Leinster [1] によって導入された豊穣圏の不変量で，特に距離空間から得られる豊穣圏の場合がよく研究されています．
+            ここでは距離空間の magnitude が一体どんな量なのかを考察します．
+            距離空間と言うと幾何学的な対象のように聞こえますが，見方を変えるとこれは集合の元の間に「類似度」が定まったものと捉えられます．
+            この見方をすると，magnitude は要するに <strong>「ものの種類の数」</strong> を数えていると考えることができます．
+        </p>
+
+        <h3>類似空間</h3>
+
+        <p>説明のために，ここだけの概念として「類似空間」というものを定義します．</p>
+
+        <div class="theorem">
+            <p>
+                <strong class="theoremname">定義.</strong>
+                類似空間 \((X,s)\) とは，集合 \(X\) と写像 \(s\colon X\times X\to [0,1]\) の組であって以下を満たすものを指す．
+            </p>
+
+            <ol>
+                <li>任意の \(x\in X\) に対して \(s(x,x)=1\).</li>
+                <li>任意の \(x,y\in X\) に対して \(s(x,y)=s(y,x)\).</li>
+                <li>任意の \(x,y,z\in X\) に対して \(s(x,y)s(y,z)\le s(x,z)\).</li>
+            </ol>
+        </div>
+
+        <p>
+            気持ちとしては，類似空間は集合に二元の「類似度」が定まっているものと思えます．
+            三つ目の公理は，\(x,y\) の類似度が \(a\) であり，\(y,z\) の類似度が \(b\) であるとき，\(x,z\) の類似度が \(ab\) 以上であることを表しています．
+        </p>
+
+        <p>
+            類似空間の定義は距離空間によく似ています．
+            実際，距離空間 \((X,d)\) に対し，写像 \(s\colon X\times X\to [0,1]\) を
+        </p>
+
+        \[
+            s(x,y)=e^{-d(x,y)}
+        \]
+
+        <p>
+            で定めれば，\((X,s)\) は類似空間となります．
+            感覚的には「距離が近いほど似ている」とみなすわけです．
+            しかし，全ての類似空間が距離空間から得られるわけではありません．
+            類似空間の側では相異なる \(x,y\in X\) に対して \(s(x,y)=0\) や \(s(x,y)=1\) にもなり得るからです．
+        </p>
+
+        <p>
+            もう一つの重要な例は集合上の同値関係から得られます．
+            \(X\) を集合とし，\(\sim\) を \(X\) 上の同値関係とします．
+            このとき写像 \(s\colon X\times X\to [0,1]\) を
+        </p>
+
+        \[
+            s(x,y)=\begin{cases}1&(x\sim y)\\0&(x\not\sim y)\end{cases}
+        \]
+
+        <p>
+            で定めれば，\((X,s)\) は類似空間となります．
+            つまり類似空間は同値関係の一般化になっています．
+            同値関係が「同じか違うか」という定性的なデータだけを扱うのに対し，類似空間は「どのくらい同じか」という定量的なデータまで扱うことができます．
+        </p>
+
+        <h3>類似空間の magnitude</h3>
+
+        <p>
+            \(X\) を有限集合とし，\(\sim\) を \(X\) 上の同値関係とします．
+            このとき \(X\) はいくつかの同値類に分かれます．
+            同値類の個数，つまり \(X/\mathord\sim\) の元の個数を数えるという問題は，数学において非常に基本的です．
+            例えば「紅白のボールを円形に並べる方法を，回転を同一視して数える」といった問題は，身近なところに同値類の数え上げが現れる良い例です．
+        </p>
+
+        <p>
+            さて，ここでは同値類の個数を表す方法として次のようなものを考えます．
+            \(w\colon X\to \mathbb{R}\) を写像とし，以下が成り立っているとします：
+        </p>
+
+        \[
+            \forall x\in X,\quad \sum_{y\in X\colon x\sim y} w(y)=1.
+        \]
+
+        <p>
+            この条件は「一つの同値類にわたる \(w(x)\) の和が \(1\) である」と言い表せます．
+            このとき当然，\(w(x)\) の総和は同値類の個数に一致します：
+        </p>
+
+        \[
+            \#(X/\mathord\sim) = \sum_{x\in X} w(x).
+        \]
+
+        <p>
+            これを類似空間に一般化しましょう．
+            \((X,s)\) を有限類似空間とします．
+            \(w\colon X\to \mathbb{R}\) を写像とし，以下が成り立っているとします：
+        </p>
+
+        \[
+            \forall x\in X,\quad \sum_{y\in X} s(x,y)w(y)=1.
+        \]
+
+        <p>
+            このような写像 \(w\) を <strong>weighting</strong> といいます．
+            そして weighting が存在するとき，その値の総和を \((X,s)\) の <strong>magnitude</strong> と呼び，\(\operatorname{Mag}(X,s)\) で表します：
+        </p>
+
+        \[
+        \operatorname{Mag}(X,s) = \sum_{x\in X} w(x).
+        \]
+
+        <p>この定義は weighting の取り方に依りません．実際，\(w,w'\) を weighting とすると</p>
+
+        \[
+        \begin{aligned}
+        \sum_{x\in X} w(x) &= \sum_{x\in X}w(x)\biggl(\sum_{y\in X} s(x,y)w'(y)\biggr)\\
+        &=\sum_{y\in X}w'(y)\biggl(\sum_{x\in X} s(y,x)w(x)\biggr)\\
+        &=\sum_{y\in X}w'(y)
+        \end{aligned}
+        \]
+
+        <p>
+            となります．
+            直感的には，weighting は「似ている元どうしで \(1\) を分け合ったもの」とみなすことができます．
+            Magnitude はその総和なので「元が何種類あるか」を実数値で測っていると考えられます．
+        </p>
+
+        <h3>例：2点空間</h3>
+
+        <p>例として \(X=\{x,y\}\) とし，類似空間の構造を次のように定めます：</p>
+
+        \[
+            s(x,x)=s(y,y)=1,\quad s(x,y)=s(y,x)=a.
+        \]
+
+        <p>
+            ただし \(a\in [0,1]\) です．
+            このとき
+        </p>
+
+        \[
+            w(x)=w(y)=\dfrac{1}{1+a}
+        \]
+
+        <p>と定めると，\(w\) は \((X,s)\) の weighting を与えます．よって magnitude は</p>
+
+        \[
+            \operatorname{Mag}(X,s)=\frac{2}{1+a}
+        \]
+
+        <p>
+            となります．
+            この場合 magnitude は \(1\) 以上 \(2\) 以下の値を取り，\(a\) が大きいほど magnitude は小さくなります．
+            これは前節で述べた「種類の個数」という解釈と整合しています．
+            \(a=0\) のときは \(x,y\) は完全に別種のものとみなされ，\(a=1\) のときは \(x,y\) は完全に同種のものとみなされます．
+            magnitude はこれらの「種類の個数」を補間しています．
+        </p>
+
+        <h3>関数としての magnitude</h3>
+
+        <p>
+            前節では weighting の存在を仮定して magnitude を定義しました．
+            しかし一般の有限類似空間は weighting を持つとは限りません．
+            これを解消する一つの方法は，類似空間の構造をパラメータ \(t\in (0,\infty)\) で変形し，その magnitude を \(t\) の関数として捉えることです．
+            有限類似空間 \((X,s)\) およびパラメータ \(t\in (0,\infty)\)に対し，関数 \(s^t\colon X\times X\to [0,1]\) を
+        </p>
+
+        \[
+            s^t(x,y) = s(x,y)^t
+        \]
+
+        <p>
+            で定めます．
+            すると \((X,s^t)\) も類似空間となります．
+            関数
+        </p>
+
+        \[
+            t\mapsto \operatorname{Mag}(X,s^t)
+        \]
+
+        <p>
+            のことを \((X,s)\) の <strong>magnitude 関数</strong> と呼びます．
+            この関数は有限個を除く全ての \(t\in (0,\infty)\) に対して定義され，解析的であることも知られています．
+            直感的には，\(t\) を \(0\) に近づけると元どうしの類似性が強くなり，\(t\) を \(\infty\) に近づけると元どうしの類似性が弱くなります．
+            実際，距離空間から得られる類似空間の場合には，\(t\to\infty\) の極限で magnitude 関数は \(\#X\) に収束することが証明できます [1, Proposition 2.2.6 (v)]．
+            一方，\(t\to 0\) の極限で magnitude 関数 が \(1\) に収束するとは限らないので注意が必要です [1, Example 2.2.8]．
+        </p>
+
+        <h3>参考文献</h3>
+
+        <ol class="references">
+            <li>Tom Leinster. <cite>The magnitude of metric spaces.</cite> Documenta Mathematica 18 (2013), 857-905.</li>
+        </ol>
+    </main>
+</body>
+</html>

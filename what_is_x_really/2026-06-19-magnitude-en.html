@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is magnitude, really?</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <div class="navigation">
+        <a href="index.html">Home</a> > <a href="what_is_x_really.html">What is X, really?</a>
+    </div>
+
+    <main>
+        <h2>What is magnitude, really?</h2>
+
+        <p>
+            Magnitude is an invariant of enriched categories introduced by Leinster [1], and the case of enriched categories arising from metric spaces has been studied especially well.
+            Here we consider what kind of quantity the magnitude of a metric space really is.
+            A metric space may sound like a geometric object, but from another point of view it is a set equipped with a notion of "similarity" between its elements.
+            From this point of view, magnitude can be understood as counting <strong>"the number of kinds of things"</strong>.
+        </p>
+
+        <h3>Similarity spaces</h3>
+
+        <p>For the purposes of this discussion, let us introduce an ad hoc notion called a "similarity space."</p>
+
+        <div class="theorem">
+            <p>
+                <strong class="theoremname">Definition.</strong>
+                A similarity space \((X,s)\) is a pair consisting of a set \(X\) and a map \(s\colon X\times X\to [0,1]\) satisfying the following conditions.
+            </p>
+
+            <ol>
+                <li>For every \(x\in X\), \(s(x,x)=1\).</li>
+                <li>For every \(x,y\in X\), \(s(x,y)=s(y,x)\).</li>
+                <li>For every \(x,y,z\in X\), \(s(x,y)s(y,z)\le s(x,z)\).</li>
+            </ol>
+        </div>
+
+        <p>
+            Informally, a similarity space is a set equipped with a binary degree of similarity.
+            The third axiom says that if the similarity between \(x\) and \(y\) is \(a\), and the similarity between \(y\) and \(z\) is \(b\), then the similarity between \(x\) and \(z\) is at least \(ab\).
+        </p>
+
+        <p>
+            The definition of a similarity space is very close to that of a metric space.
+            Indeed, given a metric space \((X,d)\), define a map \(s\colon X\times X\to [0,1]\) by
+        </p>
+
+        \[
+            s(x,y)=e^{-d(x,y)}
+        \]
+
+        <p>
+            Then \((X,s)\) is a similarity space.
+            Intuitively, this regards points as more similar when they are closer.
+            However, not every similarity space arises from a metric space.
+            In a similarity space, it is possible for distinct elements \(x,y\in X\) to satisfy \(s(x,y)=0\) or \(s(x,y)=1\).
+        </p>
+
+        <p>
+            Another important example comes from equivalence relations on sets.
+            Let \(X\) be a set, and let \(\sim\) be an equivalence relation on \(X\).
+            Define a map \(s\colon X\times X\to [0,1]\) by
+        </p>
+
+        \[
+            s(x,y)=\begin{cases}1&(x\sim y)\\0&(x\not\sim y)\end{cases}
+        \]
+
+        <p>
+            Then \((X,s)\) is a similarity space.
+            Thus similarity spaces generalize equivalence relations.
+            Whereas an equivalence relation only records the qualitative data of whether two elements are the same or different, a similarity space can also record the quantitative data of how similar they are.
+        </p>
+
+        <h3>Magnitude of similarity spaces</h3>
+
+        <p>
+            Let \(X\) be a finite set, and let \(\sim\) be an equivalence relation on \(X\).
+            Then \(X\) is divided into equivalence classes.
+            Counting the number of equivalence classes, that is, the number of elements of \(X/\mathord\sim\), is one of the most basic problems in mathematics.
+            For example, a problem such as "count the ways to arrange red and white balls in a circle, identifying arrangements that differ by rotation" is a familiar setting where counting equivalence classes appears.
+        </p>
+
+        <p>
+            Now consider the following way of expressing the number of equivalence classes.
+            Let \(w\colon X\to \mathbb{R}\) be a map, and suppose that the following condition holds:
+        </p>
+
+        \[
+            \forall x\in X,\quad \sum_{y\in X\colon x\sim y} w(y)=1.
+        \]
+
+        <p>
+            This condition says that the sum of the values \(w(x)\) over each equivalence class is \(1\).
+            It then follows immediately that the total sum of the values \(w(x)\) is the number of equivalence classes:
+        </p>
+
+        \[
+            \#(X/\mathord\sim) = \sum_{x\in X} w(x).
+        \]
+
+        <p>
+            Let us generalize this to similarity spaces.
+            Let \((X,s)\) be a finite similarity space.
+            Let \(w\colon X\to \mathbb{R}\) be a map, and suppose that the following condition holds:
+        </p>
+
+        \[
+            \forall x\in X,\quad \sum_{y\in X} s(x,y)w(y)=1.
+        \]
+
+        <p>
+            Such a map \(w\) is called a <strong>weighting</strong>.
+            When a weighting exists, the sum of its values is called the <strong>magnitude</strong> of \((X,s)\), and is denoted by \(\operatorname{Mag}(X,s)\):
+        </p>
+
+        \[
+        \operatorname{Mag}(X,s) = \sum_{x\in X} w(x).
+        \]
+
+        <p>This definition does not depend on the choice of weighting. Indeed, if \(w,w'\) are weightings, then</p>
+
+        \[
+        \begin{aligned}
+        \sum_{x\in X} w(x) &= \sum_{x\in X}w(x)\biggl(\sum_{y\in X} s(x,y)w'(y)\biggr)\\
+        &=\sum_{y\in X}w'(y)\biggl(\sum_{x\in X} s(y,x)w(x)\biggr)\\
+        &=\sum_{y\in X}w'(y)
+        \end{aligned}
+        \]
+
+        <p>
+            This proves the claim.
+            Intuitively, a weighting can be regarded as a way of sharing \(1\) among mutually similar elements.
+            Since magnitude is the total sum of these values, it measures "how many kinds of elements there are" as a real number.
+        </p>
+
+        <h3>Example: a two-point space</h3>
+
+        <p>As an example, let \(X=\{x,y\}\), and define the similarity-space structure by</p>
+
+        \[
+            s(x,x)=s(y,y)=1,\quad s(x,y)=s(y,x)=a.
+        \]
+
+        <p>
+            Here \(a\in [0,1]\).
+            In this case, if we define
+        </p>
+
+        \[
+            w(x)=w(y)=\dfrac{1}{1+a}
+        \]
+
+        <p>then \(w\) gives a weighting of \((X,s)\). Hence the magnitude is</p>
+
+        \[
+            \operatorname{Mag}(X,s)=\frac{2}{1+a}
+        \]
+
+        <p>
+            Thus in this case the magnitude takes values between \(1\) and \(2\), and the larger \(a\) is, the smaller the magnitude becomes.
+            This agrees with the interpretation given above as "the number of kinds."
+            When \(a=0\), the elements \(x\) and \(y\) are regarded as completely different kinds of things; when \(a=1\), they are regarded as completely the same kind of thing.
+            Magnitude interpolates between these numbers of kinds.
+        </p>
+
+        <h3>Magnitude as a function</h3>
+
+        <p>
+            In the previous section, we defined magnitude under the assumption that a weighting exists.
+            However, a general finite similarity space need not have a weighting.
+            One way to address this is to deform the structure of the similarity space by a parameter \(t\in (0,\infty)\), and regard magnitude as a function of \(t\).
+            Given a finite similarity space \((X,s)\) and a parameter \(t\in (0,\infty)\), define a function \(s^t\colon X\times X\to [0,1]\) by
+        </p>
+
+        \[
+            s^t(x,y) = s(x,y)^t
+        \]
+
+        <p>
+            Then \((X,s^t)\) is also a similarity space.
+            The function
+        </p>
+
+        \[
+            t\mapsto \operatorname{Mag}(X,s^t)
+        \]
+
+        <p>
+            is called the <strong>magnitude function</strong> of \((X,s)\).
+            This function is defined for all but finitely many \(t\in (0,\infty)\), and it is also known to be analytic there.
+            Intuitively, as \(t\) approaches \(0\), the similarities among elements become stronger, while as \(t\) approaches \(\infty\), the similarities among elements become weaker.
+            In fact, for similarity spaces arising from metric spaces, one can prove that the magnitude function converges to \(\#X\) in the limit \(t\to\infty\) [1, Proposition 2.2.6 (v)].
+            On the other hand, one should be careful: in the limit \(t\to 0\), the magnitude function does not necessarily converge to \(1\) [1, Example 2.2.8].
+        </p>
+
+        <h3>References</h3>
+
+        <ol class="references">
+            <li>Tom Leinster. <cite>The magnitude of metric spaces.</cite> Documenta Mathematica 18 (2013), 857-905.</li>
+        </ol>
+    </main>
+</body>
+</html>
