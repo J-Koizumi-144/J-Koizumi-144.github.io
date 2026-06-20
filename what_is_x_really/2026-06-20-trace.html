@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>トレースって要するに何なの？</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <div class="navigation">
+        <a href="../index.html">Home</a> > <a href="../what_is_x_really.html">What Is X, Really?</a>
+    </div>
+
+    <main>
+        <h2>トレースって要するに何なの？</h2>
+
+        <p>
+            正方行列のトレースは対角成分の和として定義されます．
+            この定義は最初に見ると少し不思議です．
+            なぜ行列の中で対角成分だけを取り出し，なぜそれらを足すのでしょうか．
+        </p>
+
+        <p>
+            結論から言うと，トレースは要するに <strong>「自分自身との積」</strong> であると言い表すことができます．
+            別の言葉で言うと，トレースは線型写像の出力と入力を接続して <strong>「輪っか」</strong> を作る操作です．
+            これらの標語の意味について，以下で詳しく説明します．
+        </p>
+
+        <h3>トレースの定義</h3>
+
+        <p>
+            まず通常の定義を確認します．
+            体 \(k\) 上の \(n\) 次正方行列 \(A=(a_{ij})_{1\le i,j\le n}\) に対し，\(A\) の <strong>トレース</strong> は
+        </p>
+
+        \[
+            \operatorname{tr}(A)=\sum_{i=1}^n a_{ii}
+        \]
+
+        <p>
+            で定義されます．
+            つまり左上から右下に並ぶ対角成分を足したものです．
+            例えば
+        </p>
+
+        \[
+            A=\begin{pmatrix}
+                2&1&0\\
+                3&-1&4\\
+                5&2&7
+            \end{pmatrix}
+        \]
+
+        <p>
+            ならば \(\operatorname{tr}(A)=2+(-1)+7=8\) です．
+        </p>
+
+        <p>
+            定義だけを見ると，「対角成分を足す」という操作は不自然に感じられるかもしれません．
+            行列には他にもたくさんの成分があるのに，なぜ \(a_{11},a_{22},\ldots,a_{nn}\) だけを取り出すのでしょうか．
+            この疑問に答える鍵は <strong>行列の積</strong> の概念にあります．
+        </p>
+
+        <h3>行列の積</h3>
+
+        <p>
+            \(m\times n\) 行列 \(A=(a_{ij})_{1\le i\le m,1\leq j\le n}\) と \(n\) 次元縦ベクトル \(x=(x_i)_{1\leq i\le n}\) の積は
+        </p>
+
+        \[
+            (Ax)_i=\sum_{j=1}^n a_{ij} x_j
+        \]
+
+        <p>
+            で与えられます．
+            この式を以下のように図示してみましょう．
+        </p>
+
+        <img src="2026-06-20-trace-fig1.png" width="350" alt="行列とベクトルの積の図" style="display: block; max-width: 100%; height: auto; margin: 20px auto;">
+
+        <p>言葉で表すと次のようになります．</p>
+
+        <ul>
+            <li>行列 \(A\) は左右に紐が一本ずつ伸びた箱として図示する．左の紐が行の添え字を表し，右の紐が列の添え字を表す．</li>
+            <li>ベクトル \(x\) は左に紐が一本伸びた箱として図示する．左の紐は行の添え字を表す．</li>
+            <li>紐をつなげることは，対応する添字を動かして和を取ることを表す．</li>
+        </ul>
+
+        <p>この最後の操作，つまり接続された添え字について和を取る操作を <strong>縮約</strong> と呼びます．</p>
+
+        <p>
+            行列の積についても同じような図示を行うことができます．
+            \(m\times n\) 行列 \(A=(a_{ij})_{1\le i\leq m,1\leq j \leq n}\) および \(n\times\ell\) 行列 \(B=(b_{ij})\) に対して，それらの積 \(AB\) は
+        </p>
+
+        \[
+            (AB)_{ik}=\sum_{j=1}^n a_{ij}b_{jk}
+        \]
+
+        <p>で与えられるのでした．この式は以下のような図で表すことができます．</p>
+
+        <img src="2026-06-20-trace-fig2.png" width="400" alt="行列の積の図" style="display: block; max-width: 100%; height: auto; margin: 20px auto;">
+
+        <p>同様に三つの行列の積 \(ABC\) や，二つの行列と一つのベクトルの積 \(ABx\) などについても，成分の計算式を図で表すことができます．</p>
+
+        <h3>トレースは「輪っか」である</h3>
+
+        <p>
+            さて，\(n\) 次正方行列 \(A=(a_{ij})_{1\le i,j\le n}\) を考えます．
+            上で述べたように，これは一つの箱から二本の紐が出ている図に対応しています．
+            この二本の紐をつないでループを作ってみましょう．
+        </p>
+
+        <img src="2026-06-20-trace-fig3.png" width="160" alt="トレースを輪っかとして表した図" style="display: block; max-width: 100%; height: auto; margin: 20px auto;">
+
+        <p>すると対応する計算式は，接続された添字 \(i\) にわたって和をとるので</p>
+
+        \[
+            \sum_{i=1}^n a_{ii}
+        \]
+
+        <p>
+            となります．
+            これはまさに \(A\) のトレースの定義そのものです！
+            つまりトレースとは，行列 \(A\) の入力側の添字と出力側の添字を，行列の積のように縮約したものです．
+            これが冒頭に述べた <strong>「トレースは自分自身との積である」</strong> という標語の意味です．
+        </p>
+
+        <p>このようにトレースを「輪っか」として捉えると，\(m\times n\) 行列 \(A\) と \(n\times m\) 行列 \(B\) に対して</p>
+
+        \[
+            \operatorname{tr}(AB)=\operatorname{tr}(BA)
+        \]
+
+        <p>
+            が成り立つことも自然に解釈できます．
+            これは図で書くと，「\(B\) がループの上側を通って \(A\) の左側に移動できる」という事実に対応しています．
+        </p>
+
+        <img src="2026-06-20-trace-fig4.png" width="250" alt="トレースの巡回性を表した図" style="display: block; max-width: 100%; height: auto; margin: 20px auto;">
+
+        <p>
+            より一般に，行列 \(A_1,\dots,A_N\) に対して積 \(A_iA_{i+1}\ (i=1,2,\dots,N)\) が定義されるとします．
+            ただし \(A_{N+1}=A_1\) と約束します．
+            このとき上と同じ説明によって
+        </p>
+
+        \[
+            \operatorname{tr}(A_1A_2\cdots A_{N-1}A_N)=\operatorname{tr}(A_NA_1A_2\cdots A_{N-1})
+        \]
+
+        <p>
+            という <strong>巡回置換不変性</strong> が得られます．
+            またこの性質から，トレースが行列の相似で不変であることもすぐに分かります．
+            実際，\(n\) 次正方行列 \(A\) と可逆行列 \(P\) に対して
+        </p>
+
+        \[
+            \operatorname{tr}(P^{-1}AP)
+            =\operatorname{tr}(PP^{-1}A)
+            =\operatorname{tr}(A)
+        \]
+
+        <p>
+            となります．
+            図を描いてみると，これは「 \(P\) と \(P^{-1}\) がループの上で隣り合っているので打ち消せる」という単純な原理に対応していることがわかります．
+        </p>
+
+        <h3>基底によらない定義</h3>
+
+        <p>
+            ここまでの説明では行列の成分表示を使いましたが，実はトレースは成分を用いずに，抽象的な線型写像の言葉だけで定義できます．
+            有限次元ベクトル空間 \(V\) について，その双対空間を \(V^*\) とすると，標準的な同型
+        </p>
+
+        \[
+            V^*\otimes V \cong \operatorname{End}(V)
+        \]
+
+        <p>があります．具体的には，単純テンソル \(\varphi\otimes v\in V^*\otimes V\) を線型写像</p>
+
+        \[
+            x\mapsto \varphi(x)v
+        \]
+
+        <p>
+            に対応させます．
+            この対応を線型に拡張することで，\(V^*\otimes V\) と \(\operatorname{End}(V)\) との間の同型が得られます．
+            これを用いて <strong>余代入</strong> と呼ばれる線型写像 \(\operatorname{coev}\colon k\to V^*\otimes V\) を次のように定義します：
+        </p>
+
+        \[
+        \operatorname{coev}\colon k\xrightarrow{1\mapsto \mathrm{id}_V} \operatorname{End}(V)\cong V^*\otimes V.
+        \]
+
+        <p>また <strong>代入</strong> と呼ばれる線型写像 \(\operatorname{ev}\colon V^*\otimes V\to k\) を次のように定義します：</p>
+
+        \[
+        \operatorname{ev}\colon V^*\otimes V\to k;\quad \varphi\otimes v\mapsto \varphi(v).
+        \]
+
+        <p>このとき線型写像 \(f\colon V\to V\) に対し，以下の合成は \(\operatorname{tr}(f)\) 倍写像に一致します：</p>
+
+        \[
+        k
+        \xrightarrow{\operatorname{coev}} V^*\otimes V
+        \xrightarrow{\mathrm{id}\otimes f} V^*\otimes V
+        \xrightarrow{\operatorname{ev}} k.
+        \]
+
+        <p>
+            上の主張を確かめてみましょう．\(V\) の基底 \(e_1,\ldots,e_n\) とその双対基底 \(e_1^*,\ldots,e_n^*\) を取り，この基底に関する線型写像 \(f\colon V\to V\) の表現行列を \(A=(a_{ij})_{1\le i,j\le n}\) とします．
+            このとき，恒等写像 \(\mathrm{id}_V\colon V\to V\) に対応する \(V^*\otimes V\) の元は
+        </p>
+
+        \[
+            \sum_{i=1}^n e_i^*\otimes e_i
+        \]
+
+        <p>
+            で与えられます．
+            よって余代入は \(1\) をこの元に送ります．
+            さらに \(\mathrm{id}\otimes f\) を適用すると
+        </p>
+
+        \[
+            \sum_{i=1}^n e_i^*\otimes f(e_i) = \sum_{i=1}^n\sum_{j=1}^n e_i^*\otimes a_{ji}e_j
+        \]
+
+        <p>となり，代入を適用すると \(e_i^*(e_j)=\delta_{ij}\) より</p>
+
+        \[
+            \sum_{i=1}^n a_{ii} = \operatorname{tr}(A)
+        \]
+
+        <p>
+            が得られます．
+            以上で，前述の合成写像 \(k\to k\) が \(\operatorname{tr}(f)\) 倍写像に等しいことがわかりました．
+        </p>
+
+        <h3>ストリング図で見るトレース</h3>
+
+        <p>
+            前々節で見た「輪っか」としてのトレースの解釈と，前節で見た代入・余代入を用いたトレースの定義は，一見すると全く違うように見えます．
+            しかし実は，後者の定義を「ストリング図」と呼ばれる方法で図示すると，まさに「輪っか」の姿が現れます．
+        </p>
+
+        <p>
+            ストリング図は，ベクトル空間の圏のように「テンソル積」（モノイダル構造）が定まっている圏において，その対象や射を図示するための方法です．
+            ストリング図の書き方の厳密なルールについてはここでは深入りしません．
+            以下のルールのみ押さえておけば大丈夫です．
+        </p>
+
+        <ul>
+            <li>ベクトル空間は縦線で表す．</li>
+            <li>ベクトル空間のテンソル積は縦線を横に並べることで表す．</li>
+            <li>線型写像は縦線を上から下につなぐ継ぎ目で表す．</li>
+            <li>ベクトル空間 \(k\) を表す縦線は省略する．</li>
+        </ul>
+
+        <p>例えばベクトル空間 \(V_1,V_2,W\) に対し，線型写像 \(f\colon V_1\otimes V_2\to W\) は次のようなストリング図で表されます．</p>
+
+        <img src="2026-06-20-trace-fig5.png" width="240" alt="ストリング図の基本例" style="display: block; max-width: 100%; height: auto; margin: 20px auto;">
+
+        <p>これを踏まえて，前節で述べたトレースの抽象的な定義</p>
+
+        \[
+        k
+        \xrightarrow{\operatorname{coev}} V^*\otimes V
+        \xrightarrow{\mathrm{id}\otimes f} V^*\otimes V
+        \xrightarrow{\operatorname{ev}} k
+        \]
+
+        <p>をストリング図で書くと次のようになります．</p>
+
+        <img src="2026-06-20-trace-fig6.png" width="280" alt="代入と余代入によるトレースのストリング図" style="display: block; max-width: 100%; height: auto; margin: 20px auto;">
+
+        <p>
+            \(f\) から出た二本の紐が代入と余代入によって曲げられて「輪っか」になっている様子が見て取れると思います．
+            つまり，前節で述べたトレースの定義は，実は「輪っか」という直感をストリング図によって圏論的な言葉に直したものだったのです．
+        </p>
+
+        <h3>不動点とトレース</h3>
+
+        <p>
+            数学においてトレースが現れる重要な例として，<strong>Lefschetz 跡公式</strong> というものがあります（「跡」はトレースの和訳です）．
+            \(M\) を向きづけられたコンパクト多様体とし，滑らかな写像 \(f\colon M\to M\) を考えます．
+            点 \(x\in M\) であって \(f(x)=x\) を満たすものを，\(f\)の <strong>不動点</strong> といいます．
+            技術的な仮定として，\(f\) の不動点は集積していないとしましょう．
+            このとき Lefschetz 跡公式は，\(f\) の不動点にわたる「局所不動点指数」と呼ばれる符号付きの量の総和が
+        </p>
+
+        \[
+        \sum_{i=0}^\infty (-1)^i \operatorname{tr}(f^*|H^i(M;\mathbb{Q}))
+        \]
+
+        <p>
+            で与えられることを主張しています．
+            ただし \(f^*\) は \(f\) がコホモロジー群に誘導する写像
+        </p>
+
+        \[
+            f^*\colon H^i(M;\mathbb{Q})\to H^i(M;\mathbb{Q})
+        \]
+
+        <p>
+            です．
+            大雑把に言えば，Lefschetz 跡公式は「不動点」と「トレース」を結びつける公式といえます．
+        </p>
+
+        <p>
+            このようにトレースが不動点と関わることは，前節までで述べた「入力と出力の縮約」という描像からも自然に見えてきます．
+            単純な例として，有限集合の自己写像について考えてみましょう．
+        </p>
+
+        \[
+            X=\{1,2,\ldots,n\}
+        \]
+
+        <p>
+            とし，自己写像 \(f\colon X\to X\) を考えます．
+            元 \(i\in X\) を \(k^n\) の標準基底ベクトル \(e_i\) と同一視すると，\(f\) は線型写像 \(k^n\to k^n\) を誘導します．
+            この線型写像の表現行列を \(A_f\) とします．
+            具体的には，\(A_f=(a_{ij})_{1\le i,j\le n}\) と表すと
+        </p>
+
+        \[
+            a_{ij}=
+            \begin{cases}
+                1&(i=f(j))\\
+                0&(i\neq f(j))
+            \end{cases}
+        \]
+
+        <p>です．この行列のトレースを取ると</p>
+
+        \[
+            \operatorname{tr}(A_f)
+            =\sum_{i=1}^n a_{ii}
+            =\#\{i\in X\mid f(i)=i\}
+        \]
+
+        <p>
+            となり，\(f\) の不動点の個数が出てきます．
+            この計算では，トレースの定義で「入力と出力を縮約」することと，不動点の定義で「入力と出力の一致」を要求することがちょうど対応しています．
+            したがって，ある意味では「トレースは不動点の個数の一般化である」とも言えるでしょう．
+        </p>
+
+        <h3>謝辞</h3>
+
+        <p>この記事で強調した「トレースとは自分自身との積である」というスローガンは東田京介さんの受け売りです．良い標語を教えてくださったことに感謝します．</p>
+    </main>
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is trace, really?</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <div class="navigation">
+        <a href="../index.html">Home</a> > <a href="../what_is_x_really.html">What Is X, Really?</a>
+    </div>
+
+    <main>
+        <h2>What is trace, really?</h2>
+
+        <p>
+            The trace of a square matrix is defined as the sum of its diagonal entries.
+            This definition can look a little mysterious at first.
+            Why do we single out only the diagonal entries of a matrix, and why do we add them?
+        </p>
+
+        <p>
+            The short answer is that trace is, in essence, <strong>"a product with itself."</strong>
+            In other words, trace is the operation of connecting the output and input of a linear map to make a <strong>"loop."</strong>
+            Below, we explain what these slogans mean.
+        </p>
+
+        <h3>Definition of trace</h3>
+
+        <p>
+            Let us first recall the usual definition.
+            For an \(n\)-by-\(n\) square matrix \(A=(a_{ij})_{1\le i,j\le n}\) over a field \(k\), the <strong>trace</strong> of \(A\) is defined by
+        </p>
+
+        \[
+            \operatorname{tr}(A)=\sum_{i=1}^n a_{ii}
+        \]
+
+        <p>
+            In other words, it is the sum of the diagonal entries running from the upper left to the lower right.
+            For example, if
+        </p>
+
+        \[
+            A=\begin{pmatrix}
+                2&1&0\\
+                3&-1&4\\
+                5&2&7
+            \end{pmatrix},
+        \]
+
+        <p>
+            then \(\operatorname{tr}(A)=2+(-1)+7=8\).
+        </p>
+
+        <p>
+            If we look only at the definition, the operation "add the diagonal entries" may feel unnatural.
+            A matrix has many other entries, so why do we pick out only \(a_{11},a_{22},\ldots,a_{nn}\)?
+            The key to answering this question lies in the concept of <strong>matrix multiplication</strong>.
+        </p>
+
+        <h3>Matrix multiplication</h3>
+
+        <p>
+            The product of an \(m\times n\) matrix \(A=(a_{ij})_{1\le i\le m,1\leq j\le n}\) and an \(n\)-dimensional column vector \(x=(x_i)_{1\leq i\le n}\) is given by
+        </p>
+
+        \[
+            (Ax)_i=\sum_{j=1}^n a_{ij} x_j
+        \]
+
+        <p>
+            Let us draw this formula as follows.
+        </p>
+
+        <img src="2026-06-20-trace-fig1.png" width="350" alt="Diagram of the product of a matrix and a vector" style="display: block; max-width: 100%; height: auto; margin: 20px auto;">
+
+        <p>In words, the diagram means the following.</p>
+
+        <ul>
+            <li>The matrix \(A\) is drawn as a box with one string extending from each side. The left string represents the row index, and the right string represents the column index.</li>
+            <li>The vector \(x\) is drawn as a box with one string extending to the left. The left string represents the row index.</li>
+            <li>Connecting strings means summing over the corresponding index.</li>
+        </ul>
+
+        <p>This last operation, summing over a connected index, is called <strong>contraction</strong>.</p>
+
+        <p>
+            Matrix multiplication can be drawn in the same way.
+            For an \(m\times n\) matrix \(A=(a_{ij})_{1\le i\leq m,1\leq j \leq n}\) and an \(n\times\ell\) matrix \(B=(b_{ij})\), their product \(AB\) is given by
+        </p>
+
+        \[
+            (AB)_{ik}=\sum_{j=1}^n a_{ij}b_{jk}
+        \]
+
+        <p>Thus the formula can be represented by the following diagram.</p>
+
+        <img src="2026-06-20-trace-fig2.png" width="400" alt="Diagram of matrix multiplication" style="display: block; max-width: 100%; height: auto; margin: 20px auto;">
+
+        <p>Similarly, products such as the product \(ABC\) of three matrices, or the product \(ABx\) of two matrices and a vector, can also be represented diagrammatically from their component formulas.</p>
+
+        <h3>Trace is a loop</h3>
+
+        <p>
+            Now consider an \(n\)-by-\(n\) square matrix \(A=(a_{ij})_{1\le i,j\le n}\).
+            As described above, this corresponds to a diagram with two strings coming out of one box.
+            Let us connect these two strings to make a loop.
+        </p>
+
+        <img src="2026-06-20-trace-fig3.png" width="160" alt="Diagram representing trace as a loop" style="display: block; max-width: 100%; height: auto; margin: 20px auto;">
+
+        <p>Then the corresponding formula is obtained by summing over the connected index \(i\), so it is</p>
+
+        \[
+            \sum_{i=1}^n a_{ii}
+        \]
+
+        <p>
+            This is exactly the definition of the trace of \(A\).
+            Thus trace is the result of contracting the input-side index and the output-side index of the matrix \(A\), just as in matrix multiplication.
+            This is the meaning of the slogan stated at the beginning: <strong>"trace is a product with itself."</strong>
+        </p>
+
+        <p>When we regard trace as a loop in this way, the identity</p>
+
+        \[
+            \operatorname{tr}(AB)=\operatorname{tr}(BA)
+        \]
+
+        <p>
+            for an \(m\times n\) matrix \(A\) and an \(n\times m\) matrix \(B\) also becomes natural.
+            Written as a diagram, this corresponds to the fact that \(B\) can move along the upper side of the loop to the left side of \(A\).
+        </p>
+
+        <img src="2026-06-20-trace-fig4.png" width="250" alt="Diagram of the cyclicity of trace" style="display: block; max-width: 100%; height: auto; margin: 20px auto;">
+
+        <p>
+            More generally, suppose that matrices \(A_1,\dots,A_N\) are such that the products \(A_iA_{i+1}\) are defined for \(i=1,2,\dots,N\), where we set \(A_{N+1}=A_1\).
+            Then the same explanation gives the <strong>invariance under cyclic permutation</strong>
+        </p>
+
+        \[
+            \operatorname{tr}(A_1A_2\cdots A_{N-1}A_N)=\operatorname{tr}(A_NA_1A_2\cdots A_{N-1}).
+        \]
+
+        <p>
+            From this property, it is also immediate that trace is invariant under similarity of matrices.
+            Indeed, for an \(n\)-by-\(n\) square matrix \(A\) and an invertible matrix \(P\),
+        </p>
+
+        \[
+            \operatorname{tr}(P^{-1}AP)
+            =\operatorname{tr}(PP^{-1}A)
+            =\operatorname{tr}(A).
+        \]
+
+        <p>
+            If we draw the diagram, we see that this corresponds to the simple principle that \(P\) and \(P^{-1}\) sit next to each other on the loop and cancel.
+        </p>
+
+        <h3>Basis-free definition</h3>
+
+        <p>
+            So far we have used component expressions for matrices, but in fact trace can be defined without using components, purely in the language of abstract linear maps.
+            For a finite-dimensional vector space \(V\), let \(V^*\) be its dual space.
+            Then there is a canonical isomorphism
+        </p>
+
+        \[
+            V^*\otimes V \cong \operatorname{End}(V).
+        \]
+
+        <p>Concretely, it sends a simple tensor \(\varphi\otimes v\in V^*\otimes V\) to the linear map</p>
+
+        \[
+            x\mapsto \varphi(x)v.
+        \]
+
+        <p>
+            Extending this correspondence linearly gives an isomorphism between \(V^*\otimes V\) and \(\operatorname{End}(V)\).
+            Using this, define the linear map \(\operatorname{coev}\colon k\to V^*\otimes V\), called <strong>coevaluation</strong>, as follows:
+        </p>
+
+        \[
+        \operatorname{coev}\colon k\xrightarrow{1\mapsto \mathrm{id}_V} \operatorname{End}(V)\cong V^*\otimes V.
+        \]
+
+        <p>Also define the linear map \(\operatorname{ev}\colon V^*\otimes V\to k\), called <strong>evaluation</strong>, as follows:</p>
+
+        \[
+        \operatorname{ev}\colon V^*\otimes V\to k;\quad \varphi\otimes v\mapsto \varphi(v).
+        \]
+
+        <p>Then, for a linear map \(f\colon V\to V\), the following composite agrees with multiplication by \(\operatorname{tr}(f)\):</p>
+
+        \[
+        k
+        \xrightarrow{\operatorname{coev}} V^*\otimes V
+        \xrightarrow{\mathrm{id}\otimes f} V^*\otimes V
+        \xrightarrow{\operatorname{ev}} k.
+        \]
+
+        <p>
+            Let us verify the claim above.
+            Take a basis \(e_1,\ldots,e_n\) of \(V\) and its dual basis \(e_1^*,\ldots,e_n^*\), and let \(A=(a_{ij})_{1\le i,j\le n}\) be the matrix of the linear map \(f\colon V\to V\) with respect to this basis.
+            Then the element of \(V^*\otimes V\) corresponding to the identity map \(\mathrm{id}_V\colon V\to V\) is
+        </p>
+
+        \[
+            \sum_{i=1}^n e_i^*\otimes e_i.
+        \]
+
+        <p>
+            Therefore coevaluation sends \(1\) to this element.
+            Applying \(\mathrm{id}\otimes f\) further gives
+        </p>
+
+        \[
+            \sum_{i=1}^n e_i^*\otimes f(e_i) = \sum_{i=1}^n\sum_{j=1}^n e_i^*\otimes a_{ji}e_j.
+        \]
+
+        <p>Applying evaluation, and using \(e_i^*(e_j)=\delta_{ij}\), we obtain</p>
+
+        \[
+            \sum_{i=1}^n a_{ii} = \operatorname{tr}(A).
+        \]
+
+        <p>
+            Thus the composite map \(k\to k\) above is equal to multiplication by \(\operatorname{tr}(f)\).
+        </p>
+
+        <h3>Trace in string diagrams</h3>
+
+        <p>
+            The interpretation of trace as a "loop" from two sections ago and the definition of trace using evaluation and coevaluation from the previous section may look completely different at first.
+            In fact, however, if we draw the latter definition using a method called a "string diagram," the loop appears exactly as before.
+        </p>
+
+        <p>
+            A string diagram is a way of depicting objects and morphisms in a category equipped with a "tensor product" (a monoidal structure), such as the category of vector spaces.
+            We will not go deeply into the precise rules for drawing string diagrams here.
+            It is enough to keep only the following rules in mind.
+        </p>
+
+        <ul>
+            <li>A vector space is represented by a vertical line.</li>
+            <li>The tensor product of vector spaces is represented by placing vertical lines side by side.</li>
+            <li>A linear map is represented by a junction connecting vertical lines from top to bottom.</li>
+            <li>The vertical line representing the vector space \(k\) is omitted.</li>
+        </ul>
+
+        <p>For example, for vector spaces \(V_1,V_2,W\), a linear map \(f\colon V_1\otimes V_2\to W\) is represented by the following string diagram.</p>
+
+        <img src="2026-06-20-trace-fig5.png" width="240" alt="Basic example of a string diagram" style="display: block; max-width: 100%; height: auto; margin: 20px auto;">
+
+        <p>With this in mind, the abstract definition of trace from the previous section,</p>
+
+        \[
+        k
+        \xrightarrow{\operatorname{coev}} V^*\otimes V
+        \xrightarrow{\mathrm{id}\otimes f} V^*\otimes V
+        \xrightarrow{\operatorname{ev}} k
+        \]
+
+        <p>is drawn as the following string diagram.</p>
+
+        <img src="2026-06-20-trace-fig6.png" width="280" alt="String diagram of trace using evaluation and coevaluation" style="display: block; max-width: 100%; height: auto; margin: 20px auto;">
+
+        <p>
+            We can see the two strings coming out of \(f\) being bent by evaluation and coevaluation to form a loop.
+            In other words, the definition of trace given in the previous section is precisely the categorical version, expressed through string diagrams, of the intuition of a "loop."
+        </p>
+
+        <h3>Fixed points and trace</h3>
+
+        <p>
+            One important place where trace appears in mathematics is the <strong>Lefschetz trace formula</strong>.
+            Let \(M\) be an oriented compact manifold, and consider a smooth map \(f\colon M\to M\).
+            A point \(x\in M\) satisfying \(f(x)=x\) is called a <strong>fixed point</strong> of \(f\).
+            As a technical assumption, suppose that the fixed points of \(f\) do not accumulate.
+            Then the Lefschetz trace formula says that the sum, over the fixed points of \(f\), of certain signed quantities called local fixed point indices is given by
+        </p>
+
+        \[
+        \sum_{i=0}^\infty (-1)^i \operatorname{tr}(f^*|H^i(M;\mathbb{Q})).
+        \]
+
+        <p>
+            Here \(f^*\) is the map induced by \(f\) on cohomology groups:
+        </p>
+
+        \[
+            f^*\colon H^i(M;\mathbb{Q})\to H^i(M;\mathbb{Q}).
+        \]
+
+        <p>
+            Roughly speaking, the Lefschetz trace formula is a formula that connects fixed points and traces.
+        </p>
+
+        <p>
+            The fact that trace is related to fixed points also becomes natural from the picture of "contracting input and output" described in the preceding sections.
+            As a simple example, let us consider a self-map of a finite set.
+        </p>
+
+        \[
+            X=\{1,2,\ldots,n\}
+        \]
+
+        <p>
+            Let \(f\colon X\to X\) be a self-map.
+            Identifying an element \(i\in X\) with the standard basis vector \(e_i\) of \(k^n\), \(f\) induces a linear map \(k^n\to k^n\).
+            Let \(A_f\) be the matrix of this linear map.
+            Concretely, if \(A_f=(a_{ij})_{1\le i,j\le n}\), then
+        </p>
+
+        \[
+            a_{ij}=
+            \begin{cases}
+                1&(i=f(j))\\
+                0&(i\neq f(j))
+            \end{cases}
+        \]
+
+        <p>Taking the trace of this matrix gives</p>
+
+        \[
+            \operatorname{tr}(A_f)
+            =\sum_{i=1}^n a_{ii}
+            =\#\{i\in X\mid f(i)=i\}.
+        \]
+
+        <p>
+            Thus the number of fixed points of \(f\) appears.
+            In this computation, "contracting input and output" in the definition of trace corresponds exactly to requiring "input and output to agree" in the definition of a fixed point.
+            Therefore, in a certain sense, we may also say that trace is a generalization of the number of fixed points.
+        </p>
+
+        <h3>Acknowledgments</h3>
+
+        <p>The slogan emphasized in this article, "trace is a product with itself," is borrowed from Kyosuke Higashida. I thank him for sharing such a good phrase.</p>
+    </main>
+</body>
+</html>

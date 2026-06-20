@@ -103,6 +103,13 @@ p{
   margin-bottom: 20px;
 }
 
+main img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 20px auto;
+}
+
 .navigation{
   font-size: 16px;
 }
