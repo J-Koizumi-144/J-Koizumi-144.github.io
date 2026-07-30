@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kähler 微分って要するに何なの？</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <div class="navigation">
+        <a href="../index.html">Home</a> &gt; <a href="../what_is_x_really.html">What Is X, Really?</a>
+    </div>
+
+    <main>
+        <h2>Kähler 微分って要するに何なの？</h2>
+
+        <p>
+            可換環 \(A\) と \(A\) 代数 \(B\) に対し，Kähler 微分加群と呼ばれる \(B\) 加群 \(\Omega_{B/A}\) が定義されます．
+            これはしばしば「微分 \(1\) 形式の可換環論的な類似物」と説明されますが，何故そうみなせるのかは定義から明らかではありません．
+            この記事では，多様体上の微分 \(1\) 形式の定義を改めて考え直すことで，Kähler微分の定義がその自然な類似とみなせることを解説します．
+        </p>
+
+        <h3>Kähler 微分加群の定義</h3>
+
+        <p>
+            \(A\) を可換環とし，\(B\) を可換な \(A\) 代数とします．
+            つまり環準同型 \(A\longrightarrow B\) が与えられているとします．
+            このとき \(B\otimes_AB\) のイデアル \(I\) を
+        </p>
+
+        \[
+            I=\operatorname{Ker}(\mu\colon B\otimes_AB\longrightarrow B;\ b\otimes b'\longmapsto bb')
+        \]
+
+        <p>
+            により定めます．
+            このとき Kähler 微分加群 \(\Omega_{B/A}\) は
+        </p>
+
+        \[
+            \Omega_{B/A}=I/I^2
+        \]
+
+        <p>
+            により定義されます．
+            この定義の時点では「微分 \(1\) 形式っぽさ」はあまり感じられません．
+        </p>
+
+        <p>
+            Kähler 微分加群の概念的な説明としてよくなされるのは，普遍性による特徴づけです．\(B\) 加群 \(M\) に対し，\(A\) 加群の準同型 \(D\colon B\longrightarrow M\) であって
+        </p>
+
+        \[
+            D(bb')=bD(b')+b'D(b)
+        \]
+
+        <p>
+            をみたすものを，\(A\) 上の <strong>導分 (derivation)</strong> と呼びます．
+            上のように \(\Omega_{B/A}\) を定義するとき，\(d\colon B\longrightarrow \Omega_{B/A}\) を
+        </p>
+
+        \[
+            b\longmapsto [1\otimes b-b\otimes 1] \in I/I^2
+        \]
+
+        <p>
+            により定めると，\(d\) は \(A\) 上の導分となることが確かめられます．
+            さらに，\(d\colon B\longrightarrow \Omega_{B/A}\) は \(A\) 上の導分のなす圏における始対象となります．
+            つまり，任意の \(A\) 上の導分 \(D\colon B\longrightarrow M\) に対し，\(B\) 加群の準同型 \(\varphi\colon \Omega_{B/A}\longrightarrow M\) であって \(D=\varphi\circ d\) を満たすものがただ一つ存在します．
+            この性質によって \(\Omega_{B/A}\) は同型を除いて一意的に特徴付けられます．
+        </p>
+
+        <p>導分は微分の性質である Leibniz 則を抽象化したものなので，この特徴づけからは「微分っぽさ」を多少感じることができますが，まだ「なぜ \(d\) が導分になるのか」「なぜ導分の中で普遍的な対象が \(I/I^2\) として構成できるのか」という疑問が残ります．</p>
+
+        <h3>可換環からスキームへ</h3>
+
+        <p>再解釈の出発点は，可換環の代わりに対応するスキームを考えることです．</p>
+
+        \[
+            S=\operatorname{Spec} A,\qquad X=\operatorname{Spec} B
+        \]
+
+        <p>
+            としましょう．
+            \(X\) は \(S\) 上のスキームであり，環 \(B\) は \(X\) の「関数環」とみなすことができます．
+            環準同型 \(\mu \colon B\otimes_AB\longrightarrow B\) は対角射
+        </p>
+
+        \[
+            \Delta\colon X\longrightarrow X\times_SX
+        \]
+
+        <p>
+            に対応するので，\(I\) は「\(X\times_SX\) 上の関数のうち，対角線上で \(0\) であるもの」のなすイデアルとみなせます．
+            この前提のもとで，\(I/I^2\) がなぜ「微分 \(1\) 形式全体」のようなものと思えるのかを，通常の微分 \(1\) 形式と比較しながら考えてみます．
+        </p>
+
+        <h3>余接空間再考</h3>
+
+        <p>
+            \(M\) を滑らかな多様体とします．
+            \(M\) 上の微分 \(1\) 形式とは，\(M\) の余接束の滑らかな断面，つまり各点 \(p\in M\) に対して余接空間 \(T^*_pM\) の元を対応させる滑らかな対応づけのことです．
+            余接空間 \(T^*_pM\) は接空間 \(T_pM\) の双対空間です．
+            接空間 \(T_pM\) は点 \(p\) における微分作用素のなす線型空間ですから，余接空間の元は「点 \(p\) における微分作用素に対する線形な応答」を記述しています．
+        </p>
+
+        <p>
+            \(M\) 上の滑らかな関数全体のなす環を \(C^\infty(M)\) で表し，そのうち点 \(p\in M\) で \(0\) となるもの全体のなすイデアルを \(I_p\) とします．
+            このとき \(f\in C^\infty(M)\) に対して，\(f\) の点 \(p\) における全微分
+        </p>
+
+        \[
+            (df)_p\colon T_pM\longrightarrow \mathbb{R};\qquad v\longmapsto v(f)
+        \]
+
+        <p>
+            は余接空間 \(T^*_pM\) の元を定めます．
+            これにより全射線型写像
+        </p>
+
+        \[
+            d_p\colon C^\infty(M)\longrightarrow T^*_pM
+        \]
+
+        <p>
+            が得られます．
+            全微分は定数を足しても変わらないので，この写像は
+        </p>
+
+        \[
+            C^\infty(M)\xrightarrow{f\longmapsto f-f(p)}
+            I_p\xrightarrow{d_p|_{I_p}}
+            T^*_pM
+        \]
+
+        <p>
+            と分解することができます．
+            線形写像 \(d_p|_{I_p}\colon I_p\longrightarrow T^*_pM\) は全射なので，
+            \(T^*_pM\) は \(I_p\) の商空間とみなせます．
+            つまり，\(T^*_pM\) は
+        </p>
+
+        \[
+        \boxed{
+            \text{\(I_p\) を「\(p\) での全微分の一致」という同値関係で割った商空間}
+        }
+        \]
+
+        <p>とみなせるわけです．</p>
+
+        <p>
+            ではこの「\(p\) での全微分の一致」という同値関係，つまり \(d_p|_{I_p}\) の核はどのように表せるでしょうか．
+            例えば \(f,g\in I_p\) とすると \(f(p)=0\) かつ \(g(p)=0\) ですから，Leibniz 則より，\(fg\) の \(p\) における全微分は \(0\) となります．
+            つまり \(I_p^2\subseteq \operatorname{Ker} (d_p|_{I_p})\) です．
+            実はこの包含は等号になることが示せます：
+        </p>
+
+        <div class="theorem">
+            <p>
+                <strong class="theoremname">補題.</strong>
+                \(I_p^2=\operatorname{Ker} (d_p|_{I_p})\) が成り立つ．
+            </p>
+
+            <p>
+                <strong class="theoremname">証明.</strong>
+                前段落より \(I_p^2\subseteq \operatorname{Ker}(d_p|_{I_p})\) である．
+                逆に，\(f\in I_p\) かつ \((df)_p=0\) とし，\(p\) を原点とする局所座標 \(x_1,\ldots,x_n\) を取る．
+                Hadamard の補題より，\(p\) の近傍で
+            </p>
+
+            \[
+                f=\sum_i x_i g_i
+            \]
+
+            <p>
+                と書ける．
+                この式を \(p\) で微分すると \(g_i(p)=\partial f/\partial x_i(p)=0\) なので，再び Hadamard の補題を使って
+            </p>
+
+            \[
+                g_i=\sum_j x_jh_{ij},\qquad
+                f=\sum_{i,j}x_ix_jh_{ij}
+            \]
+
+            <p>
+                と書ける．
+                この座標近傍に台を持つ bump function \(\chi,\eta\) を，\(\chi\) は \(p\) の近傍で \(1\)，\(\eta\) は \(\operatorname{supp}\chi\) 上で \(1\) となるように取る．
+                \(\eta x_i\) と \(\chi x_jh_{ij}\) を \(M\) 全体へ \(0\) で延長した関数はいずれも \(I_p\) に属し，その積の和が \(\chi f\) となるので，\(\chi f\in I_p^2\) である．
+                また \(1-\chi,f\in I_p\) なので \((1-\chi)f\in I_p^2\) であり，\(f=\chi f+(1-\chi)f\in I_p^2\) を得る．
+                \(\square\)
+            </p>
+        </div>
+
+        <p>上の補題より，余接空間と \(I_p/I_p^2\) との間の同型</p>
+
+        \[
+        \boxed{
+            T^*_pM\cong I_p/I_p^2
+        }
+        \]
+
+        <p>
+            が得られます．
+            この同型を通じて，全微分写像 \(d_p\colon C^\infty(M)\longrightarrow T^*_pM\) は
+        </p>
+
+        \[
+            d_p\colon C^\infty(M)\longrightarrow I_p/I_p^2;\qquad f\longmapsto \bigl[f-f(p)\bigr]
+        \]
+
+        <p>という写像とみなすことができます．少しずつ Kähler 微分加群との繋がりが見えてきました．</p>
+
+        <h3>微分 \(1\) 形式再考</h3>
+
+        <p>
+            引き続き \(M\) を滑らかな多様体とします．
+            前節では固定した点 \(p\in M\) に対して余接空間 \(T^*_pM\) を代数的に記述しました．
+            次に点 \(p\) を動かすことで，微分形式全体 \(\Omega(M)=\Gamma(M,T^*M)\) についても同様の代数的な表示を考えてみましょう．
+        </p>
+
+        <p>
+            前節では多様体 \(M\) 上の関数のうち \(p\) で消えるもの全体を考えました．
+            ここでは点 \(p\) 自体も動かすので，考える空間は直積多様体 \(M\times M\) になります．
+            点 \(p\in M\) ごとに \(M\) のコピー \(\{p\}\times M\) を考えているイメージです．
+            滑らかな関数 \(h\in C^\infty(M\times M)\) に対して
+        </p>
+
+        \[
+            \forall p\in M,\qquad h(p,{-})\in I_p
+        \]
+
+        <p>となることは，\(h\) がイデアル</p>
+
+        \[
+            I=\bigl\{h\in C^\infty(M\times M)\mid \forall x\in M,\ h(x,x)=0\bigr\}
+        \]
+
+        <p>
+            に属することと同値です．
+            さらに \(h\in I^2\) ならば \(h(p,{-})\in I_p^2\) となるため，各点 \(p\in M\) に対して自然な線形写像
+        </p>
+
+        \[
+        I/I^2\longrightarrow I_p/I_p^2;\quad [h]\longmapsto \bigl[h(p,{-})\bigr]
+        \]
+
+        <p>が定まります．\(p\in M\) にわたって束ねることで</p>
+
+        \[
+        I/I^2\longrightarrow \Omega(M)
+        \]
+
+        <p>
+            が得られます．
+            前節の補題の証明をうまく大域化すると，この写像は同型であることが証明できます（詳細は割愛します）．
+            こうして，滑らかな多様体上の微分 \(1\) 形式全体を，Kähler 微分加群の定義と並行する形で，代数的に記述することができます：
+        </p>
+
+        \[
+        \boxed{
+            \Omega(M)\cong I/I^2.
+        }
+        \]
+
+        <p>
+            この同型を改めて直感的に捉え直してみましょう．
+            \(I\) の元は「組 \((x,y)\in M\times M\) の関数であって，\(x=y\) のとき \(0\) になるもの」です．
+            \(I^2\) による商を取ることは，局所座標で見た時に \(x-y\) について \(2\) 次以上の差を無視することに対応します．
+            つまり \(y\) が \(x\) に限りなく近づくときの \(1\) 次の振る舞いだけを見て，他の情報を捨てているのです．
+            結果的にこれは接ベクトルに対する線形な応答，すなわち微分 \(1\) 形式を定めることになります．
+            あえて粗く標語的にまとめれば，この同型は
+        </p>
+
+        \[
+            \boxed{
+            \text{微分 \(1\) 形式とは，無限に近い \(2\) 点の差に対する線形関数である}
+            }
+        \]
+
+        <p>という哲学を表現していると言えます．</p>
+
+        <h3>微分写像の表示</h3>
+
+        <p>
+            では，微分写像 \(d\colon C^\infty(M)\longrightarrow \Omega(M)\) は代数的にはどのように表せるでしょうか．
+            関数 \(f\in C^\infty(M)\) に対して
+        </p>
+
+        \[
+            (x,y)\longmapsto f(y)-f(x)
+        \]
+
+        <p>
+            という \(M\times M\) 上の関数を考えてみましょう．
+            これは明らかに対角線上で消えるので \(I\) に属します．
+            点 \(p\in M\) に対し，自然な写像
+        </p>
+
+        \[
+            I/I^2\longrightarrow I_p/I_p^2\cong T^*_pM
+        \]
+
+        <p>によって \(\bigl[f(y)-f(x)\bigr]\) は</p>
+
+        \[
+            \bigl[f(y)-f(x)\bigr]\longmapsto \bigl[f-f(p)\bigr]\longmapsto (df)_p
+        \]
+
+        <p>
+            とうつるので，\(\bigl[f(y)-f(x)\bigr]\in I/I^2\) は微分 \(1\) 形式 \(df\in \Omega(M)\) に対応しています．
+            よって微分写像 \(d\colon C^\infty(M)\longrightarrow \Omega(M)\) は
+        </p>
+
+        \[
+            d\colon C^\infty(M)\longrightarrow I/I^2;\qquad f\longmapsto \bigl[f(y)-f(x)\bigr]
+        \]
+
+        <p>
+            と記述できることがわかります．
+            \(1\) 変数の実関数 \(f\colon \mathbb{R}\longrightarrow \mathbb{R}\) の微分は
+        </p>
+
+        \[
+            f(y)-f(x) = f'(x)(y-x)\mod(y-x)^2
+        \]
+
+        <p>と表せますが，上の式はまさにこれの一般化になっているわけです．</p>
+
+        <hr>
+
+        <p>最後に，Kähler 微分加群の特徴づけに現れた普遍的な導分の定義</p>
+
+        \[
+            d\colon B\longrightarrow \Omega_{B/A};\qquad b\longmapsto [1\otimes b-b\otimes 1]
+        \]
+
+        <p>
+            を思い出しましょう．
+            これはちょうど上の \(d\) の表示を可換環の言葉に翻訳したものになっています．
+            実際，\(1\otimes b\) は第 \(2\) 射影
+        </p>
+
+        \[
+            \operatorname{pr}_2\colon 
+            X\times_S X
+            \longrightarrow
+            X
+        \]
+
+        <p>
+            による関数 \(b\) の引き戻しなので，\(M\times M\) 上の関数 \((x,y)\longmapsto f(y)\) の類似物です．
+            同様に \(b\otimes 1\) は \((x,y)\longmapsto f(x)\) に対応しているわけです．
+            ただし，一般には
+        </p>
+
+        \[
+            C^\infty(M\times M)\not\cong C^\infty(M)\otimes_{\mathbb R}C^\infty(M)
+        \]
+
+        <p>なので，この類似が実際に \(\Omega_{C^\infty(M)/\mathbb R}\) と \(\Omega(M)\) の間の同型を導くわけではないことに注意が必要です．</p>
+    </main>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What are Kähler differentials, really?</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <div class="navigation">
+        <a href="../index.html">Home</a> &gt; <a href="../what_is_x_really.html">What Is X, Really?</a>
+    </div>
+
+    <main>
+        <h2>What are Kähler differentials, really?</h2>
+
+        <p>
+            Given a commutative ring \(A\) and an \(A\)-algebra \(B\), one can define a \(B\)-module \(\Omega_{B/A}\), called the module of Kähler differentials.
+            It is often described as the commutative-algebraic analogue of differential \(1\)-forms, but it is not clear from the definition why this is so.
+            In this article, we reconsider the definition of differential \(1\)-forms on manifolds and explain why the definition of Kähler differentials is their natural analogue.
+        </p>
+
+        <h3>Definition of Kähler differentials</h3>
+
+        <p>
+            Let \(A\) be a commutative ring, and let \(B\) be a commutative \(A\)-algebra.
+            In other words, suppose that we are given a ring homomorphism \(A\longrightarrow B\).
+            Let \(I\) be the ideal of \(B\otimes_A B\) defined by
+        </p>
+
+        \[
+            I=\operatorname{Ker}(\mu\colon B\otimes_AB\longrightarrow B;\ b\otimes b'\longmapsto bb')
+        \]
+
+        <p>
+            The module of Kähler differentials \(\Omega_{B/A}\) is then defined by
+        </p>
+
+        \[
+            \Omega_{B/A}=I/I^2
+        \]
+
+        <p>
+            At this point, the definition does not look much like differential \(1\)-forms.
+        </p>
+
+        <p>
+            A common conceptual description of Kähler differentials uses a universal property.
+            Given a \(B\)-module \(M\), an \(A\)-linear map \(D\colon B\longrightarrow M\) satisfying
+        </p>
+
+        \[
+            D(bb')=bD(b')+b'D(b)
+        \]
+
+        <p>
+            is called an <strong>\(A\)-derivation</strong>.
+            With \(\Omega_{B/A}\) defined as above, define \(d\colon B\longrightarrow \Omega_{B/A}\) by
+        </p>
+
+        \[
+            b\longmapsto [1\otimes b-b\otimes 1] \in I/I^2
+        \]
+
+        <p>
+            One can check that \(d\) is an \(A\)-derivation.
+            Moreover, \(d\colon B\longrightarrow \Omega_{B/A}\) is an initial object in the category of \(A\)-derivations.
+            That is, for every \(A\)-derivation \(D\colon B\longrightarrow M\), there is a unique \(B\)-linear map \(\varphi\colon \Omega_{B/A}\longrightarrow M\) such that \(D=\varphi\circ d\).
+            This property characterizes \(\Omega_{B/A}\) uniquely up to isomorphism.
+        </p>
+
+        <p>Since derivations abstract the Leibniz rule for differentiation, this characterization does suggest something differential, but it still leaves two questions: why is \(d\) a derivation, and why can the universal derivation be constructed as \(I/I^2\)?</p>
+
+        <h3>From commutative rings to schemes</h3>
+
+        <p>The starting point for a reinterpretation is to replace the commutative rings by their corresponding schemes.</p>
+
+        \[
+            S=\operatorname{Spec} A,\qquad X=\operatorname{Spec} B
+        \]
+
+        <p>
+            Let us use this notation.
+            Then \(X\) is a scheme over \(S\), and the ring \(B\) can be regarded as the ring of functions on \(X\).
+            The ring homomorphism \(\mu\colon B\otimes_A B\longrightarrow B\) corresponds to the diagonal morphism
+        </p>
+
+        \[
+            \Delta\colon X\longrightarrow X\times_SX
+        \]
+
+        <p>
+            Therefore, \(I\) can be regarded as the ideal of functions on \(X\times_SX\) that vanish on the diagonal.
+            With this interpretation in place, we compare \(I/I^2\) with ordinary differential \(1\)-forms to see why it can be regarded as their algebraic counterpart.
+        </p>
+
+        <h3>Rethinking cotangent spaces</h3>
+
+        <p>
+            Let \(M\) be a smooth manifold.
+            A differential \(1\)-form on \(M\) is a smooth section of the cotangent bundle of \(M\): it assigns to each point \(p\in M\) an element of the cotangent space \(T^*_pM\), and does so smoothly.
+            The cotangent space \(T^*_pM\) is the dual vector space of the tangent space \(T_pM\).
+            Since \(T_pM\) is the vector space of differential operators at \(p\), an element of the cotangent space describes a linear response to differential operators at \(p\).
+        </p>
+
+        <p>
+            Write \(C^\infty(M)\) for the ring of smooth functions on \(M\), and let \(I_p\) be the ideal of functions that vanish at \(p\in M\).
+            For \(f\in C^\infty(M)\), the total derivative of \(f\) at \(p\),
+        </p>
+
+        \[
+            (df)_p\colon T_pM\longrightarrow \mathbb{R};\qquad v\longmapsto v(f)
+        \]
+
+        <p>
+            defines an element of the cotangent space \(T^*_pM\).
+            This gives a surjective linear map
+        </p>
+
+        \[
+            d_p\colon C^\infty(M)\longrightarrow T^*_pM
+        \]
+
+        <p>
+            Adding a constant does not change the total derivative, so this map factors as
+        </p>
+
+        \[
+            C^\infty(M)\xrightarrow{f\longmapsto f-f(p)}
+            I_p\xrightarrow{d_p|_{I_p}}
+            T^*_pM
+        \]
+
+        <p>
+            The linear map \(d_p|_{I_p}\colon I_p\longrightarrow T^*_pM\) is surjective, so \(T^*_pM\) can be regarded as a quotient of \(I_p\).
+            In other words, \(T^*_pM\) can be viewed as
+        </p>
+
+        \[
+        \boxed{
+            \text{\(I_p\) modulo equality of total derivatives at \(p\)}
+        }
+        \]
+
+        <p>This is another way to view the cotangent space.</p>
+
+        <p>
+            What does the equivalence relation given by equality of total derivatives at \(p\), or equivalently the kernel of \(d_p|_{I_p}\), look like?
+            If \(f,g\in I_p\), then \(f(p)=g(p)=0\), and the Leibniz rule shows that the total derivative of \(fg\) at \(p\) is zero.
+            Thus \(I_p^2\subseteq \operatorname{Ker}(d_p|_{I_p})\).
+            In fact, this inclusion is an equality.
+        </p>
+
+        <div class="theorem">
+            <p>
+                <strong class="theoremname">Lemma.</strong>
+                We have \(I_p^2=\operatorname{Ker}(d_p|_{I_p})\).
+            </p>
+
+            <p>
+                <strong class="theoremname">Proof.</strong>
+                The preceding paragraph proves that \(I_p^2\subseteq \operatorname{Ker}(d_p|_{I_p})\).
+                Conversely, suppose that \(f\in I_p\) and \((df)_p=0\), and choose local coordinates \(x_1,\ldots,x_n\) centered at \(p\).
+                By Hadamard's lemma, in a neighborhood of \(p\) we can write
+            </p>
+
+            \[
+                f=\sum_i x_i g_i
+            \]
+
+            <p>
+                Differentiating this identity at \(p\) gives \(g_i(p)=\partial f/\partial x_i(p)=0\), so another application of Hadamard's lemma gives
+            </p>
+
+            \[
+                g_i=\sum_j x_jh_{ij},\qquad
+                f=\sum_{i,j}x_ix_jh_{ij}
+            \]
+
+            <p>
+                Choose bump functions \(\chi,\eta\) supported in this coordinate neighborhood such that \(\chi=1\) near \(p\) and \(\eta=1\) on \(\operatorname{supp}\chi\).
+                Extend \(\eta x_i\) and \(\chi x_jh_{ij}\) by zero to functions on all of \(M\).
+                These functions belong to \(I_p\), and the sum of their products is \(\chi f\), so \(\chi f\in I_p^2\).
+                Moreover, \(1-\chi,f\in I_p\), so \((1-\chi)f\in I_p^2\), and hence \(f=\chi f+(1-\chi)f\in I_p^2\).
+                \(\square\)
+            </p>
+        </div>
+
+        <p>The lemma gives an isomorphism between the cotangent space and \(I_p/I_p^2\):</p>
+
+        \[
+        \boxed{
+            T^*_pM\cong I_p/I_p^2
+        }
+        \]
+
+        <p>
+            Under this isomorphism, the total derivative \(d_p\colon C^\infty(M)\longrightarrow T^*_pM\) becomes
+        </p>
+
+        \[
+            d_p\colon C^\infty(M)\longrightarrow I_p/I_p^2;\qquad f\longmapsto \bigl[f-f(p)\bigr]
+        \]
+
+        <p>This is already beginning to resemble the module of Kähler differentials.</p>
+
+        <h3>Rethinking differential \(1\)-forms</h3>
+
+        <p>
+            Continue to let \(M\) be a smooth manifold.
+            In the preceding section, we described the cotangent space \(T^*_pM\) algebraically for a fixed point \(p\in M\).
+            We now let \(p\) vary and seek a similar algebraic description of the space \(\Omega(M)=\Gamma(M,T^*M)\) of differential \(1\)-forms.
+        </p>
+
+        <p>
+            In the preceding section, we considered the functions on \(M\) that vanish at \(p\).
+            Since \(p\) will now vary, we work on the product manifold \(M\times M\).
+            For each \(p\in M\), one may think of the copy \(\{p\}\times M\) of \(M\).
+            For a smooth function \(h\in C^\infty(M\times M)\), the condition
+        </p>
+
+        \[
+            \forall p\in M,\qquad h(p,{-})\in I_p
+        \]
+
+        <p>is equivalent to \(h\) belonging to the ideal</p>
+
+        \[
+            I=\bigl\{h\in C^\infty(M\times M)\mid \forall x\in M,\ h(x,x)=0\bigr\}.
+        \]
+
+        <p>
+            Moreover, if \(h\in I^2\), then \(h(p,{-})\in I_p^2\), so for each \(p\in M\) there is a natural linear map
+        </p>
+
+        \[
+        I/I^2\longrightarrow I_p/I_p^2;\quad [h]\longmapsto \bigl[h(p,{-})\bigr].
+        \]
+
+        <p>Combining these maps as \(p\) varies gives a map</p>
+
+        \[
+        I/I^2\longrightarrow \Omega(M).
+        \]
+
+        <p>
+            A suitable globalization of the proof of the lemma in the preceding section shows that this map is an isomorphism; we omit the details.
+            Thus the differential \(1\)-forms on a smooth manifold admit an algebraic description parallel to the definition of Kähler differentials:
+        </p>
+
+        \[
+        \boxed{
+            \Omega(M)\cong I/I^2.
+        }
+        \]
+
+        <p>
+            Let us interpret this isomorphism more intuitively.
+            An element of \(I\) is a function of a pair \((x,y)\in M\times M\) that vanishes when \(x=y\).
+            Taking the quotient by \(I^2\) amounts, in local coordinates, to discarding terms of order at least two in \(y-x\).
+            It retains only the first-order behavior as \(y\) approaches \(x\) and discards all other information.
+            The result is a linear response to tangent vectors, which is precisely a differential \(1\)-form.
+            As a rough slogan, the isomorphism expresses the idea that
+        </p>
+
+        \[
+            \boxed{
+            \begin{gathered}
+            \text{a differential \(1\)-form is a linear function of the difference}\\
+            \text{between two infinitesimally close points}
+            \end{gathered}
+            }
+        \]
+
+        <p>This is the viewpoint expressed by the isomorphism.</p>
+
+        <h3>The differential map</h3>
+
+        <p>
+            We now ask how to express the differential map \(d\colon C^\infty(M)\longrightarrow \Omega(M)\) algebraically.
+            Given a function \(f\in C^\infty(M)\), consider the function on \(M\times M\) defined by
+        </p>
+
+        \[
+            (x,y)\longmapsto f(y)-f(x).
+        \]
+
+        <p>
+            This function clearly vanishes on the diagonal, so it belongs to \(I\).
+            For each \(p\in M\), consider the natural map
+        </p>
+
+        \[
+            I/I^2\longrightarrow I_p/I_p^2\cong T^*_pM.
+        \]
+
+        <p>Under this map, \(\bigl[f(y)-f(x)\bigr]\) is sent as follows:</p>
+
+        \[
+            \bigl[f(y)-f(x)\bigr]\longmapsto \bigl[f-f(p)\bigr]\longmapsto (df)_p.
+        \]
+
+        <p>
+            Thus \(\bigl[f(y)-f(x)\bigr]\in I/I^2\) corresponds to the differential \(1\)-form \(df\in \Omega(M)\).
+            Consequently, the differential map \(d\colon C^\infty(M)\longrightarrow \Omega(M)\) is described algebraically by
+        </p>
+
+        \[
+            d\colon C^\infty(M)\longrightarrow I/I^2;\qquad f\longmapsto \bigl[f(y)-f(x)\bigr].
+        \]
+
+        <p>
+            For a real-valued function of one variable \(f\colon \mathbb{R}\longrightarrow \mathbb{R}\), differentiation can be written as
+        </p>
+
+        \[
+            f(y)-f(x) = f'(x)(y-x)\mod(y-x)^2.
+        \]
+
+        <p>The formula above is precisely a generalization of this identity.</p>
+
+        <hr>
+
+        <p>Finally, recall the universal derivation that characterizes the module of Kähler differentials:</p>
+
+        \[
+            d\colon B\longrightarrow \Omega_{B/A};\qquad b\longmapsto [1\otimes b-b\otimes 1].
+        \]
+
+        <p>
+            This is exactly the algebraic translation of the preceding description of \(d\).
+            Indeed, \(1\otimes b\) is the pullback of the function \(b\) along the second projection
+        </p>
+
+        \[
+            \operatorname{pr}_2\colon 
+            X\times_S X
+            \longrightarrow
+            X.
+        \]
+
+        <p>
+            It is therefore analogous to the function \((x,y)\longmapsto f(y)\) on \(M\times M\).
+            Similarly, \(b\otimes 1\) corresponds to \((x,y)\longmapsto f(x)\).
+            In general, however,
+        </p>
+
+        \[
+            C^\infty(M\times M)\not\cong C^\infty(M)\otimes_{\mathbb R}C^\infty(M),
+        \]
+
+        <p>so this analogy does not produce an isomorphism between \(\Omega_{C^\infty(M)/\mathbb R}\) and \(\Omega(M)\).</p>
+    </main>
+</body>
+</html>
