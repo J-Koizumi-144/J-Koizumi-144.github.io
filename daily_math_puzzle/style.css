@@ -20,11 +20,6 @@
     font-size: 15px;
 }
 
-.puzzle-number,
-.game-note {
-    color: #555;
-}
-
 .puzzle-footer {
     display: flex;
     flex-wrap: wrap;
@@ -161,7 +156,7 @@ a:focus-visible,
 }
 
 .game-message {
-    min-height: 3.3em;
+    min-height: 1.65em;
     margin: 16px 0;
 }
 
@@ -182,11 +177,6 @@ a:focus-visible,
 
 .coin-game .merge-button:not(:disabled):hover {
     background: #066165;
-}
-
-.game-note {
-    font-size: 14px;
-    margin-bottom: 0;
 }
 
 @media (max-width: 520px) {
