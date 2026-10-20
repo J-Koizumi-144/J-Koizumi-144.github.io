@@ -2,7 +2,7 @@ import { CoinGame } from './coin-game.mjs';
 
 const copy = {
     en: {
-        language: 'Language', size: 'n',
+        language: '言語', size: 'n',
         coins: 'Coins', piles: 'Piles', moves: 'Moves', unequal: 'Unequal merges',
         merge: 'Combine', undo: 'Undo', reset: 'Reset',
         board: 'Coin piles',
@@ -16,7 +16,7 @@ const copy = {
         stuck: 'No moves left. Undo or reset.',
     },
     ja: {
-        language: '言語', size: 'n',
+        language: 'Language', size: 'n',
         coins: 'コインの枚数', piles: '山の数', moves: '操作回数', unequal: '異なる枚数の合流',
         merge: '合わせる', undo: '1手戻す', reset: 'リセット',
         board: 'コインの山',
