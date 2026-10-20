@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="style.css" type="text/css">
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
+    <link rel="stylesheet" href="grid-coloring.css" type="text/css">
+    <script type="module" src="grid-coloring.js"></script>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
     <script>
@@ -40,6 +43,46 @@
             \(2n\times 2n\) の方眼のいくつかのマスを黒く塗る．
             どの行にもどの列にも黒いマスが少なくとも \(1\) 個あり，縦横 \(2\) マスずつのどの正方形にも黒いマスが \(1\) 個または \(3\) 個あるようにしたい．
             黒く塗るマスの個数の最小値を求めよ．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+            <h2 id="try-it">Try it</h2>
+            <noscript><p>Enable JavaScript to play. <span lang="ja">操作機能を使うには JavaScript を有効にしてください．</span></p></noscript>
+            <div id="grid-game" class="grid-game" lang="en" hidden>
+                <div class="game-settings">
+                    <label><span data-label="language">言語</span>
+                        <select id="grid-language" aria-label="Language / 言語">
+                            <option value="en">English</option>
+                            <option value="ja">日本語</option>
+                        </select>
+                    </label>
+                    <label>n
+                        <select id="grid-size">
+                            <option value="2">2</option>
+                            <option value="3" selected>3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                    </label>
+                </div>
+                <dl class="game-stats">
+                    <div class="grid-black-stat"><dt data-label="black">Black cells</dt><dd id="black-total">0</dd></div>
+                    <div><dt data-label="rows">Empty rows</dt><dd id="empty-rows">6</dd></div>
+                    <div><dt data-label="columns">Empty columns</dt><dd id="empty-columns">6</dd></div>
+                    <div><dt data-label="squares">Invalid 2 × 2</dt><dd id="invalid-squares">25</dd></div>
+                </dl>
+                <div class="coloring-scroll">
+                    <div id="coloring-board" class="coloring-board" role="group" aria-label="6 by 6 grid" aria-describedby="grid-message"></div>
+                </div>
+                <p id="grid-message" class="game-message" role="status" aria-live="polite" aria-atomic="true"></p>
+                <p id="grid-summary" class="grid-summary" role="status" aria-live="polite" aria-atomic="true"></p>
+                <div class="game-actions">
+                    <button id="undo-cell" type="button" disabled data-label="undo">Undo</button>
+                    <button id="reset-grid" type="button" data-label="reset">Reset</button>
+                    <label class="grid-error-toggle"><input id="show-grid-errors" type="checkbox"><span data-label="errors">Show errors</span></label>
+                </div>
+            </div>
         </section>
     </main>
     <nav class="puzzle-footer" aria-label="Problem navigation">
