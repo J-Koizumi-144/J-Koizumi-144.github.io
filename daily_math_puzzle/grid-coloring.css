@@ -24,7 +24,7 @@
     cursor: default;
 }
 
-.grid-game button:not(:disabled):hover {
+.grid-game .game-actions button:not(:disabled):hover {
     background: #eaf4f4;
 }
 
