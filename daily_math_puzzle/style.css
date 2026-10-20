@@ -1,0 +1,204 @@
+/* Keep the typography and paper layout of the main site. */
+.problem-statement p,
+.coin-game,
+.puzzle-archive {
+    line-height: 1.65;
+}
+
+.puzzle-meta {
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 32px;
+}
+
+.puzzle-archive li {
+    margin: 24px 0;
+}
+
+.puzzle-description {
+    margin: 2px 0;
+    font-size: 15px;
+}
+
+.puzzle-number,
+.game-note {
+    color: #555;
+}
+
+.puzzle-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px 24px;
+    margin-top: 40px;
+    padding-top: 18px;
+    border-top: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.coin-game {
+    margin-top: 24px;
+    border: 1px solid #ccc;
+    padding: 22px;
+}
+
+.game-settings,
+.game-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.game-settings {
+    justify-content: space-between;
+}
+
+.game-settings label {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.coin-game button,
+.coin-game select {
+    font: inherit;
+    color: inherit;
+    background: #fcfcfc;
+    border: 1px solid #888;
+    border-radius: 3px;
+    min-height: 44px;
+    padding: 6px 12px;
+}
+
+.coin-game button:not(:disabled),
+.coin-game select {
+    cursor: pointer;
+}
+
+.coin-game button:disabled {
+    color: #666;
+    border-color: #ccc;
+    background: #eee;
+}
+
+.coin-game button:not(:disabled):hover {
+    background: #eaf4f4;
+}
+
+a:focus-visible,
+.coin-game :focus-visible {
+    outline: 2px solid #087b7f;
+    outline-offset: 4px;
+}
+
+.game-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    padding: 16px 0;
+    margin: 16px 0;
+    border-block: 1px solid #ddd;
+    text-align: center;
+}
+
+.game-stats dt {
+    font-size: 14px;
+}
+
+.game-stats dd {
+    font-size: 24px;
+    margin: 4px 0 0;
+}
+
+.unequal-stat dd {
+    font-weight: bold;
+    color: #087b7f;
+}
+
+.pile-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(66px, 1fr));
+    gap: 10px;
+    margin: 22px 0;
+}
+
+.coin-game .pile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 68px;
+    padding: 12px 4px;
+    border: 1px solid #aaa;
+}
+
+.coin-game .pile[aria-pressed="true"] {
+    border: 2px solid #087b7f;
+    background: #eaf4f4;
+}
+
+.pile[aria-pressed="true"]::after {
+    content: "✓";
+    position: absolute;
+    top: 0;
+    right: 4px;
+    color: #087b7f;
+    font-size: 14px;
+}
+
+.pile-coin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #777;
+    background: #f5f1e8;
+    font-size: 20px;
+}
+
+.game-message {
+    min-height: 3.3em;
+    margin: 16px 0;
+}
+
+.game-message[data-state="blocked"] {
+    color: #8a3d20;
+}
+
+.game-message[data-state="complete"] {
+    color: #08666a;
+    font-weight: bold;
+}
+
+.coin-game .merge-button:not(:disabled) {
+    color: #fff;
+    background: #087b7f;
+    border-color: #087b7f;
+}
+
+.coin-game .merge-button:not(:disabled):hover {
+    background: #066165;
+}
+
+.game-note {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+@media (max-width: 520px) {
+    .coin-game {
+        padding: 14px;
+    }
+
+    .game-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .game-actions .merge-button {
+        width: 100%;
+    }
+}
