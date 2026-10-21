@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/10/21: frog jumps. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/10/21</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="frog-jumps.css" type="text/css">
+    <script type="module" src="frog-jumps.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-10-21" aria-current="page">2026/10/21</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/10/21</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>Let \(n\) be a positive integer.
+There are \(5n\) stones in a straight line, spaced \(1\) unit apart.
+A frog starts on one stone, lands on every other stone exactly once, and then returns to its starting point for the first time.
+If every jump has length \(2\) or \(3\), find the minimum possible number of jumps of length \(2\).</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>\(n\) を正の整数とする．
+一直線上に間隔 \(1\) で並んだ \(5n\) 個の石がある．
+カエルが一つの石から出発し，ほかのすべての石に一度ずつ着地してから，初めて出発点に戻る．
+一跳びの距離が \(2\) または \(3\) であるとき，距離 \(2\) の跳躍の回数の最小値を求めよ．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+            <h2 id="try-it">Try it</h2>
+            <noscript><p>Enable JavaScript to play. <span lang="ja">操作機能を使うには JavaScript を有効にしてください．</span></p></noscript>
+            <div id="frog-game" class="frog-game" lang="en" hidden>
+                <div class="game-settings">
+                    <label><span data-label="language">言語</span>
+                        <select id="frog-language" aria-label="Language / 言語">
+                            <option value="en">English</option><option value="ja">日本語</option>
+                        </select>
+                    </label>
+                    <label>n <select id="frog-size">
+                        <option value="1">1</option><option value="2" selected>2</option>
+                        <option value="3">3</option><option value="4">4</option>
+                        <option value="5">5</option><option value="6">6</option>
+                    </select></label>
+                </div>
+                <dl class="game-stats">
+                    <div><dt data-label="visited">Stones visited</dt><dd id="frog-visited">0 / 10</dd></div>
+                    <div><dt data-label="jumps">Jumps</dt><dd id="frog-jumps">0</dd></div>
+                    <div class="frog-short"><dt data-label="short">Length 2</dt><dd id="frog-short">0</dd></div>
+                    <div><dt data-label="long">Length 3</dt><dd id="frog-long">0</dd></div>
+                </dl>
+                <div class="frog-scroll">
+                    <div id="frog-board" class="frog-board" role="group" aria-label="10 stones in a straight line" aria-describedby="frog-message"></div>
+                </div>
+                <p class="frog-legend" data-label="legend">★ start · ● current · ✓ visited</p>
+                <p id="frog-route" class="frog-route"></p>
+                <p id="frog-message" class="game-message" role="status" aria-live="polite" aria-atomic="true"></p>
+                <div class="game-actions">
+                    <button id="frog-undo" type="button" disabled data-label="undo">Undo</button>
+                    <button id="frog-reset" type="button" data-label="reset">Reset</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-10-20.html" rel="prev">&larr; 2026/10/20</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>

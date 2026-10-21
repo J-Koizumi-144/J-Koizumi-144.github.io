@@ -1,0 +1,21 @@
+.frog-game { margin-top: 24px; padding: 20px; border: 1px solid #ccc; line-height: 1.65; }
+.frog-game button, .frog-game select { font: inherit; color: inherit; background: #fcfcfc; border: 1px solid #888; border-radius: 3px; min-height: 44px; padding: 6px 12px; }
+.frog-game button:not(:disabled), .frog-game select { cursor: pointer; }
+.frog-game button:disabled { color: #777; border-color: #ccc; background: #eee; }
+.frog-game :focus-visible { outline: 2px solid #087b7f; outline-offset: 3px; }
+.frog-game .frog-scroll { overflow-x: auto; padding: 8px 4px; }
+.frog-game .frog-board { height: 190px; position: relative; }
+.frog-game .frog-arcs { position: absolute; inset: 0; width: 100%; height: 190px; pointer-events: none; }
+.frog-game .frog-arcs path { fill: none; stroke: #087b7f; stroke-width: 2; }
+.frog-game .frog-arcs path[data-distance="3"] { stroke: #8a6137; stroke-dasharray: 5 3; }
+.frog-game .stone { position: absolute; top: 68px; width: 48px; height: 56px; padding: 2px; border-radius: 20px; background: #fff; line-height: 1.1; }
+.frog-game .stone span { display: block; min-height: 15px; font-size: 12px; margin-top: 3px; }
+.frog-game .stone[data-visited="true"] { background: #e8eceb; }
+.frog-game .stone[aria-pressed="true"] { background: #087b7f; color: white; border: 2px solid #065b60; }
+.frog-game .stone[aria-disabled="true"] { cursor: default; }
+.frog-game .stone:not([aria-disabled="true"]):hover { box-shadow: 0 0 0 2px #087b7f; }
+.frog-game .frog-legend { font-size: 14px; margin: 6px 0; }
+.frog-game .frog-route { overflow-wrap: anywhere; font-size: 15px; margin: 12px 0; }
+.frog-game .frog-short dd { color: #087b7f; font-weight: bold; }
+.frog-game .game-message { margin: 12px 0; }
+@media(max-width: 520px) { .frog-game { padding: 12px; } }
