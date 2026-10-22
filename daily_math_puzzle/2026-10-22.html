@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/10/22: spacing paired balls. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/10/22</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="ball-spacing.css" type="text/css">
+    <script type="module" src="ball-spacing.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-10-22" aria-current="page">2026/10/22</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/10/22</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>Let \(n\geq2\) be an integer.
+            A total of \(2n\) balls, two labeled with each integer from \(1\) to \(n\), are arranged in a row.
+            For each label, the number of balls between the two balls with that label is recorded, and all these numbers are at least \(n-2\).
+            Find the largest possible number of distinct values among these \(n\) recorded numbers.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>\(n\) を \(2\) 以上の整数とする．
+            \(1\) から \(n\) までの数が書かれたボールを，各 \(2\) 個ずつ，計 \(2n\) 個一列に並べる．
+            各数について，その数が書かれた \(2\) 個のボールの間にあるボールの個数を記録したところ，すべて \(n-2\) 以上であった．
+            この \(n\) 個の記録に現れる値の種類数として，あり得る最大値を求めよ．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+            <h2 id="try-it">Try it</h2>
+            <noscript><p>Enable JavaScript to play. <span lang="ja">操作機能を使うには JavaScript を有効にしてください．</span></p></noscript>
+            <div id="ball-game" class="coin-game ball-game" lang="en" hidden>
+                <div class="game-settings">
+                    <label><span data-label="language">言語</span>
+                        <select id="ball-language" aria-label="Language / 言語"><option value="en">English</option><option value="ja">日本語</option></select>
+                    </label>
+                    <label>n <select id="ball-size"><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6" selected>6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select></label>
+                </div>
+                <dl class="game-stats">
+                    <div><dt data-label="distinct">Distinct values</dt><dd id="ball-distinct">1</dd></div>
+                    <div><dt data-label="valid">Pairs meeting the condition</dt><dd id="ball-valid">0 / 6</dd></div>
+                    <div><dt data-label="minimum">Required gap</dt><dd id="ball-minimum">4</dd></div>
+                </dl>
+                <div class="ball-scroll"><div id="ball-board" class="ball-board" role="group" aria-label="Balls in a row" aria-describedby="ball-selection"></div></div>
+                <p id="ball-selection" role="status" aria-live="polite"></p>
+                <div class="game-actions">
+                    <button id="ball-swap" class="merge-button" type="button" data-label="swap" disabled>Swap</button>
+                    <button id="ball-undo" type="button" data-label="undo" disabled>Undo</button>
+                    <button id="ball-reset" type="button" data-label="reset">Reset</button>
+                </div>
+                <p class="ball-record-heading" data-label="records">Balls between each pair</p>
+                <ul id="ball-records" class="ball-records"></ul>
+                <p id="ball-message" class="game-message" role="status" aria-live="polite"></p>
+            </div>
+        </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-10-21.html" rel="prev">&larr; 2026/10/21</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,19 @@
+.ball-game { line-height: 1.65; min-width: 0; }
+.ball-game .game-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ball-game .ball-scroll { overflow-x: auto; padding: 10px 4px; }
+.ball-game .ball-board { display: flex; gap: 8px; width: max-content; padding: 6px 3px; }
+.ball-game .ball-slot { width: 48px; text-align: center; flex: 0 0 48px; }
+.ball-game .number-ball { width: 48px; height: 48px; min-height: 48px; padding: 0; border-radius: 50%; background: #f5f1e8; font-size: 21px; position: relative; }
+.ball-game .number-ball[aria-pressed="true"] { border: 2px solid #087b7f; background: #eaf4f4; }
+.ball-game .number-ball[aria-pressed="true"]::after { content: '✓'; position: absolute; top: -10px; right: -2px; font-size: 15px; color: #087b7f; }
+.ball-game .ball-position { display: block; color: #666; font-size: 12px; margin-top: 4px; }
+.ball-game .ball-records { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 8px 0 16px; }
+.ball-game .ball-records li { border: 1px solid #ccc; padding: 4px 10px; font-variant-numeric: tabular-nums; }
+.ball-game .ball-records li[data-valid="true"] { border-color: #087b7f; }
+.ball-game .ball-record-heading { margin-bottom: 0; }
+.ball-game #ball-selection { min-height: 1.65em; }
+@media (max-width: 520px) {
+    .ball-game .game-stats { grid-template-columns: 1fr; text-align: left; gap: 8px; }
+    .ball-game .game-stats > div { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .ball-game .game-stats dd { font-size: 21px; margin: 0; }
+}
