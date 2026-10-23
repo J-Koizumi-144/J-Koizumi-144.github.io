@@ -13,8 +13,6 @@
 .tournament-game .tournament-scores td { border-bottom: 1px solid #ddd; padding: 7px 6px; text-align: center; }
 .tournament-game .tournament-scores thead { background: #f0f3f2; }
 .tournament-game .tournament-orders { display: flex; flex-wrap: wrap; gap: 8px 25px; margin: 12px 0; }
-.tournament-game details { margin-top: 18px; border-top: 1px solid #ccc; padding-top: 12px; }
-.tournament-game summary { cursor: pointer; min-height: 44px; }
 .tournament-game .tournament-help { font-size: 15px; margin: 12px 0; }
 .tournament-game .game-message { margin: 8px 0 14px; }
 @media (max-width: 520px) {

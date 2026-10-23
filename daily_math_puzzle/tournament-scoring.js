@@ -4,9 +4,9 @@ const copy = {
     en: {
         language: '言語', teams: 'Teams', undo: 'Undo', reset: 'Reset',
         instruction: 'Click a cell to cycle the row team’s result: draw → win → loss.',
-        others: 'Other teams: matches and scores', team: 'Team', wins: 'W', draws: 'D', losses: 'L',
+        team: 'Team', wins: 'W', draws: 'D', losses: 'L',
         two: '2-point wins', three: '3-point wins', focus: 'A, B, C: results',
-        rest: 'Other matches', standings: 'Scores', opponent: 'vs',
+        standings: 'Scores', opponent: 'vs',
         result: { '0': 'D', '1': 'W', '-1': 'L' },
         fullResult: { '0': 'draw', '1': 'win', '-1': 'loss' },
         cell: (a, b, result) => `${a} vs ${b}: ${result}`,
@@ -16,9 +16,9 @@ const copy = {
     ja: {
         language: 'Language', teams: 'チーム数', undo: '1手戻す', reset: 'リセット',
         instruction: 'マスを押すと，行のチームの結果が引き分け→勝ち→負けと切り替わります．',
-        others: 'ほかのチームの対戦と成績', team: 'チーム', wins: '勝', draws: '分', losses: '負',
+        team: 'チーム', wins: '勝', draws: '分', losses: '負',
         two: '勝ち2点', three: '勝ち3点', focus: 'A・B・Cの対戦',
-        rest: 'ほかのチーム同士の対戦', standings: '成績', opponent: '対',
+        standings: '成績', opponent: '対',
         result: { '0': '分', '1': '勝', '-1': '負' },
         fullResult: { '0': '引き分け', '1': '勝ち', '-1': '負け' },
         cell: (a, b, result) => `${a} 対 ${b}：${result}`,
@@ -30,11 +30,9 @@ const root = document.getElementById('tournament-game');
 const language = document.getElementById('tournament-language');
 const size = document.getElementById('tournament-size');
 const focused = document.getElementById('tournament-focus');
-const otherMatches = document.getElementById('tournament-others');
-const details = document.getElementById('tournament-details');
 const undo = document.getElementById('tournament-undo');
 let game = new TournamentGame(Number(size.value));
-const activeCells = { focus: [0, 1], others: [3, 4] };
+let activeCell = [0, 1];
 const name = i => i < 3 ? 'ABC'[i] : `D${i - 2}`;
 const node = (tag, text) => {
     const element = document.createElement(tag);
@@ -42,10 +40,10 @@ const node = (tag, text) => {
     return element;
 };
 
-function resultTable(container, rows, columns, key, t) {
+function resultTable(container, rows, columns, t) {
     const table = node('table');
     table.className = 'tournament-matrix';
-    table.append(node('caption', t[key === 'focus' ? 'focus' : 'rest']));
+    table.append(node('caption', t.focus));
     const head = node('tr');
     head.append(node('th', t.opponent));
     columns.forEach(i => {
@@ -65,9 +63,9 @@ function resultTable(container, rows, columns, key, t) {
                 const button = node('button', t.result[result]);
                 button.type = 'button';
                 button.dataset.row = row; button.dataset.column = column;
-                button.dataset.matrix = key; button.dataset.result = result;
+                button.dataset.result = result;
                 button.setAttribute('aria-label', t.cell(name(row), name(column), t.fullResult[result]));
-                button.tabIndex = activeCells[key][0] === row && activeCells[key][1] === column ? 0 : -1;
+                button.tabIndex = activeCell[0] === row && activeCell[1] === column ? 0 : -1;
                 td.append(button);
             }
             tr.append(td);
@@ -104,35 +102,30 @@ function render(focusCell) {
     root.lang = language.value;
     root.querySelectorAll('[data-label]').forEach(e => { e.textContent = t[e.dataset.label]; });
     const all = Array.from({ length: game.size }, (_, i) => i);
-    resultTable(focused, [0, 1, 2], all, 'focus', t);
-    resultTable(otherMatches, all.slice(3), all.slice(3), 'others', t);
+    resultTable(focused, [0, 1, 2], all, t);
     scores(document.getElementById('tournament-scores'), [0, 1, 2], state.teams, t);
-    scores(document.getElementById('tournament-other-scores'), all.slice(3), state.teams, t);
-    details.hidden = game.size === 3;
-    otherMatches.hidden = game.size < 5;
     document.getElementById('tournament-order-two').textContent = `${t.two}: ${order(state.teams, 'two')} ${state.twoMet ? t.met : t.unmet}`;
     document.getElementById('tournament-order-three').textContent = `${t.three}: ${order(state.teams, 'three')} ${state.threeMet ? t.met : t.unmet}`;
     const message = document.getElementById('tournament-message');
     message.textContent = state.complete ? t.done : t.pending;
     message.dataset.state = state.complete ? 'complete' : '';
     undo.disabled = game.history.length === 0;
-    if (focusCell) root.querySelector(`button[data-matrix="${focusCell.key}"][data-row="${focusCell.row}"][data-column="${focusCell.column}"]`).focus({ preventScroll: true });
+    if (focusCell) root.querySelector(`button[data-row="${focusCell.row}"][data-column="${focusCell.column}"]`).focus({ preventScroll: true });
 }
 
 root.addEventListener('click', event => {
     const button = event.target.closest('button[data-row]');
     if (!button) return;
-    const row = Number(button.dataset.row), column = Number(button.dataset.column), key = button.dataset.matrix;
-    activeCells[key] = [row, column];
-    game.cycle(row, column); render({ row, column, key });
+    const row = Number(button.dataset.row), column = Number(button.dataset.column);
+    activeCell = [row, column];
+    game.cycle(row, column); render({ row, column });
 });
 root.addEventListener('keydown', event => {
     const button = event.target.closest('button[data-row]');
     if (!button || !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
     event.preventDefault();
-    const key = button.dataset.matrix;
-    const minimum = key === 'focus' ? 0 : 3;
-    const maxRow = key === 'focus' ? 2 : game.size - 1;
+    const minimum = 0;
+    const maxRow = 2;
     let row = Number(button.dataset.row), column = Number(button.dataset.column);
     if (event.key === 'Home') column = minimum;
     else if (event.key === 'End') column = game.size - 1;
@@ -143,16 +136,16 @@ root.addEventListener('keydown', event => {
     }
     if (row === column) column += event.key === 'End' ? -1 : 1;
     if (row < minimum || row > maxRow || column < minimum || column >= game.size) return;
-    activeCells[key] = [row, column];
-    root.querySelectorAll(`button[data-matrix="${key}"]`).forEach(e => { e.tabIndex = -1; });
-    const target = root.querySelector(`button[data-matrix="${key}"][data-row="${row}"][data-column="${column}"]`);
+    activeCell = [row, column];
+    root.querySelectorAll('button[data-row]').forEach(e => { e.tabIndex = -1; });
+    const target = root.querySelector(`button[data-row="${row}"][data-column="${column}"]`);
     target.tabIndex = 0; target.focus();
 });
 undo.addEventListener('click', () => { game.undo(); render(); });
 document.getElementById('tournament-reset').addEventListener('click', () => { game.reset(); render(); });
 size.addEventListener('change', () => {
     game = new TournamentGame(Number(size.value));
-    activeCells.focus = [0, 1]; activeCells.others = [3, 4]; details.open = false; render();
+    activeCell = [0, 1]; render();
 });
 language.addEventListener('change', () => render());
 render(); root.hidden = false;
