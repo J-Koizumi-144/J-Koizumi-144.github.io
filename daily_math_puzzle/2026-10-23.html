@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/10/23: changing the points for a win. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/10/23</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="tournament-scoring.css" type="text/css">
+    <script type="module" src="tournament-scoring.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-10-23" aria-current="page">2026/10/23</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/10/23</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>Several teams play a round-robin tournament in which each pair of teams plays exactly once.
+            When a win is worth \(2\) points, a draw \(1\) point, and a loss \(0\) points, three teams \(A,B,C\) have point totals satisfying \(A&gt;B&gt;C\).
+            The results are then scored again with only the value of a win changed to \(3\) points, and the three teams' point totals now satisfy \(C&gt;B&gt;A\).
+            Find the smallest number of teams for which this can happen.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>いくつかのチームが総当たり戦を行い，どの \(2\) チームも \(1\) 回ずつ対戦した．
+            勝ち \(2\) 点，引き分け \(1\) 点，負け \(0\) 点として集計すると，ある \(3\) チーム \(A,B,C\) の勝ち点は \(A&gt;B&gt;C\) だった．
+            試合結果を変えず，勝ちだけを \(3\) 点にして集計し直すと，この \(3\) チームの勝ち点は \(C&gt;B&gt;A\) となった．
+            このようなことが起こりうるチーム数の最小値を求めよ．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+            <h2 id="try-it">Try it</h2>
+            <noscript><p>Enable JavaScript to play. <span lang="ja">操作機能を使うには JavaScript を有効にしてください．</span></p></noscript>
+            <div id="tournament-game" class="coin-game tournament-game" lang="en" hidden>
+                <div class="game-settings">
+                    <label><span data-label="language">言語</span>
+                        <select id="tournament-language" aria-label="Language / 言語"><option value="en">English</option><option value="ja">日本語</option></select>
+                    </label>
+                    <label><span data-label="teams">Teams</span><select id="tournament-size"><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6" selected>6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option></select></label>
+                </div>
+                <p class="tournament-help" data-label="instruction"></p>
+                <div id="tournament-focus" class="tournament-scroll"></div>
+                <div id="tournament-scores" class="tournament-scroll"></div>
+                <div class="tournament-orders" role="status" aria-live="polite" aria-atomic="true">
+                    <span id="tournament-order-two"></span><span id="tournament-order-three"></span>
+                </div>
+                <p id="tournament-message" class="game-message" role="status" aria-live="polite"></p>
+                <div class="game-actions">
+                    <button id="tournament-undo" type="button" data-label="undo" disabled>Undo</button>
+                    <button id="tournament-reset" type="button" data-label="reset">Reset</button>
+                </div>
+                <details id="tournament-details">
+                    <summary data-label="others">Other teams: matches and scores</summary>
+                    <div id="tournament-others" class="tournament-scroll"></div>
+                    <div id="tournament-other-scores" class="tournament-scroll"></div>
+                </details>
+            </div>
+        </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-10-22.html" rel="prev">&larr; 2026/10/22</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
