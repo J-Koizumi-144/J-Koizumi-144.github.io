@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/10/24: seven clubs with different membership sizes. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/10/24</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="club-memberships.css" type="text/css">
+    <script type="module" src="club-memberships.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-10-24" aria-current="page">2026/10/24</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/10/24</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>A school has seven clubs, all with different numbers of members.
+Every pair of clubs has exactly one member in common.
+Each student belongs to at most three clubs.
+What is the minimum possible number of students who belong to at least one club?</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>ある学校に7つのクラブがあり，部員数はすべて異なる．
+どの二つのクラブにも，共通の部員がちょうど1人いる．
+1人の生徒が入れるクラブは3つまでである．
+少なくとも一つのクラブに入っている生徒は，最少で何人いるか．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+            <h2 id="try-it">Try it</h2>
+            <noscript><p>Enable JavaScript to play. <span lang="ja">操作機能を使うには JavaScript を有効にしてください．</span></p></noscript>
+            <div id="club-game" class="coin-game club-game" lang="en" hidden>
+                <div class="game-settings"><label><span data-label="language">言語</span>
+                    <select id="club-language" aria-label="Language / 言語"><option value="en">English</option><option value="ja">日本語</option></select>
+                </label></div>
+                <p class="club-help" data-label="instruction"></p>
+                <div id="club-selection" class="club-selection"></div>
+                <div class="game-actions">
+                    <button id="club-add" type="button" data-label="add" disabled>Add student</button>
+                    <button id="club-clear" type="button" data-label="clear" disabled>Clear selection</button>
+                </div>
+                <p class="club-caption" data-label="members"></p>
+                <dl id="club-sizes" class="club-sizes"></dl>
+                <div id="club-pairs" class="club-scroll"></div>
+                <p class="club-caption" data-label="groups"></p>
+                <p id="club-empty" data-label="empty"></p>
+                <ul id="club-groups" class="club-groups"></ul>
+                <div class="club-status" role="status" aria-live="polite" aria-atomic="true">
+                    <span id="club-total"></span><span id="club-distinct"></span><span id="club-exact-pairs"></span>
+                </div>
+                <p id="club-message" class="game-message" role="status" aria-live="polite"></p>
+                <div class="game-actions">
+                    <button id="club-undo" type="button" data-label="undo" disabled>Undo</button>
+                    <button id="club-reset" type="button" data-label="reset" disabled>Reset</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-10-23.html" rel="prev">&larr; 2026/10/23</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
