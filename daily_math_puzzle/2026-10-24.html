@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="style.css" type="text/css">
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-    <link rel="stylesheet" href="club-memberships.css" type="text/css">
-    <script type="module" src="club-memberships.js"></script>
+    <link rel="stylesheet" href="club-memberships.css?v=20261024-table" type="text/css">
+    <script type="module" src="club-memberships.js?v=20261024-table"></script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
@@ -53,25 +53,19 @@ What is the minimum possible number of students who belong to at least one club?
                     <select id="club-language" aria-label="Language / 言語"><option value="en">English</option><option value="ja">日本語</option></select>
                 </label></div>
                 <p class="club-help" data-label="instruction"></p>
-                <div id="club-selection" class="club-selection"></div>
                 <div class="game-actions">
-                    <button id="club-add" type="button" data-label="add" disabled>Add student</button>
-                    <button id="club-clear" type="button" data-label="clear" disabled>Clear selection</button>
-                </div>
-                <p class="club-caption" data-label="members"></p>
-                <dl id="club-sizes" class="club-sizes"></dl>
-                <div id="club-pairs" class="club-scroll"></div>
-                <p class="club-caption" data-label="groups"></p>
-                <p id="club-empty" data-label="empty"></p>
-                <ul id="club-groups" class="club-groups"></ul>
-                <div class="club-status" role="status" aria-live="polite" aria-atomic="true">
-                    <span id="club-total"></span><span id="club-distinct"></span><span id="club-exact-pairs"></span>
-                </div>
-                <p id="club-message" class="game-message" role="status" aria-live="polite"></p>
-                <div class="game-actions">
+                    <button id="club-add" type="button" data-label="add">Add row</button>
                     <button id="club-undo" type="button" data-label="undo" disabled>Undo</button>
                     <button id="club-reset" type="button" data-label="reset" disabled>Reset</button>
                 </div>
+                <p id="club-limit" class="club-limit" hidden></p>
+                <div id="club-memberships" class="club-scroll membership-scroll"></div>
+                <p id="club-empty" data-label="empty" hidden></p>
+                <div id="club-pairs" class="club-scroll"></div>
+                <div class="club-status" role="status" aria-live="polite" aria-atomic="true">
+                    <span id="club-total"></span><span id="club-blank"></span><span id="club-distinct"></span><span id="club-exact-pairs"></span>
+                </div>
+                <p id="club-message" class="game-message" role="status" aria-live="polite"></p>
             </div>
         </section>
     </main>
