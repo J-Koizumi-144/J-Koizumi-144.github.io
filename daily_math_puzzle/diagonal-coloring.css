@@ -1,0 +1,18 @@
+.diagonal-game { margin-top: 24px; border: 1px solid #ccc; padding: 22px; line-height: 1.65; }
+.diagonal-game button, .diagonal-game select { font: inherit; color: inherit; background: #fcfcfc; border: 1px solid #888; border-radius: 3px; min-height: 44px; padding: 6px 12px; cursor: pointer; }
+.diagonal-game button:disabled { color: #666; border-color: #ccc; background: #eee; cursor: default; }
+.diagonal-game :focus-visible { outline: 2px solid #087b7f; outline-offset: 3px; }
+.diagonal-game .game-actions button:not(:disabled):hover { background: #eaf4f4; }
+.diagonal-game .diagonal-stat dd { font-weight: bold; color: #087b7f; }
+.diagonal-game .diagonal-scroll { overflow-x: auto; padding: 5px; }
+.diagonal-game .diagonal-board { display: grid; grid-template-columns: 30px repeat(var(--size), minmax(32px, 1fr)); grid-template-rows: 30px repeat(var(--size), auto); width: 100%; max-width: 534px; min-width: calc(30px + var(--size) * 32px); margin: 0 auto; }
+.diagonal-game .diagonal-cell { aspect-ratio: 1; min-width: 0; min-height: 32px; padding: 0; border-radius: 0; border: 0; box-shadow: inset 0 0 0 0.5px #888; background: #fff; touch-action: manipulation; color: #087b7f; font-size: 20px; line-height: 1; }
+.diagonal-game .diagonal-cell[aria-pressed="true"] { background: #333; color: #b9e7e7; }
+.diagonal-game .diagonal-cell:focus-visible { outline-offset: -4px; z-index: 1; }
+.diagonal-game .diagonal-count { align-self: center; justify-self: center; font-size: 14px; min-width: 22px; line-height: 22px; text-align: center; }
+.diagonal-game .diagonal-count.invalid { outline: 1px solid #923d27; color: #923d27; border-radius: 50%; }
+.diagonal-game .diagonal-legend { color: #087b7f; font-size: 14px; margin: 8px 0 16px; }
+.diagonal-game .diagonal-error-toggle { display: flex; align-items: center; gap: 6px; min-height: 44px; cursor: pointer; }
+.diagonal-game input { width: 18px; height: 18px; accent-color: #087b7f; }
+.diagonal-game .diagonal-summary { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 520px) { .diagonal-game { padding: 14px; } }

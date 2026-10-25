@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/10/25: black cells on the diagonal. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/10/25</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="diagonal-coloring.css" type="text/css">
+    <script type="module" src="diagonal-coloring.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-10-25" aria-current="page">2026/10/25</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/10/25</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>Let \(n\) be a positive integer.
+Color some cells of a \(3n\times3n\) grid black.
+Every row and every column must contain at least one black cell, and its black cells must be consecutive, with no white cells between them.
+The numbers of black cells in the rows must all be different, and the same must hold for the columns.
+Find the minimum possible number of black cells on the diagonal from the top left to the bottom right.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>\(n\) を正の整数とする．
+\(3n\times3n\) の方眼のいくつかのマスを黒く塗る．
+どの行にもどの列にも黒いマスが \(1\) 個以上あり，それらは途中に白いマスを挟まずに連続している．
+黒いマスの個数は行ごとにすべて異なり，列ごとにもすべて異なる．
+左上から右下への対角線上にある黒いマスの個数の最小値を求めよ．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+            <h2 id="try-it">Try it</h2>
+            <noscript><p>Enable JavaScript to play. <span lang="ja">操作機能を使うには JavaScript を有効にしてください．</span></p></noscript>
+            <div id="diagonal-game" class="diagonal-game" lang="en" hidden>
+                <div class="game-settings">
+                    <label><span data-label="language">言語</span><select id="diagonal-language" aria-label="Language / 言語"><option value="en">English</option><option value="ja">日本語</option></select></label>
+                    <label>n <select id="diagonal-size"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></label>
+                </div>
+                <p data-label="guide"></p>
+                <dl class="game-stats">
+                    <div class="diagonal-stat"><dt data-label="diagonal"></dt><dd id="diagonal-count">0</dd></div>
+                    <div><dt data-label="black"></dt><dd id="diagonal-black">0</dd></div>
+                    <div><dt data-label="rows"></dt><dd id="diagonal-rows">6</dd></div>
+                    <div><dt data-label="columns"></dt><dd id="diagonal-columns">6</dd></div>
+                </dl>
+                <div class="diagonal-scroll"><div id="diagonal-board" class="diagonal-board" role="group" aria-describedby="diagonal-summary"></div></div>
+                <p class="diagonal-legend" data-label="legend"></p>
+                <div class="game-actions">
+                    <button id="diagonal-undo" type="button" data-label="undo" disabled>Undo</button>
+                    <button id="diagonal-reset" type="button" data-label="reset" disabled>Reset</button>
+                    <label class="diagonal-error-toggle"><input id="diagonal-errors" type="checkbox"><span data-label="errors"></span></label>
+                </div>
+                <p id="diagonal-message" class="game-message" role="status" aria-live="polite"></p>
+                <p id="diagonal-summary" class="diagonal-summary" role="status" aria-live="polite" aria-atomic="true"></p>
+            </div>
+        </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-10-24.html" rel="prev">&larr; 2026/10/24</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
