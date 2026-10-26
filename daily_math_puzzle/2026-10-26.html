@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/10/26: spreading black cells after one removal. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/10/26</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="spreading-cells.css" type="text/css">
+    <script type="module" src="spreading-cells.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-10-26" aria-current="page">2026/10/26</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/10/26</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>Let \(n\) be a positive integer.
+Color some cells of an initially white \((2n+1)\times(2n+1)\) grid black.
+An opponent then chooses one black cell and turns it white again.
+After that, repeatedly color a white cell black if it shares an edge with at least two black cells, until no further move is possible.
+We want the entire grid to end up black, whichever cell the opponent turns white.
+Find the minimum number of cells that must be colored black initially.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>\(n\) を正の整数とする．
+\((2n+1)\times(2n+1)\) の白い方眼の何マスかを黒く塗る．
+その後，相手が黒いマスを一つ選んで白に戻す．
+それから，辺を共有する黒いマスが二つ以上ある白いマスを黒く塗る操作を，できなくなるまで繰り返す．
+相手がどのマスを白に戻しても，最後に全マスが黒くなるようにしたい．
+最初に黒く塗るマスの個数の最小値を求めよ．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+            <h2 id="try-it">Try it</h2>
+            <noscript><p>Enable JavaScript to play. <span lang="ja">操作機能を使うには JavaScript を有効にしてください．</span></p></noscript>
+            <div id="spreading-cells" class="spreading-cells" lang="en" hidden>
+                <div class="game-settings">
+                    <label><span data-label="language">言語</span><select id="spreading-language" aria-label="Language / 言語"><option value="en">English</option><option value="ja">日本語</option></select></label>
+                    <label>n <select id="spreading-size"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
+                </div>
+                <p id="spreading-guide"></p>
+                <dl class="game-stats">
+                    <div><dt data-label="initial"></dt><dd id="spreading-initial">0</dd></div>
+                    <div><dt data-label="black"></dt><dd id="spreading-black">0</dd></div>
+                    <div><dt data-label="moves"></dt><dd id="spreading-moves">0</dd></div>
+                    <div><dt data-label="available"></dt><dd id="spreading-available">—</dd></div>
+                </dl>
+                <div class="spreading-scroll"><div id="spreading-board" class="spreading-board" role="group"></div></div>
+                <p class="spreading-legend" data-label="legend"></p>
+                <div class="game-actions">
+                    <button id="spreading-start" type="button" data-label="start">Try this layout</button>
+                    <button id="spreading-retry" type="button" data-label="retry" disabled>Choose another removal</button>
+                    <button id="spreading-edit" type="button" data-label="edit" disabled>Edit initial layout</button>
+                </div>
+                <div class="game-actions">
+                    <button id="spreading-undo" type="button" data-label="undo" disabled>Undo</button>
+                    <button id="spreading-reset" type="button" data-label="reset" disabled>Reset</button>
+                    <label class="spreading-toggle"><input id="spreading-show" type="checkbox"><span data-label="show"></span></label>
+                </div>
+                <p id="spreading-removal" class="spreading-removal"></p>
+                <p id="spreading-message" class="game-message" role="status" aria-live="polite" aria-atomic="true"></p>
+            </div>
+        </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-10-25.html" rel="prev">&larr; 2026/10/25</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
