@@ -1,0 +1,29 @@
+.circular-friends { border: 1px solid #ccc; padding: 20px; margin-top: 20px; line-height: 1.65; }
+.circular-friends button, .circular-friends select { font: inherit; color: inherit; background: #fcfcfc; border: 1px solid #888; border-radius: 3px; min-height: 44px; padding: 6px 12px; }
+.circular-friends button:not(:disabled), .circular-friends select { cursor: pointer; }
+.circular-friends button:disabled { color: #666; border-color: #ccc; background: #eee; }
+.circular-friends :focus-visible { outline: 3px solid #087b7f; outline-offset: 3px; }
+.circular-friends .game-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.circular-friends .friends-scroll { overflow-x: auto; padding: 8px; }
+.circular-friends .friends-board { position: relative; width: 460px; height: 460px; margin: auto; }
+.circular-friends svg { position: absolute; inset: 0; width: 460px; height: 460px; pointer-events: none; }
+.circular-friends line.neighbor { stroke: #888; stroke-width: 2; }
+.circular-friends line.added { stroke: #087b7f; stroke-width: 1.6; stroke-dasharray: 5 3; opacity: 0.65; }
+.circular-friends .friend-person { position: absolute; transform: translate(-50%, -50%); width: 52px; height: 52px; padding: 0; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.15; background: #fff; }
+.circular-friends .friend-person span { font-size: 18px; }
+.circular-friends .friend-person small { font-size: 12px; }
+.circular-friends .friend-person[aria-pressed="true"] { border: 3px solid #087b7f; background: #eaf4f4; }
+.circular-friends .friend-person[aria-pressed="true"]::after { content: '✓'; position: absolute; top: -7px; right: -4px; color: #08666a; background: white; border-radius: 50%; }
+.circular-friends .friend-person.even-count { outline: 2px dashed #ae6137; outline-offset: 2px; }
+.circular-friends .friends-legend { font-size: 14px; margin: 10px 0; }
+.circular-friends .friends-selection { min-height: 1.65em; margin: 12px 0; }
+.circular-friends .game-actions { margin: 12px 0; }
+.circular-friends .friends-toggle { display: flex; align-items: center; gap: 8px; min-height: 44px; }
+.circular-friends input { width: 18px; height: 18px; }
+.circular-friends .friends-details p { margin: 4px 0; overflow-wrap: anywhere; }
+@media(max-width: 520px) {
+    .circular-friends { padding: 12px; }
+    .circular-friends .game-stats { grid-template-columns: 1fr; padding: 8px 0; }
+    .circular-friends .game-stats > div { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .circular-friends .game-stats dd { margin: 0; font-size: 20px; }
+}

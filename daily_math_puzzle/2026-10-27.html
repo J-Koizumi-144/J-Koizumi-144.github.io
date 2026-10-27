@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/10/27: friends around a circular table. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/10/27</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="circular-friends.css" type="text/css">
+    <script type="module" src="circular-friends.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-10-27" aria-current="page">2026/10/27</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/10/27</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>Fourteen people sit around a circular table.
+Neighbors are always friends, and each person has an odd number of friends among these fourteen people.
+Also, every group of three people contains a pair of friends.
+Find the minimum possible number of pairs of friends.
+Friendship is mutual, and no one is counted as their own friend.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>14人が円卓を囲んでいる．
+隣同士は必ず友人であり，どの人もこの14人の中に奇数人の友人がいる．
+また，どの3人を選んでも，その中に友人同士の2人がいる．
+友人同士の2人組の個数の最小値を求めよ．
+ただし，友人関係は相互的で，自分自身は友人に数えない．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+            <h2 id="try-it">Try it</h2>
+            <noscript><p>Enable JavaScript to play. <span lang="ja">操作機能を使うには JavaScript を有効にしてください．</span></p></noscript>
+            <div id="circular-friends" class="circular-friends" lang="en" hidden>
+                <div class="game-settings"><label><span data-label="language">言語</span><select id="friends-language" aria-label="Language / 言語"><option value="en">English</option><option value="ja">日本語</option></select></label></div>
+                <p data-label="guide"></p>
+                <dl class="game-stats">
+                    <div><dt data-label="pairs"></dt><dd id="friends-pairs">14</dd></div>
+                    <div><dt data-label="odd"></dt><dd id="friends-odd">0 / 14</dd></div>
+                    <div><dt data-label="triples"></dt><dd id="friends-triples"></dd></div>
+                </dl>
+                <div class="friends-scroll"><div id="friends-board" class="friends-board" role="group"><svg viewBox="0 0 460 460" aria-hidden="true"><g id="friends-lines"></g></svg></div></div>
+                <p class="friends-legend" data-label="legend"></p>
+                <p id="friends-selection" class="friends-selection" role="status"></p>
+                <div class="game-actions"><button id="friends-change" type="button" disabled>Add friendship</button><button id="friends-clear" type="button" data-label="clear" disabled>Clear selection</button></div>
+                <div class="game-actions"><button id="friends-undo" type="button" data-label="undo" disabled>Undo</button><button id="friends-reset" type="button" data-label="reset" disabled>Reset</button></div>
+                <p id="friends-message" class="game-message" role="status" aria-live="polite" aria-atomic="true"></p>
+                <label class="friends-toggle"><input id="friends-show" type="checkbox"><span data-label="show"></span></label>
+                <div id="friends-details" class="friends-details" hidden><p id="friends-even"></p><p id="friends-example"></p></div>
+            </div>
+        </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-10-26.html" rel="prev">&larr; 2026/10/26</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
