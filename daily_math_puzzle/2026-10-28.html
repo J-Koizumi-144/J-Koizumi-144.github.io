@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/10/28: vertex colors and triangulations. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/10/28</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="colored-triangulation.css" type="text/css">
+    <script type="module" src="colored-triangulation.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-10-28" aria-current="page">2026/10/28</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/10/28</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>Let \(n\) be a positive integer.
+Color the vertices of a regular \(6n\)-gon alternately red and blue.
+Divide it into triangles by diagonals that do not cross in the interior, so that an even number of diagonals meet at every vertex.
+Find the minimum possible number of resulting triangles whose three vertices all have the same color.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>\(n\) を正の整数とする．
+正 \(6n\) 角形の頂点を，赤と青で交互に塗る．
+内部で交差しない対角線を引いて三角形に分割し，各頂点から出る対角線の本数がすべて偶数になるようにする．
+分割でできた三角形のうち，3頂点が同じ色のものの個数の最小値を求めよ．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+            <h2 id="try-it">Try it</h2>
+            <noscript><p>Enable JavaScript to play. <span lang="ja">操作機能を使うには JavaScript を有効にしてください．</span></p></noscript>
+            <div id="triangulation-game" class="triangulation-game" lang="en" hidden>
+                <div class="game-settings">
+                    <label><span data-label="language">言語</span><select id="tri-language" aria-label="Language / 言語"><option value="en">English</option><option value="ja">日本語</option></select></label>
+                    <label>n <select id="tri-size" aria-label="n"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select></label>
+                </div>
+                <p class="tri-instruction" data-label="instruction"></p>
+                <dl class="game-stats">
+                    <div><dt data-label="diagonals"></dt><dd id="tri-diagonals"></dd></div>
+                    <div><dt data-label="triangles"></dt><dd id="tri-triangles"></dd></div>
+                    <div><dt data-label="mono"></dt><dd id="tri-mono"></dd></div>
+                    <div><dt data-label="odd"></dt><dd id="tri-odd"></dd></div>
+                </dl>
+                <div class="tri-scroll"><div id="tri-board" class="tri-board" role="group"></div></div>
+                <p class="tri-legend" data-label="legend"></p>
+                <p id="tri-selection" class="tri-selection"></p>
+                <p id="tri-operation" class="game-message" role="status" aria-live="polite"></p>
+                <div class="game-actions">
+                    <button id="tri-confirm" class="tri-confirm" type="button" disabled></button>
+                    <button id="tri-undo" type="button" data-label="undo" disabled></button>
+                    <button id="tri-reset" type="button" data-label="reset"></button>
+                    <label><input id="tri-errors" type="checkbox"><span data-label="errors"></span></label>
+                </div>
+                <p id="tri-status" class="game-message" role="status" aria-live="polite"></p>
+            </div>
+        </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-10-27.html" rel="prev">&larr; 2026/10/27</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>

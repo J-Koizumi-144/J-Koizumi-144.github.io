@@ -1,0 +1,21 @@
+.triangulation-game {border:1px solid #ccc; padding:20px; line-height:1.65; margin-top:24px;}
+.triangulation-game button,.triangulation-game select {font:inherit; min-height:44px; border:1px solid #888; border-radius:3px; background:#fcfcfc; color:inherit; padding:6px 12px;}
+.triangulation-game button:not(:disabled),.triangulation-game select {cursor:pointer;}
+.triangulation-game button:disabled {color:#666; background:#eee; border-color:#ccc;}
+.triangulation-game :focus-visible {outline:3px solid #087b7f; outline-offset:3px;}
+.triangulation-game .tri-scroll {overflow-x:auto; max-width:100%; padding:6px 0;}
+.triangulation-game .tri-board {position:relative; margin:0 auto;}
+.triangulation-game svg {position:absolute; inset:0; width:100%; height:100%; pointer-events:none;}
+.triangulation-game .tri-vertex {position:absolute; transform:translate(-50%,-50%); width:46px; height:46px; padding:0; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; line-height:1.05; font-family:Arial,sans-serif; font-size:15px;}
+.triangulation-game .tri-vertex small {font-size:11px; margin-top:2px;}
+.triangulation-game .tri-red {background:#fff0ed; border:2px solid #b33b31; color:#8c2923;}
+.triangulation-game .tri-blue {background:#eef3ff; border:2px solid #315c9e; color:#20477f;}
+.triangulation-game .tri-vertex[aria-pressed="true"] {outline:3px solid #087b7f; outline-offset:3px; box-shadow:0 0 0 6px #fff;}
+.triangulation-game .tri-vertex.tri-odd {border-style:dashed; background:#fff4c7;}
+.triangulation-game .tri-instruction {font-size:15px; margin:14px 0 8px;}
+.triangulation-game .tri-legend {font-size:14px; margin:8px 0;}
+.triangulation-game .game-stats {margin:12px 0; padding:12px 0;}
+.triangulation-game .game-message {margin:10px 0;}
+.triangulation-game .tri-selection {min-height:1.65em; margin:8px 0;}
+.triangulation-game .tri-confirm:not(:disabled) {background:#087b7f; color:#fff; border-color:#087b7f;}
+@media(max-width:520px){.triangulation-game {padding:12px;} .triangulation-game .game-stats {grid-template-columns:repeat(2,minmax(0,1fr));}}
