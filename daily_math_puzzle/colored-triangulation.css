@@ -16,6 +16,4 @@
 .triangulation-game .tri-legend {font-size:14px; margin:8px 0;}
 .triangulation-game .game-stats {margin:12px 0; padding:12px 0;}
 .triangulation-game .game-message {margin:10px 0;}
-.triangulation-game .tri-selection {min-height:1.65em; margin:8px 0;}
-.triangulation-game .tri-confirm:not(:disabled) {background:#087b7f; color:#fff; border-color:#087b7f;}
 @media(max-width:520px){.triangulation-game {padding:12px;} .triangulation-game .game-stats {grid-template-columns:repeat(2,minmax(0,1fr));}}

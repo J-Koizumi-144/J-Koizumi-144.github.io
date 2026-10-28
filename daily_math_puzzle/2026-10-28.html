@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="style.css" type="text/css">
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-    <link rel="stylesheet" href="colored-triangulation.css" type="text/css">
-    <script type="module" src="colored-triangulation.js"></script>
+    <link rel="stylesheet" href="colored-triangulation.css?v=20261028-direct" type="text/css">
+    <script type="module" src="colored-triangulation.js?v=20261028-direct"></script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
@@ -62,13 +62,10 @@ Find the minimum possible number of resulting triangles whose three vertices all
                 </dl>
                 <div class="tri-scroll"><div id="tri-board" class="tri-board" role="group"></div></div>
                 <p class="tri-legend" data-label="legend"></p>
-                <p id="tri-selection" class="tri-selection"></p>
                 <p id="tri-operation" class="game-message" role="status" aria-live="polite"></p>
                 <div class="game-actions">
-                    <button id="tri-confirm" class="tri-confirm" type="button" disabled></button>
                     <button id="tri-undo" type="button" data-label="undo" disabled></button>
                     <button id="tri-reset" type="button" data-label="reset"></button>
-                    <label><input id="tri-errors" type="checkbox"><span data-label="errors"></span></label>
                 </div>
                 <p id="tri-status" class="game-message" role="status" aria-live="polite"></p>
             </div>
