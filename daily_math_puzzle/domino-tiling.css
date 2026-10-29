@@ -1,0 +1,23 @@
+.domino-game { margin-top:24px; border:1px solid #ccc; padding:22px; line-height:1.65; }
+.domino-game button, .domino-game select { font:inherit; color:inherit; background:#fcfcfc; border:1px solid #888; border-radius:3px; min-height:44px; padding:6px 12px; cursor:pointer; }
+.domino-game button:disabled { color:#666; border-color:#ccc; background:#eee; cursor:default; }
+.domino-game :focus-visible { outline:2px solid #087b7f; outline-offset:3px; }
+.domino-game .game-stats { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.domino-scroll { overflow-x:auto; padding:5px; }
+.domino-board { display:grid; grid-template-columns:24px repeat(var(--columns),44px) 44px; grid-auto-rows:44px; width:max-content; margin:0 auto; }
+.domino-game .domino-cell { width:44px; height:44px; min-height:44px; border-radius:0; padding:0; border:1px solid #bbb; background:white; touch-action:manipulation; font:22px/1 sans-serif; }
+.domino-game .domino-cell.horizontal { background:#e1f1f1; border:2px solid #39878a; color:#26686b; }
+.domino-game .domino-cell.vertical { background:#f6ebd7; border:2px solid #a37b38; color:#825f28; }
+.domino-game .horizontal.tile-start { border-right:0; border-radius:6px 0 0 6px; }
+.domino-game .horizontal.tile-end { border-left:0; border-radius:0 6px 6px 0; }
+.domino-game .vertical.tile-start { border-bottom:0; border-radius:6px 6px 0 0; }
+.domino-game .vertical.tile-end { border-top:0; border-radius:0 0 6px 6px; }
+.domino-game .domino-cell:hover { filter:brightness(.94); }
+.domino-game .domino-cell:focus-visible { outline-offset:-5px; z-index:1; }
+.domino-row-label, .domino-row-count { align-self:center; justify-self:center; font-size:15px; }
+.domino-row-count { font-weight:bold; }
+.domino-row-count.same-count { color:#923d27; }
+.domino-count-caption { text-align:right; font-size:14px; margin-bottom:8px; }
+.domino-game .domino-toggle { display:flex; align-items:center; gap:8px; margin-top:16px; min-height:44px; }
+.domino-toggle input { width:18px; height:18px; accent-color:#087b7f; }
+@media(max-width:520px) { .domino-game { padding:14px; } .domino-game .game-stats dt { font-size:12px; } }

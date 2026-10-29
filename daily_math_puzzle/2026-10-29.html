@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/10/29: different horizontal tile counts in every row. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/10/29</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="domino-tiling.css" type="text/css">
+    <script type="module" src="domino-tiling.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-10-29" aria-current="page">2026/10/29</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/10/29</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>Let \(n\) be an integer with \(n\geq2\).
+Tile a rectangle with \(n\) rows and \(2n-2\) columns using \(1\times2\) tiles aligned with the grid, leaving no gaps or overlaps.
+Tiles may be placed vertically or horizontally.
+Find all \(n\) for which this can be done so that every row contains a different number of horizontal tiles.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>\(n\) を2以上の整数とする．
+縦 \(n\) マス，横 \(2n-2\) マスの長方形を，\(1\times2\) のタイルで，マス目に沿ってすき間や重なりなく敷き詰める．
+タイルは縦向きにも横向きにも置いてよい．
+各行にある横向きのタイルの枚数が，どの2行でも異なるようにできる \(n\) をすべて求めよ．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+            <h2 id="try-it">Try it</h2>
+            <noscript><p>Enable JavaScript to play. <span lang="ja">操作機能を使うには JavaScript を有効にしてください．</span></p></noscript>
+            <div id="domino-game" class="domino-game" lang="en" hidden>
+                <div class="game-settings">
+                    <label><span data-label="language">言語</span><select id="domino-language" aria-label="Language / 言語"><option value="en">English</option><option value="ja">日本語</option></select></label>
+                    <label>n <select id="domino-size" aria-label="n"><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></label>
+                    <label><span data-label="orientation"></span><select id="domino-orientation"><option value="h" data-label="h"></option><option value="v" data-label="v"></option></select></label>
+                </div>
+                <p data-label="instruction"></p>
+                <dl class="game-stats">
+                    <div><dt data-label="tiles"></dt><dd id="domino-tiles"></dd></div>
+                    <div><dt data-label="empty"></dt><dd id="domino-empty"></dd></div>
+                    <div><dt data-label="distinct"></dt><dd id="domino-distinct"></dd></div>
+                </dl>
+                <p class="domino-count-caption" data-label="rowCounts"></p>
+                <div class="domino-scroll"><div id="domino-board" class="domino-board" role="group"></div></div>
+                <label class="domino-toggle"><input id="domino-repeated" type="checkbox"><span data-label="repeated"></span></label>
+                <p id="domino-operation" class="game-message" role="status" aria-live="polite"></p>
+                <div class="game-actions">
+                    <button id="domino-undo" type="button" data-label="undo" disabled></button>
+                    <button id="domino-reset" type="button" data-label="reset" disabled></button>
+                </div>
+                <p id="domino-status" class="game-message" role="status" aria-live="polite"></p>
+            </div>
+        </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-10-28.html" rel="prev">&larr; 2026/10/28</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
