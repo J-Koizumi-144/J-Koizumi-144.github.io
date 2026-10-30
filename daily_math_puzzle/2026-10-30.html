@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/10/30: mixing two cups, with one three-cup mix allowed. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/10/30</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="cup-mixing.css" type="text/css">
+    <script type="module" src="cup-mixing.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-10-30" aria-current="page">2026/10/30</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/10/30</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>There are \(n\) cups, each containing the same mass of salt water, where \(n\geq2\).
+Initially, the concentration in each cup is either 6% or 12%.
+You may repeatedly choose two cups, mix all their contents, and divide the mixture equally between those two cups.
+On at most one occasion, you may choose three cups instead of two and perform the same operation.
+Find all \(n\) for which, regardless of how the initial concentrations are assigned, all cups can be made to have the same concentration after finitely many operations.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>\(n\) 個のコップに，同じ重さの食塩水が入っている（\(n\geq2\)）．
+各コップの初めの濃度は6%または12%である．
+2個のコップを選び，中身をすべて混ぜてから，その2個に等分して戻す操作を繰り返せる．
+ただし，一度だけ，2個の代わりに3個を選んで同じ操作をしてもよい．
+初めの濃度の割り当てがどのようであっても，有限回の操作ですべてのコップの濃度を等しくできる \(n\) をすべて求めよ．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+            <h2 id="try-it">Try it</h2>
+            <noscript><p>Enable JavaScript to play. <span lang="ja">操作機能を使うには JavaScript を有効にしてください．</span></p></noscript>
+            <div id="cup-game" class="coin-game cup-game" lang="en" hidden>
+                <div class="game-settings">
+                    <label><span data-label="language">言語</span><select id="cup-language" aria-label="Language / 言語"><option value="en">English</option><option value="ja">日本語</option></select></label>
+                    <label>n <select id="cup-size" aria-label="n"><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6" selected>6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option></select></label>
+                </div>
+                <p id="cup-instruction"></p>
+                <dl class="game-stats">
+                    <div><dt data-label="moves"></dt><dd id="cup-moves"></dd></div>
+                    <div><dt data-label="triple"></dt><dd id="cup-triple"></dd></div>
+                    <div><dt data-label="selected"></dt><dd id="cup-selected"></dd></div>
+                </dl>
+                <div id="cup-board" class="cup-board" role="group"></div>
+                <p id="cup-selection" class="game-message" role="status" aria-live="polite"></p>
+                <div class="game-actions">
+                    <button id="cup-start" type="button" data-label="start"></button>
+                    <button id="cup-mix" type="button" data-label="mix" disabled></button>
+                    <button id="cup-undo" type="button" data-label="undo" disabled></button>
+                    <button id="cup-edit" type="button" data-label="edit"></button>
+                    <button id="cup-reset" type="button" data-label="reset" disabled></button>
+                </div>
+                <p id="cup-status" class="game-message" role="status" aria-live="polite"></p>
+            </div>
+        </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-10-29.html" rel="prev">&larr; 2026/10/29</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>

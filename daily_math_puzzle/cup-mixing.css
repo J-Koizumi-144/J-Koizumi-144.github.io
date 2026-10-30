@@ -1,0 +1,12 @@
+.cup-game { line-height:1.65; }
+.cup-game .game-stats { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.cup-game .cup-board { display:grid; grid-template-columns:repeat(auto-fit,minmax(106px,1fr)); gap:12px; margin:20px 0; }
+.cup-game .cup { display:flex; flex-direction:column; align-items:center; gap:6px; position:relative; padding:10px 6px; min-width:0; }
+.cup-game .cup[aria-pressed="true"] { border:2px solid #087b7f; background:#eaf4f4; padding:9px 5px; }
+.cup-game .cup[aria-pressed="true"]::after { content:'✓'; position:absolute; right:7px; top:5px; color:#087b7f; }
+.cup-game .cup-number { font-size:14px; }
+.cup-game .cup-vessel { width:42px; height:40px; border:2px solid #667; border-top:0; border-radius:0 0 9px 9px; background:linear-gradient(to bottom,transparent 20%,color-mix(in srgb,#087b7f var(--tint),white) 20%); }
+.cup-game .cup-value { max-width:100%; font-size:16px; overflow-wrap:anywhere; }
+.cup-game .game-message { margin:10px 0; }
+.cup-game [hidden] { display:none; }
+@media(max-width:520px) { .cup-game .cup-board { grid-template-columns:repeat(2,minmax(0,1fr)); } .cup-game .game-stats dt { font-size:12px; } }
