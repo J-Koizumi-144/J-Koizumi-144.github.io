@@ -1,0 +1,26 @@
+.chocolate-game .chocolate-scroll { overflow-x: auto; padding: 6px; margin: 16px -6px; }
+.chocolate-game .chocolate-board {
+    display: grid; grid-template-columns: repeat(var(--size), 48px);
+    grid-template-rows: repeat(var(--size), 48px); gap: 5px;
+    width: max-content; margin-inline: auto;
+}
+.chocolate-game .chocolate-piece {
+    position: relative; min-height: 0; padding: 0; border: 2px solid #684d38;
+    background-color: #e9d8bf;
+    background-image: linear-gradient(to right, transparent 47px, #b79c7d 47px, #b79c7d 48px, transparent 48px),
+        linear-gradient(to bottom, transparent 47px, #b79c7d 47px, #b79c7d 48px, transparent 48px);
+    background-size: 53px 53px; background-position: -2px -2px;
+    color: #382b20; overflow: hidden;
+}
+.chocolate-game .chocolate-piece span { background: #fff9eede; padding: 2px 4px; font-size: 14px; }
+.chocolate-game .chocolate-piece[data-single="true"] { background: #f3ece2; }
+.chocolate-game .chocolate-piece[aria-pressed="true"] { border: 3px solid #087b7f; background-color: #dcf0ee; }
+.chocolate-game .chocolate-piece[aria-pressed="true"]::after { content: '✓'; position: absolute; top: 0; right: 2px; color: #08666a; font-size: 13px; }
+.chocolate-game .cut-preview { position: absolute; pointer-events: none; z-index: 1; }
+.chocolate-game .cut-preview.vertical { top: 0; bottom: 0; left: var(--cut); border-left: 3px dashed #087b7f; }
+.chocolate-game .cut-preview.horizontal { left: 0; right: 0; top: var(--cut); border-top: 3px dashed #087b7f; }
+.chocolate-game .cut-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 16px 0; }
+.chocolate-game .cut-controls label { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.chocolate-game #chocolate-selection { margin: 10px 0; }
+.chocolate-game .game-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 520px) { .chocolate-game .game-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
