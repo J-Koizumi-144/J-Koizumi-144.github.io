@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="style.css" type="text/css">
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-    <link rel="stylesheet" href="chocolate-breaking.css" type="text/css">
-    <script type="module" src="chocolate-breaking.js"></script>
+    <link rel="stylesheet" href="chocolate-breaking.css?v=arrows" type="text/css">
+    <script type="module" src="chocolate-breaking.js?v=arrows"></script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
@@ -62,13 +62,14 @@ What is the minimum number of moves that produce two pieces with equal numbers o
                     <div><dt data-label="pieces"></dt><dd id="chocolate-pieces"></dd></div>
                     <div><dt data-label="singles"></dt><dd id="chocolate-singles"></dd></div>
                 </dl>
-                <div class="chocolate-scroll"><div id="chocolate-board" class="chocolate-board" role="group"></div></div>
-                <p id="chocolate-selection" class="game-message" role="status" aria-live="polite"></p>
-                <div class="cut-controls">
-                    <label><span data-label="direction"></span><select id="chocolate-direction"><option value="vertical" data-label="vertical"></option><option value="horizontal" data-label="horizontal"></option></select></label>
-                    <label><span data-label="position"></span><select id="chocolate-position"></select></label>
-                    <button id="chocolate-break" type="button" class="merge-button" data-label="break" disabled></button>
+                <div class="chocolate-scroll">
+                    <div class="chocolate-layout">
+                        <div id="chocolate-board" class="chocolate-board" role="group"></div>
+                        <div id="chocolate-vertical" class="cut-rail vertical"></div>
+                        <div id="chocolate-horizontal" class="cut-rail horizontal"></div>
+                    </div>
                 </div>
+                <p id="chocolate-selection" class="game-message" role="status" aria-live="polite"></p>
                 <div class="game-actions">
                     <button id="chocolate-undo" type="button" data-label="undo" disabled></button>
                     <button id="chocolate-reset" type="button" data-label="reset" disabled></button>

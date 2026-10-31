@@ -1,26 +1,62 @@
 .chocolate-game .chocolate-scroll { overflow-x: auto; padding: 6px; margin: 16px -6px; }
-.chocolate-game .chocolate-board {
-    display: grid; grid-template-columns: repeat(var(--size), 48px);
-    grid-template-rows: repeat(var(--size), 48px); gap: 5px;
-    width: max-content; margin-inline: auto;
+.chocolate-game .chocolate-layout {
+    --cell: 50px; --rail: 44px;
+    display: grid; width: max-content; margin-inline: auto;
+    grid-template: ". top" var(--rail) "left board" auto / var(--rail) auto;
 }
-.chocolate-game .chocolate-piece {
-    position: relative; min-height: 0; padding: 0; border: 2px solid #684d38;
+.chocolate-game .chocolate-board {
+    grid-area: board; display: grid;
+    grid-template-columns: repeat(var(--size), var(--cell));
+    grid-template-rows: repeat(var(--size), var(--cell));
+}
+#chocolate-board .chocolate-piece {
+    position: relative; margin: 2px; min-height: 0; padding: 0; border: 2px solid #684d38;
     background-color: #e9d8bf;
-    background-image: linear-gradient(to right, transparent 47px, #b79c7d 47px, #b79c7d 48px, transparent 48px),
-        linear-gradient(to bottom, transparent 47px, #b79c7d 47px, #b79c7d 48px, transparent 48px);
-    background-size: 53px 53px; background-position: -2px -2px;
+    background-image: linear-gradient(to right, #b79c7d 1px, transparent 1px),
+        linear-gradient(to bottom, #b79c7d 1px, transparent 1px);
+    background-size: var(--cell) var(--cell); background-position: -4px -4px;
     color: #382b20; overflow: hidden;
 }
+#chocolate-board .chocolate-piece:hover { background-color: #f1e5d3; }
+#chocolate-board .chocolate-piece[data-single="true"] { background-color: #f3ece2; }
+#chocolate-board .chocolate-piece[aria-pressed="true"] {
+    border-color: #087b7f; box-shadow: inset 0 0 0 1px #087b7f; background-color: #dcf0ee;
+}
+#chocolate-board .chocolate-piece[aria-pressed="true"]::after {
+    content: '✓'; position: absolute; top: 0; right: 2px; color: #08666a; font-size: 13px;
+}
 .chocolate-game .chocolate-piece span { background: #fff9eede; padding: 2px 4px; font-size: 14px; }
-.chocolate-game .chocolate-piece[data-single="true"] { background: #f3ece2; }
-.chocolate-game .chocolate-piece[aria-pressed="true"] { border: 3px solid #087b7f; background-color: #dcf0ee; }
-.chocolate-game .chocolate-piece[aria-pressed="true"]::after { content: '✓'; position: absolute; top: 0; right: 2px; color: #08666a; font-size: 13px; }
-.chocolate-game .cut-preview { position: absolute; pointer-events: none; z-index: 1; }
-.chocolate-game .cut-preview.vertical { top: 0; bottom: 0; left: var(--cut); border-left: 3px dashed #087b7f; }
-.chocolate-game .cut-preview.horizontal { left: 0; right: 0; top: var(--cut); border-top: 3px dashed #087b7f; }
-.chocolate-game .cut-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 16px 0; }
-.chocolate-game .cut-controls label { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.chocolate-game .cut-rail { display: flex; align-items: center; justify-content: center; }
+.chocolate-game .cut-rail.vertical { grid-area: top; }
+.chocolate-game .cut-rail.horizontal {
+    grid-area: left; flex-direction: column; position: sticky; left: 0; z-index: 1; background: #fff;
+}
+.chocolate-game .cut-rail .cut-arrow {
+    display: grid; place-items: center; flex: 0 0 var(--cell);
+    width: var(--rail); height: var(--rail); min-height: 0; padding: 0; border: none;
+    background: transparent; color: #087478; touch-action: manipulation;
+}
+.chocolate-game .cut-arrow::before {
+    content: ''; box-sizing: border-box; width: 30px; height: 30px; border-radius: 50%;
+    background: #def1ee; grid-area: 1 / 1;
+}
+.chocolate-game .cut-arrow::after { content: ''; width: 0; height: 0; border: solid transparent; grid-area: 1 / 1; }
+.chocolate-game .vertical .cut-arrow::after { border-width: 13px 9px 0; border-top-color: currentColor; }
+.chocolate-game .horizontal .cut-arrow::after { border-width: 9px 0 9px 13px; border-left-color: currentColor; }
+.chocolate-game .cut-rail .cut-arrow:disabled { color: #a7aba9; }
+.chocolate-game .cut-arrow:disabled::before { background: transparent; }
+.chocolate-game .cut-rail .cut-arrow:not(:disabled):hover { background: transparent; }
+.chocolate-game .cut-arrow:is(:hover, :focus-visible):not(:disabled)::before { background: #b4dfd8; }
+.chocolate-game .cut-arrow:focus-visible { outline-offset: -3px; }
+.chocolate-game .cut-preview {
+    position: absolute; pointer-events: none;
+    --cut: calc(var(--offset) * var(--cell) - 5px);
+}
+.chocolate-game .cut-preview.vertical { inset-block: 0; left: var(--cut); border-left: 2px dashed #08666a; }
+.chocolate-game .cut-preview.horizontal { inset-inline: 0; top: var(--cut); border-top: 2px dashed #08666a; }
 .chocolate-game #chocolate-selection { margin: 10px 0; }
 .chocolate-game .game-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-@media (max-width: 520px) { .chocolate-game .game-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) {
+    .chocolate-game .chocolate-layout { --cell: 48px; }
+    .chocolate-game .game-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

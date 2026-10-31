@@ -1,3 +1,12 @@
+// A board line is numbered from the left or top, independently of the selected piece.
+export function cutOffset(piece, axis, line) {
+    if (!piece || !Number.isInteger(line)) return null;
+    const vertical = axis === 'vertical';
+    if (!vertical && axis !== 'horizontal') return null;
+    const offset = line - (vertical ? piece.x : piece.y);
+    return offset > 0 && offset < (vertical ? piece.w : piece.h) ? offset : null;
+}
+
 export class ChocolateGame {
     constructor(size = 4) {
         if (!Number.isInteger(size) || size < 2 || size > 10) throw new RangeError('Invalid size');
