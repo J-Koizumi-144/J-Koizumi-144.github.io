@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/01: tracing a grid with right turns. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/01</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="right-turn-pen.css" type="text/css">
+    <script type="module" src="right-turn-pen.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-01" aria-current="page">2026/11/01</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/01</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>Let \(n\) be an integer with \(n\geq2\).
+We want to trace every line segment of a grid with \(n\) rows and \(n\) columns of cells exactly once.
+The pen may be put down or lifted only at grid points.
+At every grid point encountered within a stroke, the pen must turn right; it may neither go straight nor turn back.
+What is the minimum number of strokes needed?</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>\(n\) を2以上の整数とする．
+縦横 \(n\) マスの方眼の線を，すべて1回ずつなぞりたい．
+ペンを下ろす点と上げる点は格子点に限る．
+途中の格子点では必ず右に曲がり，直進も引き返しもできない．
+最少何筆でなぞれるか．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+            <h2 id="try-it">Try it</h2>
+            <noscript><p>Enable JavaScript to play. <span lang="ja">操作機能を使うには JavaScript を有効にしてください．</span></p></noscript>
+            <div id="pen-game" class="coin-game pen-game" lang="en" hidden>
+                <div class="game-settings">
+                    <label><span data-label="language">言語</span>
+                        <select id="pen-language"><option value="en">English</option><option value="ja">日本語</option></select>
+                    </label>
+                    <label>n <select id="pen-size"><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></label>
+                </div>
+                <p data-label="instructions"></p>
+                <dl class="game-stats">
+                    <div><dt data-label="strokes"></dt><dd id="stroke-count"></dd></div>
+                    <div><dt data-label="edges"></dt><dd id="edge-count"></dd></div>
+                </dl>
+                <div class="pen-scroll"><div id="pen-board" class="pen-board" role="group"></div></div>
+                <p class="game-message" id="pen-message" role="status"></p>
+                <div class="game-actions">
+                    <button type="button" id="pen-lift" data-label="lift" disabled></button>
+                    <button type="button" id="pen-undo" data-label="undo" disabled></button>
+                    <button type="button" id="pen-reset" data-label="reset" disabled></button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-10-31.html" rel="prev">&larr; 2026/10/31</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>

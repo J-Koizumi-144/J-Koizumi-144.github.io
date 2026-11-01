@@ -1,0 +1,36 @@
+.pen-game .game-stats { grid-template-columns: repeat(2, 1fr); }
+.pen-game .pen-scroll { overflow-x: auto; padding: 4px; }
+.pen-game .pen-board {
+    --step: 48px;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--points), var(--step));
+    grid-auto-rows: var(--step);
+    width: max-content;
+    margin: 0 auto;
+    isolation: isolate;
+}
+.pen-game .pen-board svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.pen-game .pen-board .point {
+    position: relative;
+    display: grid;
+    place-items: center;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: #234747;
+    font: bold 17px/1 sans-serif;
+    min-height: 44px;
+}
+.pen-game .point::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: #656f71; }
+.pen-game .point[data-next="true"]::before { background: #fff; border: 2px solid #087b7f; width: 13px; height: 13px; }
+.pen-game .point[aria-pressed="true"]::before {
+    content: attr(data-tip); width: 24px; height: 24px; line-height: 24px;
+    border: 2px solid #9a411b; background: #fff4dc; color: #73300d;
+}
+.pen-game .pen-board .point:not([aria-disabled="true"]):hover::before { box-shadow: 0 0 0 4px #b4dadc; }
+.pen-game .pen-board .point[aria-disabled="true"] { cursor: default; }
+.pen-game .pen-board .point:focus-visible { outline-offset: -3px; }
+.pen-game .grid-line { stroke: #bbc3c4; stroke-width: 1.5; }
+.pen-game .ink { fill: none; stroke: #087b7f; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.pen-game .ink.current { stroke: #a24d1f; stroke-dasharray: 7 3; }
