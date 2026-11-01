@@ -36,7 +36,7 @@ function svgElement(name, attrs) {
 const coord = value => value * 48 + 24;
 
 function strokePath(stroke, width) {
-    const radius = 20;
+    const radius = 16;
     const endpointGap = 9;
     const points = stroke.map(p => [coord(p % width), coord(Math.floor(p / width))]);
     const closed = stroke[0] === stroke.at(-1);
