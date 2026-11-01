@@ -1,20 +1,20 @@
-import { PenGame } from './right-turn-game.mjs';
+import { PenGame } from './right-turn-game.mjs?v=auto-lift';
 
 const copy = {
     en: {
-        language: '言語', instructions: 'Choose grid points in order. Lift the pen to start another stroke.',
+        language: '言語', instructions: 'Choose grid points in order. The pen lifts automatically at a dead end.',
         strokes: 'Strokes', edges: 'Edges traced', lift: 'Lift pen', undo: 'Undo', reset: 'Reset',
         board: 'Grid points', point: (r, c) => 'Row ' + r + ', column ' + c,
         tip: 'pen', ready: 'Choose a starting point.', first: 'Choose a neighboring point.',
-        turn: 'Choose the next point or lift the pen.', blocked: 'No further edge in this stroke. Lift the pen.',
+        turn: 'Choose the next point or lift the pen.',
         done: 'Every edge has been traced.'
     },
     ja: {
-        language: 'Language', instructions: '格子点を順に押して線を引きます．次の筆に移るにはペンを上げます．',
+        language: 'Language', instructions: '格子点を順に押して線を引きます．進めなくなるとペンが自動で上がります．',
         strokes: '筆数', edges: 'なぞった辺', lift: 'ペンを上げる', undo: '1手戻す', reset: 'リセット',
         board: '方眼の格子点', point: (r, c) => r + '行' + c + '列',
         tip: 'ペンの位置', ready: '始点を選んでください．', first: '隣の格子点を選んでください．',
-        turn: '次の点を選ぶか，ペンを上げてください．', blocked: 'この筆ではこれ以上進めません．ペンを上げてください．',
+        turn: '次の点を選ぶか，ペンを上げてください．',
         done: 'すべての辺をなぞりました．'
     }
 };
@@ -79,7 +79,7 @@ function render(focus = false) {
     const width = game.size + 1;
     const current = game.current;
     const done = game.edgeCount === game.totalEdges;
-    const tip = done ? undefined : current.at(-1);
+    const tip = current.at(-1);
     const step = tip - current.at(-2);
     const arrows = {1: '→', [-1]: '←', [width]: '↓', [-width]: '↑'};
     root.lang = language.value;
@@ -90,15 +90,13 @@ function render(focus = false) {
     byId('pen-undo').disabled = byId('pen-reset').disabled = !game.history.length;
     board.setAttribute('aria-label', t.board);
     board.style.setProperty('--points', width);
-    const nodes = [drawLines(width, done ? null : current)];
-    let available = 0;
+    const nodes = [drawLines(width, current)];
     for (let point = 0; point < width * width; point++) {
         const button = document.createElement('button');
         button.type = 'button';
         button.className = 'point';
         button.dataset.point = point;
         const legal = game.canSelect(point);
-        if (legal) available++;
         button.dataset.next = legal && game.down;
         button.dataset.tip = arrows[step] || '●';
         button.tabIndex = point === activePoint ? 0 : -1;
@@ -110,10 +108,9 @@ function render(focus = false) {
     }
     board.replaceChildren(...nodes);
     const message = byId('pen-message');
-    message.dataset.state = done ? 'complete' : game.down && !available ? 'blocked' : '';
+    message.dataset.state = done ? 'complete' : '';
     if (done) message.textContent = t.done;
     else if (!game.down) message.textContent = t.ready;
-    else if (!available) message.textContent = t.blocked;
     else message.textContent = current.length === 1 ? t.first : t.turn;
     if (focus) board.querySelector('[tabindex="0"]').focus();
 }

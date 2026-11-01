@@ -45,10 +45,13 @@ export class PenGame {
     select(point) {
         if (!this.canSelect(point)) return false;
         this.history.push([this.strokes, this.down]);
-        this.strokes = this.down
-            ? [...this.strokes.slice(0, -1), [...this.current, point]]
-            : [...this.strokes, [point]];
-        this.down = true;
+        if (this.down) {
+            this.strokes = [...this.strokes.slice(0, -1), [...this.current, point]];
+            this.down = this.neighbors(point).some(next => this.canSelect(next));
+        } else {
+            this.strokes = [...this.strokes, [point]];
+            this.down = true;
+        }
         return true;
     }
 
