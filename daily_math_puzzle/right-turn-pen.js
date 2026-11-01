@@ -33,8 +33,30 @@ function svgElement(name, attrs) {
     return el;
 }
 
-function drawLines(width) {
-    const coord = value => value * 48 + 24;
+const coord = value => value * 48 + 24;
+
+function strokePath(stroke, width) {
+    const radius = 20;
+    const endpointGap = 9;
+    const points = stroke.map(p => [coord(p % width), coord(Math.floor(p / width))]);
+    const closed = stroke[0] === stroke.at(-1);
+
+    function toward([x, y], [nextX, nextY], distance) {
+        return [x + Math.sign(nextX - x) * distance, y + Math.sign(nextY - y) * distance].join(' ');
+    }
+
+    let d = 'M ' + toward(points[0], points[1], closed ? radius : endpointGap);
+    for (let i = 1; i < points.length; i++) {
+        const corner = points[i];
+        // On a loop the final point is also the first corner.
+        const next = points[i + 1] ?? (closed ? points[1] : null);
+        d += ' L ' + toward(corner, points[i - 1], next ? radius : endpointGap);
+        if (next) d += ` A ${radius} ${radius} 0 0 1 ` + toward(corner, next, radius);
+    }
+    return closed ? d + ' Z' : d;
+}
+
+function drawLines(width, activeStroke) {
     const last = coord(width - 1);
     const svg = svgElement('svg', { viewBox: '0 0 ' + width * 48 + ' ' + width * 48, 'aria-hidden': true });
     for (let i = 0; i < width; i++) {
@@ -44,8 +66,10 @@ function drawLines(width) {
     }
     for (const path of game.strokes) {
         if (path.length < 2) continue;
-        const points = path.map(p => [coord(p % width), coord(Math.floor(p / width))].join(',')).join(' ');
-        svg.append(svgElement('polyline', {class: path === game.current ? 'ink current' : 'ink', points}));
+        svg.append(svgElement('path', {
+            class: path === activeStroke ? 'ink current' : 'ink',
+            d: strokePath(path, width)
+        }));
     }
     return svg;
 }
@@ -54,7 +78,8 @@ function render(focus = false) {
     const t = copy[language.value];
     const width = game.size + 1;
     const current = game.current;
-    const tip = current.at(-1);
+    const done = game.edgeCount === game.totalEdges;
+    const tip = done ? undefined : current.at(-1);
     const step = tip - current.at(-2);
     const arrows = {1: '→', [-1]: '←', [width]: '↓', [-width]: '↑'};
     root.lang = language.value;
@@ -65,7 +90,7 @@ function render(focus = false) {
     byId('pen-undo').disabled = byId('pen-reset').disabled = !game.history.length;
     board.setAttribute('aria-label', t.board);
     board.style.setProperty('--points', width);
-    const nodes = [drawLines(width)];
+    const nodes = [drawLines(width, done ? null : current)];
     let available = 0;
     for (let point = 0; point < width * width; point++) {
         const button = document.createElement('button');
@@ -84,7 +109,6 @@ function render(focus = false) {
         nodes.push(button);
     }
     board.replaceChildren(...nodes);
-    const done = game.edgeCount === game.totalEdges;
     const message = byId('pen-message');
     message.dataset.state = done ? 'complete' : game.down && !available ? 'blocked' : '';
     if (done) message.textContent = t.done;

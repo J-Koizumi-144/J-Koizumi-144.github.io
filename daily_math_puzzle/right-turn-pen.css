@@ -22,6 +22,7 @@
     font: bold 17px/1 sans-serif;
     min-height: 44px;
 }
+.pen-game .pen-board .point:hover { background: transparent; }
 .pen-game .point::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: #656f71; }
 .pen-game .point[data-next="true"]::before { background: #fff; border: 2px solid #087b7f; width: 13px; height: 13px; }
 .pen-game .point[aria-pressed="true"]::before {
