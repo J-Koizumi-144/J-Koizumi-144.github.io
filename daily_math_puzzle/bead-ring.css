@@ -1,0 +1,45 @@
+.bead-game .game-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.bead-game .ring-scroll { overflow-x: auto; padding: 6px; }
+.bead-game .ring-board {
+    position: relative;
+    width: var(--side);
+    height: var(--side);
+    margin: auto;
+    display: grid;
+    place-content: center;
+    text-align: center;
+}
+.bead-game .ring-board::before {
+    position: absolute;
+    content: "";
+    inset: 28px;
+    border: 2px solid #9da9a7;
+    border-radius: 50%;
+}
+.bead-game .ring-center { color: #496461; font-size: 14px; line-height: 1.15; }
+.bead-game .ring-center b { display: block; font: 30px/1.1 sans-serif; }
+.bead-game .ring-bead, .bead-game .change-mark {
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+.bead-game .ring-bead {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 50%;
+    border: 2px solid #464e4c;
+    background: #fff;
+    color: #292e2c;
+    font-variant-numeric: tabular-nums;
+}
+.bead-game .ring-bead[aria-pressed="true"],
+.bead-game .ring-bead[aria-pressed="true"]:hover { background: #292e2c; color: #fff; }
+.bead-game .change-mark, .bead-game .mark-key {
+    width: 8px;
+    height: 8px;
+    background: #087b7f;
+    rotate: 45deg;
+}
+.bead-game .change-mark { transform: none; margin: -4px; pointer-events: none; }
+.bead-game .ring-key { text-align: center; font-size: 14px; }
+.bead-game .mark-key { display: inline-block; margin-inline-end: 0.5em; }

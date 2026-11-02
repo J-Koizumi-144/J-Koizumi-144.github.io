@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/02: color changes on a bead ring. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/02</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="bead-ring.css" type="text/css">
+    <script type="module" src="bead-ring.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-02" aria-current="page">2026/11/02</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/02</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>Let \(n\) be an integer with \(n\geq 2\).
+Arrange white and black beads in a circle so that all \(2^n\) possible color patterns of \(n\) consecutive beads appear when read clockwise.
+What is the minimum possible number of places where neighboring beads have different colors?</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>\(n\) を2以上の整数とする．
+白と黒の玉を輪に並べ，時計回りに連続する \(n\) 個の玉の色の並びとして，白黒の \(2^n\) 通りすべてが現れるようにする．
+隣り合う玉の色が異なる場所は，最少で何箇所か．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+            <h2 id="try-it">Try it</h2>
+            <noscript><p>Enable JavaScript to play. <span lang="ja">操作機能を使うには JavaScript を有効にしてください．</span></p></noscript>
+            <div id="bead-game" class="coin-game bead-game" lang="en" hidden>
+                <div class="game-settings">
+                    <label><span data-label="language">言語</span>
+                        <select id="ring-language"><option value="en">English</option><option value="ja">日本語</option></select>
+                    </label>
+                    <label>n <select id="ring-n"><option>2</option><option selected>3</option><option>4</option></select></label>
+                    <label><span data-label="length"></span> <select id="ring-length"></select></label>
+                </div>
+                <p data-label="guide"></p>
+                <dl class="game-stats">
+                    <div><dt data-label="patterns"></dt><dd id="ring-patterns"></dd></div>
+                    <div><dt data-label="changes"></dt><dd id="ring-changes"></dd></div>
+                </dl>
+                <div class="ring-scroll">
+                    <div id="ring-board" class="ring-board" role="group">
+                        <span class="ring-center" aria-hidden="true"><b>↻</b><span data-label="direction"></span></span>
+                    </div>
+                </div>
+                <p class="ring-key"><span class="mark-key" aria-hidden="true"></span><span data-label="mark"></span></p>
+                <p id="ring-message" class="game-message" role="status"></p>
+                <div class="game-actions">
+                    <button type="button" id="ring-undo" data-label="undo" disabled></button>
+                    <button type="button" id="ring-reset" data-label="reset" disabled></button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-01.html" rel="prev">&larr; 2026/11/01</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
