@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/03: a row of seats. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/03</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="seating-row.css" type="text/css">
+    <script type="module" src="seating-row.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-03" aria-current="page">2026/11/03</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/03</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>Let \(n\) be a positive integer.
+There are \(2^n\) seats in a row.
+One by one, \(2^n\) people each choose an empty seat and sit down.
+Immediately after sitting down, each person scores the number of people in the consecutive block of occupied seats containing them.
+What is the minimum possible total score over all orders of choosing the seats?</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>\(n\) を正の整数とする．
+横一列に \(2^n\) 個の席がある．
+\(2^n\) 人が1人ずつ空席を選んで座る．
+各人は，座った直後に自分を含む，連続して埋まった席のかたまりの人数だけ点を得る．
+席を選ぶ順序を工夫するとき，全員の得点の合計の最小値を求めよ．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+            <h2 id="try-it">Try it</h2>
+            <noscript><p>Enable JavaScript to play. <span lang="ja">操作機能を使うには JavaScript を有効にしてください．</span></p></noscript>
+            <div id="seat-game" class="coin-game" lang="en" hidden>
+                <div class="game-settings">
+                    <label><span data-label="language">言語</span>
+                        <select id="language"><option value="en">English</option><option value="ja">日本語</option></select>
+                    </label>
+                    <label><span data-label="size">Seats</span>
+                        <select id="size"><option>2</option><option>4</option><option selected>8</option><option>16</option><option>32</option></select>
+                    </label>
+                </div>
+                <p data-label="guide"></p>
+                <div class="seat-scroll"><div id="seat-row" role="group"></div></div>
+                <dl class="game-stats">
+                    <div><dt data-label="seated"></dt><dd id="seated"></dd></div>
+                    <div><dt data-label="last"></dt><dd id="points"></dd></div>
+                    <div class="unequal-stat"><dt data-label="total"></dt><dd id="total"></dd></div>
+                </dl>
+                <p class="game-message" id="message" role="status"></p>
+                <div class="game-actions">
+                    <button type="button" id="undo" data-label="undo" disabled></button>
+                    <button type="button" id="reset" data-label="reset" disabled></button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-02.html" rel="prev">&larr; 2026/11/02</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>

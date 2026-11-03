@@ -1,0 +1,23 @@
+#seat-game .seat-scroll { overflow-x: auto; padding: 8px 4px; }
+#seat-row {
+    display: flex;
+    gap: 2px;
+    width: max-content;
+    margin: auto;
+}
+#seat-row button {
+    flex: none;
+    width: 38px;
+    padding: 4px 0;
+    border: 1px solid #8e9997;
+    border-bottom-width: 4px;
+    border-radius: 8px 8px 3px 3px;
+    text-align: center;
+    line-height: 1.25;
+}
+#seat-row .seat-symbol { display: block; font: 18px/1.2 sans-serif; }
+#seat-row [aria-disabled="true"] { background: #e8eeee; color: #384b4b; cursor: default; }
+#seat-row .in-block { border-bottom-color: #087b7f; }
+#seat-row .latest { background: #176b6e; border-color: #125558; color: white; }
+#seat-row .latest:hover { background: #176b6e; }
+#seat-game .game-stats { grid-template-columns: repeat(3,minmax(0,1fr)); }
