@@ -1,0 +1,46 @@
+.naming-game .naming-editor { margin: 10px 0 16px; }
+.naming-game .naming-editor[hidden] { display: none; }
+.naming-game .naming-target-row {
+    display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px 12px;
+}
+.naming-game #naming-source { white-space: nowrap; padding-top: 9px; }
+.naming-game .naming-targets {
+    display: flex; flex: 1 1 320px; flex-wrap: wrap; gap: 6px;
+}
+.naming-game .naming-targets button {
+    min-width: 44px; height: 44px; padding: 3px 5px; text-align: center;
+}
+.naming-game .naming-targets button[aria-pressed="true"] {
+    background: #eaf4f4; border: 2px solid #087b7f; font-weight: bold;
+}
+.naming-game .naming-scroll { max-width: 100%; border: 1px solid #ddd; }
+.naming-game .naming-board { position: relative; width: 100%; max-width: 600px; aspect-ratio: 1; margin: auto; }
+.naming-game .naming-board svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.naming-game .naming-edge { fill: none; stroke-width: 1.5; }
+.naming-game .naming-edge-faint { stroke: #7e8d8d; stroke-width: 2; opacity: .55; }
+.naming-game .naming-edge-active { stroke: #087b7f; stroke-width: 3; }
+.naming-game .naming-node {
+    position: absolute; transform: translate(-50%, -50%);
+    width: 50px; height: 50px; min-height: 0; padding: 0; border: 0; border-radius: 50%;
+    background: transparent; z-index: 1;
+    display: flex; align-items: center; justify-content: center;
+}
+.naming-game .naming-node span {
+    box-sizing: border-box; width: 50px; height: 50px; border-radius: 50%;
+    background: #fff; border: 2px solid #667;
+    display: flex; align-items: center; justify-content: center;
+}
+.naming-game .naming-node[data-group="true"] span { color: #fff; background: #087b7f; border-color: #087b7f; }
+.naming-game .naming-node:disabled span { color: #666; background: #e1e1e1; border-color: #aaa; }
+.naming-game .naming-node:disabled,
+.naming-game .naming-node:not(:disabled):hover { background: transparent; border-color: transparent; }
+.naming-game .naming-node[data-source="true"] span { outline: 3px solid #a15d22; outline-offset: 3px; }
+.naming-game .game-stats { grid-template-columns: 1fr; }
+@media (max-width: 520px) {
+    .naming-game .naming-scroll { box-sizing: border-box; width: calc(100% + 28px); max-width: none; margin-inline: -14px; }
+    .naming-game .naming-node { width: 44px; height: 44px; }
+    .naming-game .naming-node span { width: 32px; height: 32px; font-size: 14px; }
+    .naming-game .naming-node[data-source="true"] span { outline-width: 2px; outline-offset: 1px; }
+    .naming-game .naming-edge-faint { stroke-width: 3; opacity: .7; }
+    .naming-game .naming-edge-active { stroke-width: 4; }
+}

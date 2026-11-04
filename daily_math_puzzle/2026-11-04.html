@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/04: groups without nominations. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/04</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="naming-groups.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="module" src="naming-groups.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-04" aria-current="page">2026/11/04</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/04</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>Each of \(5n\) people (\(n\geq 1\)) has named two distinct people other than themselves.
+Choose some of them to form a group.
+However, anyone named by a group member must not be in the group.
+Find the largest group size that can always be achieved, regardless of how the names are chosen.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>\(5n\) 人（\(n\geq 1\)）がそれぞれ，自分以外の異なる \(2\) 人を指名している．
+この中から何人かを選んでグループを作る．
+ただし，グループ内の人が指名している人はグループに入れてはいけない．
+指名の仕方によらず必ず作れるグループの人数の最大値を求めよ．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+            <h2 id="try-it">Try it</h2>
+            <noscript><p>Enable JavaScript to play. <span lang="ja">操作機能を使うには JavaScript を有効にしてください．</span></p></noscript>
+            <div id="naming-game" class="coin-game naming-game" lang="en" hidden>
+                <div class="game-settings">
+                    <label><span data-label="language">言語</span>
+                        <select id="naming-language"><option value="en">English</option><option value="ja">日本語</option></select>
+                    </label>
+                    <button type="button" id="naming-randomize" data-label="randomize"></button>
+                    <button type="button" id="naming-edit-toggle" aria-pressed="false"></button>
+                    <label>n <select id="naming-size"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option></select></label>
+                </div>
+                <div class="naming-editor" hidden>
+                    <div class="naming-target-row">
+                        <span id="naming-source"></span>
+                        <div id="naming-targets" class="naming-targets" role="group"></div>
+                    </div>
+                </div>
+                <div class="naming-scroll"><div id="naming-board" class="naming-board" role="group"></div></div>
+                <dl class="game-stats">
+                    <div><dt data-label="selected"></dt><dd id="naming-selected"></dd></div>
+                </dl>
+            </div>
+        </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-03.html" rel="prev">&larr; 2026/11/03</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
