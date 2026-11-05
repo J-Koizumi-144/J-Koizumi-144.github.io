@@ -1,0 +1,10 @@
+.pair-game .game-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pair-game .pair-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(52px, 1fr)); gap: 10px; margin: 20px 0; }
+.pair-game .number-card { position: relative; min-height: 64px; font-size: 22px; background: #f5f1e8; }
+.pair-game .number-card[aria-pressed="true"] { border: 2px solid #087b7f; background: #eaf4f4; }
+.pair-game .number-card[aria-pressed="true"]::after { content: '✓'; position: absolute; top: 0; right: 3px; font-size: 12px; color: #087b7f; }
+.pair-game .pair-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; padding: 0; margin: 16px 0; list-style: none; }
+.pair-game .pair-list li { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 10px; border: 1px solid #ccc; background: #fafafa; }
+.pair-game .pair-list button { min-width: 44px; font-size: 22px; }
+.pair-game .pair-empty { color: #666; font-size: 15px; margin: 12px 0; }
+.pair-game .pair-empty:empty { display: none; }
