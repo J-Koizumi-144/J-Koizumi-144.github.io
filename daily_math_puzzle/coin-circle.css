@@ -1,8 +1,6 @@
-.coin-circle { margin-top: 24px; }
 .coin-circle, .coin-circle * { box-sizing: border-box; }
 .coin-circle[hidden] { display: none; }
-.coin-circle .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.coin-circle h2 { margin: 0; }
+.coin-circle .toolbar { display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
 .coin-circle .language { display: flex; align-items: center; gap: 8px; font-size: 14px; }
 .coin-circle button, .coin-circle select { font: inherit; color: inherit; border: 1px solid #9ba9a9; border-radius: 4px; background: #fcfcfc; cursor: pointer; }
 .coin-circle select { min-height: 34px; padding: 3px 7px; }
@@ -39,7 +37,6 @@
 .coin-circle .actions .primary:not(:disabled):hover { background: #066165; }
 .coin-circle :focus-visible { outline: 2px solid #087b7f; outline-offset: 3px; }
 @media (max-width: 520px) {
-  .coin-circle { margin-top: 9px; }
   .coin-circle .instruction { margin-top: 8px; font-size: 14px; }
   .coin-circle .actions { gap: 8px; }
   .coin-circle .actions button { padding: 8px 12px; font-size: 15px; }

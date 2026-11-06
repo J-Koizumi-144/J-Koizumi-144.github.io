@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css" type="text/css">
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-    <link rel="stylesheet" href="coin-circle.css" type="text/css">
+    <link rel="stylesheet" href="coin-circle.css?v=20261106-heading" type="text/css">
     <script defer src="coin-circle-game.js"></script>
     <script defer src="coin-circle.js"></script>
 
@@ -48,34 +48,36 @@ Prove that, regardless of the seating arrangement, it is possible to make everyo
 どのような座り方でも，5回の操作で全員のコインを5枚ずつにできることを示せ．</p>
         </section>
 
-    <noscript><p>Enable JavaScript to play. 操作するにはJavaScriptを有効にしてください．</p></noscript>
-    <section id="coin-circle" class="coin-game coin-circle" aria-labelledby="try-it" lang="en" hidden>
-      <div class="toolbar">
-        <h2 id="try-it">Try it</h2>
-        <label class="language"><span data-word="language">言語</span>
-          <select id="language" aria-label="Language / 言語"><option value="en">English</option><option value="ja">日本語</option></select>
-        </label>
-      </div>
-      <div class="setup-actions">
-        <button id="randomize" type="button" data-word="randomize">Randomize</button>
-      </div>
-      <p class="instruction" data-word="instruction">Tap arrows to select the transfers.</p>
-      <div class="board-wrap">
-        <svg viewBox="0 0 480 480" role="group" aria-label="Coins around a circular table" aria-describedby="status">
-          <circle class="table" cx="240" cy="240" r="139"/>
-          <text x="240" y="206" class="round-label" data-word="round">Round</text>
-          <text x="240" y="253" class="round-number"><tspan id="round">0</tspan><tspan class="round-denominator"> / 5</tspan></text>
-          <text x="240" y="286" class="selected-label" id="selected">0 selected</text>
-          <g id="arrows"></g><g id="people"></g>
-        </svg>
-      </div>
-      <p id="status" class="status" role="status" aria-live="polite" aria-atomic="true"></p>
-      <div class="actions">
-        <button id="pass" class="primary" type="button" data-word="pass">Pass coins</button>
-        <button id="undo" type="button" data-word="undo" disabled>Undo</button>
-        <button id="reset" type="button" data-word="reset">Reset</button>
-      </div>
-    </section>
+        <section aria-labelledby="try-it">
+            <h2 id="try-it">Try it</h2>
+            <noscript><p>Enable JavaScript to play. 操作するにはJavaScriptを有効にしてください．</p></noscript>
+            <div id="coin-circle" class="coin-game coin-circle" lang="en" hidden>
+              <div class="toolbar">
+                <label class="language"><span data-word="language">言語</span>
+                  <select id="language" aria-label="Language / 言語"><option value="en">English</option><option value="ja">日本語</option></select>
+                </label>
+              </div>
+              <div class="setup-actions">
+                <button id="randomize" type="button" data-word="randomize">Randomize</button>
+              </div>
+              <p class="instruction" data-word="instruction">Tap arrows to select the transfers.</p>
+              <div class="board-wrap">
+                <svg viewBox="0 0 480 480" role="group" aria-label="Coins around a circular table" aria-describedby="status">
+                  <circle class="table" cx="240" cy="240" r="139"/>
+                  <text x="240" y="206" class="round-label" data-word="round">Round</text>
+                  <text x="240" y="253" class="round-number"><tspan id="round">0</tspan><tspan class="round-denominator"> / 5</tspan></text>
+                  <text x="240" y="286" class="selected-label" id="selected">0 selected</text>
+                  <g id="arrows"></g><g id="people"></g>
+                </svg>
+              </div>
+              <p id="status" class="status" role="status" aria-live="polite" aria-atomic="true"></p>
+              <div class="actions">
+                <button id="pass" class="primary" type="button" data-word="pass">Pass coins</button>
+                <button id="undo" type="button" data-word="undo" disabled>Undo</button>
+                <button id="reset" type="button" data-word="reset">Reset</button>
+              </div>
+            </div>
+        </section>
     </main>
     <nav class="puzzle-footer" aria-label="Problem navigation">
         <a href="2026-11-05.html" rel="prev">&larr; 2026/11/05</a>
