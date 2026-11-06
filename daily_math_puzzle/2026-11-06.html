@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/06: equalizing coins around a circular table. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/06</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="coin-circle.css" type="text/css">
+    <script defer src="coin-circle-game.js"></script>
+    <script defer src="coin-circle.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-06" aria-current="page">2026/11/06</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/06</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>Nine people are seated around a circular table.
+They hold distinct numbers of coins, from one to nine.
+In each round, everyone may simultaneously give at most one coin to each of their two neighbors.
+Only coins held at the start of a round may be given away in that round.
+Prove that, regardless of the seating arrangement, it is possible to make everyone hold five coins each in five rounds.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>9人が円卓を囲んでいる．
+持っているコインの枚数は全員異なり，1枚から9枚までである．
+1回の操作では，全員が同時に，左右の隣の人にそれぞれ高々1枚ずつコインを渡せる．
+渡すコインは，その回の開始時に持っているものに限る．
+どのような座り方でも，5回の操作で全員のコインを5枚ずつにできることを示せ．</p>
+        </section>
+
+    <noscript><p>Enable JavaScript to play. 操作するにはJavaScriptを有効にしてください．</p></noscript>
+    <section id="coin-circle" class="coin-game coin-circle" aria-labelledby="try-it" lang="en" hidden>
+      <div class="toolbar">
+        <h2 id="try-it">Try it</h2>
+        <label class="language"><span data-word="language">言語</span>
+          <select id="language" aria-label="Language / 言語"><option value="en">English</option><option value="ja">日本語</option></select>
+        </label>
+      </div>
+      <div class="setup-actions">
+        <button id="randomize" type="button" data-word="randomize">Randomize</button>
+      </div>
+      <p class="instruction" data-word="instruction">Tap arrows to select the transfers.</p>
+      <div class="board-wrap">
+        <svg viewBox="0 0 480 480" role="group" aria-label="Coins around a circular table" aria-describedby="status">
+          <circle class="table" cx="240" cy="240" r="139"/>
+          <text x="240" y="206" class="round-label" data-word="round">Round</text>
+          <text x="240" y="253" class="round-number"><tspan id="round">0</tspan><tspan class="round-denominator"> / 5</tspan></text>
+          <text x="240" y="286" class="selected-label" id="selected">0 selected</text>
+          <g id="arrows"></g><g id="people"></g>
+        </svg>
+      </div>
+      <p id="status" class="status" role="status" aria-live="polite" aria-atomic="true"></p>
+      <div class="actions">
+        <button id="pass" class="primary" type="button" data-word="pass">Pass coins</button>
+        <button id="undo" type="button" data-word="undo" disabled>Undo</button>
+        <button id="reset" type="button" data-word="reset">Reset</button>
+      </div>
+    </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-05.html" rel="prev">&larr; 2026/11/05</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>

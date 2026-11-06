@@ -1,0 +1,53 @@
+.coin-circle { margin-top: 24px; }
+.coin-circle, .coin-circle * { box-sizing: border-box; }
+.coin-circle[hidden] { display: none; }
+.coin-circle .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.coin-circle h2 { margin: 0; }
+.coin-circle .language { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.coin-circle button, .coin-circle select { font: inherit; color: inherit; border: 1px solid #9ba9a9; border-radius: 4px; background: #fcfcfc; cursor: pointer; }
+.coin-circle select { min-height: 34px; padding: 3px 7px; }
+.coin-circle .setup-actions { display: flex; justify-content: center; margin-top: 8px; }
+.coin-circle .setup-actions button { min-height: 44px; padding: 6px 16px; font-size: 15px; }
+.coin-circle .instruction { text-align: center; font-size: 15px; line-height: 1.4; margin: 12px 0 0; }
+.coin-circle .board-wrap { display: grid; place-items: center; margin: 0 auto; }
+.coin-circle svg { display: block; width: min(100%, 460px, calc(100svh - 300px)); height: auto; overflow: visible; touch-action: manipulation; }
+.coin-circle .table { fill: #f1f6f5; stroke: #dce7e5; stroke-width: 1.5; }
+.coin-circle .person { fill: #fcf6e6; stroke: #bbae88; stroke-width: 1.6; }
+.coin-circle .person.short { fill: #fff0e9; stroke: #b44d2e; stroke-width: 3; }
+.coin-circle .amount { font: 27px 'Computer Modern', serif; fill: #333; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.coin-circle .person-group { pointer-events: none; }
+.coin-circle .arrow { cursor: pointer; outline: none; }
+.coin-circle .arrow-hit { fill: transparent; stroke: transparent; stroke-width: 10; stroke-linejoin: round; pointer-events: all; }
+.coin-circle .arrow-shape { fill: #b5c4c3; stroke: transparent; stroke-width: 2; stroke-linejoin: round; pointer-events: none; transition: fill 120ms; }
+.coin-circle .arrow:hover .arrow-shape { fill: #829e9c; }
+.coin-circle .arrow[aria-pressed='true'] .arrow-shape { fill: #087b7f; stroke: #087b7f; }
+.coin-circle .arrow[aria-pressed='true']:hover .arrow-shape { fill: #066165; }
+.coin-circle .arrow:focus-visible .arrow-shape { stroke: #123e41; stroke-width: 3; }
+.coin-circle .arrow[aria-disabled='true'] { cursor: default; opacity: .45; }
+.coin-circle .round-label { font-size: 19px; fill: #647575; text-anchor: middle; }
+.coin-circle .round-number { font-size: 46px; fill: #293f40; text-anchor: middle; }
+.coin-circle .round-denominator { font-size: 24px; fill: #7b8989; }
+.coin-circle .selected-label { font-size: 17px; fill: #647575; text-anchor: middle; }
+.coin-circle .status { min-height: 24px; line-height: 1.5; text-align: center; font-size: 15px; margin: 0 0 12px; }
+.coin-circle .status[data-state='error'] { color: #a43e20; }
+.coin-circle .status[data-state='complete'] { color: #087b7f; font-weight: bold; }
+.coin-circle .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.coin-circle .actions button { min-height: 44px; padding: 8px 18px; font-size: 16px; white-space: nowrap; }
+.coin-circle .actions .primary { color: white; background: #087b7f; border-color: #087b7f; min-width: 130px; }
+.coin-circle button:disabled { color: #7b8585; background: #edf0ef; border-color: #d4dcdc; cursor: default; }
+.coin-circle button:not(:disabled):hover { background: #eaf4f4; }
+.coin-circle .actions .primary:not(:disabled):hover { background: #066165; }
+.coin-circle :focus-visible { outline: 2px solid #087b7f; outline-offset: 3px; }
+@media (max-width: 520px) {
+  .coin-circle { margin-top: 9px; }
+  .coin-circle .instruction { margin-top: 8px; font-size: 14px; }
+  .coin-circle .actions { gap: 8px; }
+  .coin-circle .actions button { padding: 8px 12px; font-size: 15px; }
+  .coin-circle .actions .primary { min-width: 120px; }
+  .coin-circle .status { font-size: 14px; margin-bottom: 8px; }
+}
+@media (prefers-reduced-motion: reduce) { .coin-circle .arrow-shape { transition: none; } }
+@media (max-width: 360px) {
+  .coin-circle .actions button { padding-inline: 9px; font-size: 14px; }
+  .coin-circle .actions .primary { min-width: 112px; }
+}
