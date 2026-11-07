@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/07: group photographs. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/07</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="group-photos.css" type="text/css">
+    <script type="module" src="group-photos.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-07" aria-current="page">2026/11/07</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/07</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>A group of \(n\geq3\) people takes some photographs.
+Each photograph shows at least two people, but none shows all \(n\) people.
+Every pair of people must appear together in exactly one photograph.
+What is the minimum number of photographs needed?</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>\(n\geq3\) 人で，何枚かの写真を撮る．
+各写真には2人以上が写り，全員が一緒に写る写真は撮らない．
+どの2人についても，一緒に写っている写真がちょうど1枚になるようにしたい．
+写真は最少で何枚必要か．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+            <h2 id="try-it">Try it</h2>
+            <noscript><p>Enable JavaScript to play. <span lang="ja">操作機能を使うには JavaScript を有効にしてください．</span></p></noscript>
+            <div id="photo-game" class="photo-game" lang="en" hidden>
+                <div class="game-settings">
+                    <label><span data-word="people">People</span><select id="photo-size"></select></label>
+                    <label><span data-word="language">言語</span>
+                        <select id="photo-language"><option value="en">English</option><option value="ja">日本語</option></select>
+                    </label>
+                </div>
+                <p class="instruction" data-word="instruction">Select people by clicking the numbered circles.</p>
+                <dl class="game-stats">
+                    <div><dt data-word="photos">Photos</dt><dd id="photo-total">0</dd></div>
+                    <div><dt data-word="remaining">Pairs left</dt><dd id="pairs-left">15</dd></div>
+                </dl>
+                <div id="photo-board" class="photo-board" role="group" aria-describedby="photo-message">
+                    <svg id="photo-lines" class="photo-lines" viewBox="0 0 100 100" aria-hidden="true" focusable="false"></svg>
+                    <div id="photo-vertices" class="photo-vertices"></div>
+                </div>
+                <p id="photo-message" class="game-message" role="status" aria-live="polite" aria-atomic="true"></p>
+                <div class="game-actions">
+                    <button id="take-photo" class="take-photo" type="button" data-word="take" disabled>Take photo</button>
+                    <button id="clear-selection" type="button" data-word="clear" disabled>Clear selection</button>
+                    <button id="undo-photo" type="button" data-word="undo" disabled>Undo</button>
+                    <button id="reset-photos" type="button" data-word="reset" disabled>Reset</button>
+                </div>
+                <details class="photo-history-panel">
+                    <summary data-word="history">Photo history</summary>
+                    <p id="empty-history" class="empty-history" data-word="empty">No photos yet.</p>
+                    <ol id="photo-history" class="photo-history"></ol>
+                </details>
+            </div>
+        </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-06.html">&larr; 2026/11/06</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>

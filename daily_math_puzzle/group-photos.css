@@ -1,0 +1,75 @@
+.photo-game {
+    margin-top: 24px;
+    border: 1px solid #ccc;
+    padding: 22px;
+    line-height: 1.65;
+}
+
+.photo-game, .photo-game * { box-sizing: border-box; }
+.photo-game [hidden] { display: none !important; }
+.photo-game button, .photo-game select {
+    min-height: 44px;
+    padding: 6px 12px;
+    border: 1px solid #888;
+    border-radius: 3px;
+    background: #fcfcfc;
+    color: #333;
+    font: inherit;
+}
+.photo-game button:not(:disabled), .photo-game select, .photo-game summary { cursor: pointer; }
+.photo-game button:disabled { color: #777; background: #eee; border-color: #ccc; }
+.photo-game :focus-visible { outline: 3px solid #087b7f; outline-offset: 4px; }
+.photo-game .instruction { margin: 16px 0 4px; font-size: 15px; }
+.photo-game .game-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 10px 0; margin: 16px 0 10px; }
+.photo-game .game-stats dd { color: #087b7f; }
+.photo-game .photo-board {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    aspect-ratio: 1;
+    margin: 4px auto;
+}
+.photo-game .photo-lines, .photo-game .photo-vertices { position: absolute; inset: 0; width: 100%; height: 100%; }
+.photo-game .photo-lines { overflow: visible; pointer-events: none; }
+.photo-game .photo-lines line { stroke: #a1aeb0; stroke-width: 1.5px; vector-effect: non-scaling-stroke; }
+.photo-game .photo-lines .selected-edge { stroke: #087b7f; stroke-width: 3px; }
+.photo-game .photo-person {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    min-height: 46px;
+    padding: 0;
+    border: 2px solid #657779;
+    border-radius: 50%;
+    background: #fcfcfc;
+    color: #333;
+    font-family: "Computer Modern", serif;
+    font-size: 21px;
+    line-height: 1;
+    touch-action: manipulation;
+}
+.photo-game .photo-person[aria-pressed="true"] { background: #087b7f; color: #fff; border-color: #087b7f; font-family: "Computer Modern Bold", serif; }
+.photo-game .photo-person.conflicting-person { background: #9b4228; border-color: #9b4228; }
+.photo-game .game-message { min-height: 3.3em; margin: 10px 0; }
+.photo-game .game-message[data-state="blocked"] { color: #8a3d20; }
+.photo-game .game-message[data-state="complete"] { color: #08666a; font-weight: bold; }
+.photo-game .take-photo:not(:disabled) { background: #087b7f; border-color: #087b7f; color: #fff; }
+.photo-game .photo-history-panel { border-top: 1px solid #ddd; margin-top: 22px; padding-top: 12px; }
+.photo-game summary { min-height: 44px; line-height: 44px; }
+.photo-game .photo-history { list-style: none; padding: 0; margin: 6px 0; font-size: 15px; overflow-wrap: anywhere; }
+.photo-game .photo-history li { padding: 7px 0; border-bottom: 1px solid #e7e7e7; }
+.photo-game .empty-history { color: #666; font-size: 15px; }
+@media (hover: hover) {
+    .photo-game button:not(:disabled):not(.photo-person):hover { background: #eaf4f4; color: #333; }
+    .photo-game .take-photo:not(:disabled):hover { background: #066165; color: #fff; }
+    .photo-game .photo-person:not([aria-pressed="true"]):hover { background: #eaf4f4; }
+}
+@media (max-width: 520px) {
+    .photo-game { padding: 12px; }
+    .photo-game .game-actions { gap: 10px; }
+    .photo-game .take-photo { width: 100%; }
+    .photo-game .game-settings { gap: 10px; }
+}
