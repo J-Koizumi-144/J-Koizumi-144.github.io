@@ -1,0 +1,36 @@
+.five-coin-flips, .five-coin-flips * { box-sizing: border-box; }
+.five-coin-flips[hidden] { display: none; }
+.five-coin-flips .instruction { margin: 18px 0 8px; font-size: 15px; text-align: center; }
+.five-coin-flips .coin-board { position: relative; width: 100%; max-width: 390px; aspect-ratio: 1; margin: 12px auto; }
+.five-coin-flips .coin-board::before { content: ''; position: absolute; inset: 10%; border: 1px solid #d5dfde; border-radius: 50%; pointer-events: none; }
+.five-coin-flips .flip-coin {
+    position: absolute; transform: translate(-50%, -50%); width: 52px; height: 52px;
+    min-height: 44px; padding: 2px; border-radius: 50%; border: 1px solid #998b6b;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    line-height: 1.1; background: #f7efdc; color: #514628; touch-action: manipulation;
+}
+.five-coin-flips .coin-number { font-size: 12px; }
+.five-coin-flips .coin-face { font-size: 20px; }
+.five-coin-flips .flip-coin[data-face='tails'] { background: #e8eeed; border-color: #a7b6b4; color: #49605d; cursor: default; }
+.five-coin-flips .flip-coin[aria-disabled='true']:hover { background: #e8eeed; }
+.five-coin-flips .flip-coin.just-flipped { box-shadow: 0 0 0 3px #fcfcfc, 0 0 0 4px #9bafad; }
+.five-coin-flips .flip-coin:focus-visible { outline: 3px solid #087b7f; outline-offset: 5px; z-index: 1; }
+.five-coin-flips .coin-summary { position: absolute; inset: 29%; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; text-align: center; }
+.five-coin-flips .moves-label { font-size: 15px; color: #536764; }
+.five-coin-flips .move-count { font-size: 46px; line-height: 1.15; }
+.five-coin-flips .face-counts { display: flex; justify-content: center; gap: 14px; margin: 4px 0 0; }
+.five-coin-flips .face-counts div { white-space: nowrap; }
+.five-coin-flips .face-counts dt { font-size: 13px; }
+.five-coin-flips .face-counts dd { margin: 0; font-size: 19px; }
+.five-coin-flips .game-message { text-align: center; font-size: 15px; margin: 12px 0; }
+.five-coin-flips .game-actions { justify-content: center; }
+.five-coin-flips .game-actions button { min-width: 100px; }
+@media (max-width: 520px) {
+    .five-coin-flips .flip-coin { width: 44px; height: 44px; }
+    .five-coin-flips .coin-face { font-size: 18px; }
+    .five-coin-flips .coin-number { font-size: 11px; }
+    .five-coin-flips .move-count { font-size: 36px; }
+    .five-coin-flips .game-settings { gap: 8px 12px; }
+    .five-coin-flips .game-settings label { gap: 6px; font-size: 15px; }
+    .five-coin-flips .game-settings select { padding-inline: 8px; }
+}
