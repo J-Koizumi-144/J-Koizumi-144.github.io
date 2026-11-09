@@ -1,0 +1,41 @@
+.swap-game .game-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.swap-game .swap-stage { position: relative; margin: 12px 0 24px; padding-top: 102px; }
+.swap-game .swap-arcs { position: absolute; top: 0; left: 0; width: 100%; height: 102px; pointer-events: none; overflow: visible; }
+.swap-game .swap-cards { display: grid; grid-template-columns: repeat(var(--card-count), minmax(0, 1fr)); gap: 10px; align-items: center; }
+.swap-game .number-card { position: relative; width: 100%; min-width: 0; min-height: 84px; padding: 18px 0 12px; font-size: 28px; border: 1px solid #aaa; background: #f5f1e8; box-shadow: 0 2px 0 #dedbd4; }
+.swap-game .number-card[aria-pressed="true"] { border: 2px solid var(--pair-color, #087b7f); background: #edf5f4; }
+.swap-game .number-card.is-pending { outline: 2px dashed #087b7f; outline-offset: -6px; background: #fff; }
+.swap-game .pair-badge { position: absolute; top: 1px; right: 5px; color: var(--pair-color, #087b7f); font: bold 13px/1.5 sans-serif; }
+.swap-game .number-card:disabled { color: #333; background: #f5f1e8; }
+.swap-game .number-card:focus-visible { outline: 3px solid #087b7f; outline-offset: 3px; }
+.swap-game .swap-guide { margin: 14px 0 0; color: #555; font-size: 15px; }
+.swap-game .game-actions { margin-top: 14px; }
+.swap-game .game-actions .merge-button { flex: 1 1 210px; }
+.swap-game .secondary-actions { margin-top: 10px; }
+.swap-game .game-message { min-height: 1.65em; }
+.swap-game .swap-arc { fill: none; stroke-width: 2.3; stroke-linecap: round; }
+.swap-game .arc-label { font: bold 13px sans-serif; paint-order: stroke; stroke: #fcfcfc; stroke-width: 6px; stroke-linejoin: round; text-anchor: middle; }
+.swap-game[aria-busy="true"] .number-card { z-index: 1; }
+@media (max-width: 520px) {
+    body.swap-preview { padding-left: 12px; padding-right: 12px; }
+    .swap-game.coin-game { padding: 10px; }
+    .swap-game .swap-cards { gap: 4px; }
+    .swap-game .number-card { min-height: 70px; font-size: 23px; }
+    .swap-game .swap-stage { padding-top: 86px; }
+    .swap-game .swap-arcs { height: 86px; }
+    .swap-game .game-stats { margin-bottom: 0; }
+    .swap-game .game-actions { gap: 8px; }
+    .swap-game .game-actions button { flex: 1 1 auto; }
+    .swap-game .secondary-actions button { flex: 1 1 120px; }
+}
+@media (max-width: 360px) {
+    body.swap-preview { padding-left: 8px; padding-right: 8px; }
+    .swap-game.coin-game { padding: 8px; }
+}
+
+@media (max-width: 520px) {
+    .swap-game[data-card-count="7"] .swap-stage,
+    .swap-game[data-card-count="8"] .swap-stage { margin-inline: -8px; }
+    .swap-game[data-card-count="7"] .swap-cards,
+    .swap-game[data-card-count="8"] .swap-cards { gap: 2px; }
+}

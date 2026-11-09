@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/09: two rounds of simultaneous card swaps. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/09</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="simultaneous-swaps.css" type="text/css">
+    <script type="module" src="simultaneous-swaps.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body class="swap-preview">
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-09" aria-current="page">2026/11/09</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/09</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+<section class="paper problem-statement" lang="en" aria-labelledby="english"><h2 id="english">English</h2><p>There are \(n\geq2\) cards, numbered \(1\) through \(n\), arranged in a row.
+In one operation, choose any number of disjoint pairs of cards (possibly zero) and simultaneously swap the two cards in each pair.
+Prove that, regardless of their initial arrangement, the cards can be put in increasing order from left to right in two operations.</p></section>
+<section class="paper problem-statement" lang="ja" aria-labelledby="japanese"><h2 id="japanese">日本語</h2><p>\(n\geq2\) 枚のカードに1から \(n\) までの数が一つずつ書かれ，横一列に並んでいる．
+1回の操作では，同じカードを重複して選ばないように2枚組をいくつか選び，各組の2枚を同時に交換する（0組でもよい）．
+どんな並びからでも，この操作を2回行うことで，左から小さい順に並べ直せることを示せ．</p></section>
+<section id="try-section" aria-labelledby="try-it">
+<h2 id="try-it">Try it</h2>
+<noscript><p>Enable JavaScript to play. <span lang="ja">操作にはJavaScriptを有効にしてください．</span></p></noscript>
+<div id="swap-game" class="coin-game swap-game" lang="en" hidden>
+<div class="game-settings">
+<label><span data-label="language">言語</span><select id="swap-language"><option value="en">English</option><option value="ja">日本語</option></select></label>
+<label><span data-label="size">Cards</span><select id="swap-size"><option>3</option><option>4</option><option>5</option><option selected>6</option><option>7</option><option>8</option></select></label>
+</div>
+<dl class="game-stats"><div><dt data-label="rounds">Rounds used</dt><dd id="swap-rounds">0 / 2</dd></div><div><dt data-label="pairs">Pairs selected</dt><dd id="swap-pairs">0</dd></div></dl>
+<p class="swap-guide" data-label="guide">Select two cards to connect them; tap a paired card to unlink it.</p>
+<div class="swap-stage"><svg id="swap-arcs" class="swap-arcs" aria-hidden="true" focusable="false"></svg><div id="swap-cards" class="swap-cards" role="group" aria-describedby="swap-message"></div></div>
+<p id="swap-message" class="game-message" role="status" aria-live="polite" aria-atomic="true"></p>
+<div class="game-actions"><button type="button" id="swap-apply" class="merge-button">Swap all</button><button type="button" id="swap-clear" data-label="clear" disabled>Clear pairs</button></div>
+<div class="game-actions secondary-actions"><button type="button" id="swap-undo" data-label="undo" disabled>Undo</button><button type="button" id="swap-reset" data-label="reset">Reset</button><button type="button" id="swap-shuffle" data-label="shuffle">New shuffle</button></div>
+</div>
+</section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-08.html" rel="prev">&larr; 2026/11/08</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
