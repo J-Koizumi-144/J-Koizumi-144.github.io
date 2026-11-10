@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/10: island paths with a common island. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/10</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="island-routes.css" type="text/css">
+    <script type="module" src="island-routes.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body class="island-preview">
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-10" aria-current="page">2026/11/10</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/10</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+<section class="paper problem-statement" lang="en" aria-labelledby="english"><h2 id="english">English</h2><p>There are \(2n\) islands (\(n\geq 2\)) and some bridges connecting them.
+Between any two islands, there is exactly one path connecting them.
+Your task is to divide the islands into pairs so that the paths connecting the pairs all pass through a common island.
+Prove that such a pairing is always possible.</p></section>
+<section class="paper problem-statement" lang="ja" aria-labelledby="japanese"><h2 id="japanese">日本語</h2><p>\(2n\) 個（\(n\geq 2\)）の島と，島を結ぶ何本かの橋がある．
+どの二つの島の間にも，それらを結ぶ経路がちょうど一つある．
+あなたの仕事は，島を二つずつの組に分け，各組を結ぶ経路が共通の島を通るようにすることである．
+このような組分けが常にできることを示せ．</p></section>
+<section id="try-section" aria-labelledby="try-it">
+<h2 id="try-it">Try it</h2>
+<noscript><p>Enable JavaScript to play. <span lang="ja">操作にはJavaScriptを有効にしてください．</span></p></noscript>
+<div id="island-game" class="coin-game island-game" lang="en" hidden>
+<div class="game-settings">
+<label><span data-word="size">Islands</span><select id="island-size"></select></label>
+<label><span data-word="language">言語</span><select id="island-language"><option value="en">English</option><option value="ja">日本語</option></select></label>
+</div>
+<p class="island-guide" data-word="guide">Select two islands, then pair them. Select a pair to inspect its path.</p>
+<dl class="game-stats"><div><dt data-word="pairs">Pairs</dt><dd id="island-pair-count">0 / 4</dd></div><div><dt data-word="common">Common islands</dt><dd id="island-common-count">—</dd></div></dl>
+<div id="island-board" class="island-board" role="group" aria-describedby="island-message">
+<svg id="island-lines" class="island-lines" aria-hidden="true" focusable="false"></svg><div id="island-nodes" class="island-nodes"></div>
+</div>
+<div class="route-options"><label class="common-toggle"><input type="checkbox" id="island-show-common" disabled><span data-word="showCommon">Color common islands</span></label><button type="button" id="island-all" data-word="all" disabled>All paths</button></div>
+<p id="island-message" class="game-message" role="status" aria-live="polite" aria-atomic="true"></p>
+<div class="game-actions"><button type="button" id="island-apply" class="merge-button" data-word="pair" disabled>Pair islands</button><button type="button" id="island-clear" data-word="clear" disabled>Clear selection</button></div>
+<div class="game-actions secondary-actions"><button type="button" id="island-undo" data-word="undo" disabled>Undo</button><button type="button" id="island-reset" data-word="reset" disabled>Reset pairs</button><button type="button" id="island-new" data-word="newMap">New map</button></div>
+<ul id="island-pairs" class="island-pairs"></ul><p id="island-empty" class="empty-pairs" data-word="empty">No pairs yet.</p>
+</div>
+</section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-09.html" rel="prev">&larr; 2026/11/09</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
