@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/11: domino packing on a rectangular board. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/11</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="domino-packing.css" type="text/css">
+    <script type="module" src="domino-packing.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body class="packing-preview">
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-11" aria-current="page">2026/11/11</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/11</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+<section class="paper problem-statement" lang="en" aria-labelledby="english">
+<h2 id="english">English</h2>
+<p>Let \(m,n\) be positive integers such that \(mn\) is a multiple of 3.
+Place \(1\times2\) dominoes on a rectangular board with \(m\) rows and \(n\) columns, aligned with the grid and without overlap.
+Dominoes may be placed vertically or horizontally.
+What is the minimum number of dominoes needed so that no further domino can be placed on the board?</p>
+</section>
+<section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+<h2 id="japanese">日本語</h2>
+<p>\(m,n\) を正の整数とし，\(mn\) は3の倍数とする．
+縦 \(m\) マス，横 \(n\) マスの長方形の盤面に，\(1\times2\) のドミノを，マス目に沿って重ならないように置く．
+ドミノは縦向きにも横向きにも置いてよい．
+これ以上1枚も置けない状態にするには，最少で何枚置けばよいか．</p>
+</section>
+<section id="try-section" aria-labelledby="try-it">
+<h2 id="try-it">Try it</h2>
+<noscript><p>Enable JavaScript to play. <span lang="ja">操作にはJavaScriptを有効にしてください．</span></p></noscript>
+<div id="packing-game" class="coin-game packing-game" lang="en" hidden>
+<div class="game-settings">
+<label><span data-word="size">Board size</span><select id="packing-size"></select></label>
+<label><span data-word="language">言語</span><select id="packing-language"><option value="en">English</option><option value="ja">日本語</option></select></label>
+</div>
+<p id="packing-guide" class="packing-guide" data-word="guide">Click two adjacent empty cells to place a domino; select a domino and press Delete domino to remove it.</p>
+<dl class="game-stats">
+<div><dt data-word="dominoes">Dominoes</dt><dd id="packing-total">0</dd></div>
+<div><dt data-word="empty">Empty cells</dt><dd id="packing-empty">24</dd></div>
+<div><dt data-word="available">Available placements</dt><dd id="packing-available">38</dd></div>
+</dl>
+<div id="packing-board" class="packing-board" role="group" aria-describedby="packing-guide packing-message"></div>
+<p id="packing-message" class="game-message packing-message" role="status" aria-live="polite" aria-atomic="true"></p>
+<p id="packing-status" class="game-message packing-status" role="status" aria-live="polite" aria-atomic="true"></p>
+<div class="game-actions">
+<button type="button" id="packing-delete" class="packing-delete" data-word="remove" disabled>Delete domino</button>
+<button type="button" id="packing-undo" data-word="undo" disabled>Undo</button>
+<button type="button" id="packing-reset" data-word="reset" disabled>Reset</button>
+</div>
+</div>
+</section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-10.html" rel="prev">&larr; 2026/11/10</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
