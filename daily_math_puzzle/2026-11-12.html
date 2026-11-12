@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/12: flipping coins on a square board. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/12</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="coin-cross.css" type="text/css">
+    <script type="module" src="coin-cross.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body class="coin-cross-preview">
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-12" aria-current="page">2026/11/12</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/12</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+    <section class="paper problem-statement" lang="en" aria-labelledby="english">
+        <h2 id="english">English</h2>
+        <p>Let \(n\geq2\) be an integer.
+        Place one coin, heads up, in each cell of an \(n\times n\) board.
+        In one move, choose a cell and flip every coin in the same row or column as that cell.
+        What is the minimum number of moves needed to make every coin tails up?</p>
+    </section>
+    <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+        <h2 id="japanese">日本語</h2>
+        <p>\(n\) を2以上の整数とする．
+        縦横 \(n\) マスの盤面の各マスに，表を向いたコインを1枚ずつ置く．
+        1回の操作ではマスを一つ選び，そのマスと同じ行または同じ列にあるコインを，すべて裏返す．
+        すべてのコインを裏向きにするには，最少で何回の操作が必要か．</p>
+    </section>
+    <section id="try-section" aria-labelledby="try-it">
+        <h2 id="try-it">Try it</h2>
+        <noscript><p>Enable JavaScript to play. <span lang="ja">操作にはJavaScriptを有効にしてください．</span></p></noscript>
+        <div id="coin-cross" class="coin-game coin-cross" lang="en" hidden>
+            <div class="game-settings">
+                <label><span data-label="size">Board size</span><select id="cross-size"></select></label>
+                <label><span id="cross-language-label" lang="ja">言語</span>
+                    <select id="cross-language"><option value="en" lang="en">English</option><option value="ja" lang="ja">日本語</option></select>
+                </label>
+            </div>
+            <div class="cross-play">
+                <dl class="game-stats">
+                    <div><dt data-label="moves">Moves</dt><dd id="cross-moves">0</dd></div>
+                    <div><dt data-label="tails">Tails up</dt><dd><span id="cross-tails">0</span><span class="cross-total"> / <span id="cross-total">9</span></span></dd></div>
+                </dl>
+                <div id="cross-board" class="cross-board" role="group"></div>
+                <div class="cross-controls">
+                    <p id="cross-complete" class="cross-complete" data-label="complete" hidden>All coins are tails up.</p>
+                    <div class="game-actions">
+                        <button type="button" id="cross-undo" data-label="undo" disabled>Undo</button>
+                        <button type="button" id="cross-reset" data-label="reset" disabled>Reset</button>
+                    </div>
+                </div>
+            </div>
+            <span id="cross-announcement" class="cross-sr-only" role="status" aria-atomic="true"></span>
+        </div>
+    </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-11.html" rel="prev">&larr; 2026/11/11</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>

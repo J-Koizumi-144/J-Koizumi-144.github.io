@@ -1,0 +1,190 @@
+.coin-cross-preview {
+    box-sizing: border-box;
+    max-width: 844px;
+    padding: 48px clamp(14px, 6vw, 72px);
+}
+
+.coin-cross, .coin-cross * { box-sizing: border-box; }
+.coin-cross[hidden], .coin-cross [hidden] { display: none; }
+
+.coin-cross {
+    border-color: #c7cec8;
+    border-radius: 5px;
+    background: #fffefa;
+    padding: clamp(14px, 3vw, 26px);
+}
+
+.coin-cross .game-settings {
+    gap: 10px 20px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #d7dcd4;
+}
+
+.coin-cross .game-settings label { font-size: 16px; }
+.coin-cross select, .coin-cross .game-actions button {
+    min-height: 44px;
+    border-color: #a1b0a7;
+    background: #fffefa;
+}
+
+.coin-cross .cross-play {
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(136px, 1fr);
+    grid-template-areas: "board stats" "board actions";
+    align-items: end;
+    gap: 18px clamp(18px, 4vw, 38px);
+    margin-top: 22px;
+}
+
+.coin-cross .cross-board {
+    grid-area: board;
+    place-self: center;
+    display: grid;
+    grid-template-columns: repeat(var(--side), minmax(0, 1fr));
+    grid-template-rows: repeat(var(--side), minmax(0, 1fr));
+    gap: 1px;
+    width: min(100%, calc(var(--side) * 83px + 4px));
+    aspect-ratio: 1;
+    border: 1px solid #aeb8ac;
+    background: #c7cfc3;
+}
+
+.coin-cross .cross-cell {
+    display: grid;
+    place-items: center;
+    container-type: inline-size;
+    min-width: 0;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: #f6f6ee;
+    perspective: 480px;
+    touch-action: manipulation;
+}
+.coin-cross .cross-cell:not(:disabled):hover { background: #e5eee6; }
+.coin-cross .cross-cell:focus-visible { outline-offset: -3px; z-index: 1; }
+
+.coin-cross .cross-token {
+    position: relative;
+    display: block;
+    width: 76%;
+    aspect-ratio: 1;
+    pointer-events: none;
+    transform-style: preserve-3d;
+    transition: transform 300ms ease-in-out;
+}
+.coin-cross .cross-cell[aria-pressed="true"] .cross-token { transform: rotateY(180deg); }
+.coin-cross .cross-head, .coin-cross .cross-tail {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--rim);
+    border-radius: 50%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    font-size: clamp(14px, 33cqi, 28px);
+    line-height: 1;
+}
+.coin-cross .cross-head::after, .coin-cross .cross-tail::after {
+    content: '';
+    position: absolute;
+    inset: 9%;
+    border: 1px solid var(--ring);
+    border-radius: 50%;
+}
+.coin-cross .cross-head {
+    --rim: #9c824c;
+    --ring: #bca370;
+    color: #594018;
+    background-color: #e5cd93;
+}
+.coin-cross .cross-tail {
+    --rim: #2e514e;
+    --ring: #6b8981;
+    color: #fff9df;
+    background-color: #395f5a;
+    transform: rotateY(180deg);
+}
+
+.coin-cross .game-stats {
+    grid-area: stats;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    text-align: start;
+}
+.coin-cross .game-stats > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    padding-block: 8px;
+    border-bottom: 1px solid #d7dcd4;
+}
+.coin-cross .game-stats dt { color: #425650; font-size: 15px; }
+.coin-cross .game-stats dd {
+    margin: 0;
+    white-space: nowrap;
+    color: #244f4f;
+    font-size: 30px;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+}
+.coin-cross .cross-total { color: #53665d; font-size: 0.65em; }
+.coin-cross .cross-controls { grid-area: actions; align-self: start; }
+.coin-cross .game-actions { gap: 8px; }
+.coin-cross .game-actions button { min-width: 64px; }
+.coin-cross .game-actions button:disabled {
+    color: #69706b;
+    border-color: #d0d4cb;
+    background: #f4f4ee;
+}
+.coin-cross .cross-complete {
+    margin: 0 0 10px;
+    color: #185959;
+    font-weight: bold;
+    font-size: 16px;
+}
+.coin-cross .cross-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+@media (max-width: 600px) {
+    .coin-cross-preview { padding: 28px 12px; }
+    .coin-cross { padding: 14px 10px; }
+    .coin-cross .game-settings { gap: 8px 12px; padding-bottom: 12px; }
+    .coin-cross .game-settings label { gap: 5px; font-size: 15px; }
+    .coin-cross .game-settings select { padding-inline: 6px; }
+    .coin-cross .cross-play {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas: "stats" "board" "actions";
+        gap: 16px;
+        margin-top: 14px;
+    }
+    .coin-cross .game-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .coin-cross .game-stats > div {
+        display: grid;
+        justify-items: center;
+        justify-content: center;
+        gap: 2px;
+        padding: 0 4px;
+        border: 0;
+    }
+    .coin-cross .game-stats > div + div { border-left: 1px solid #d7dcd4; }
+    .coin-cross .game-stats dd { font-size: 25px; }
+    .coin-cross .game-actions { justify-content: center; }
+    .coin-cross .game-actions button { min-width: 84px; }
+    .coin-cross .cross-complete { text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .coin-cross .cross-token { transition: none; }
+}
