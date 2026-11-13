@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/13: communication between buildings in a row. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/13</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="building-links.css" type="text/css">
+    <script type="module" src="building-links.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body class="sky-preview">
+    <nav class="navigation" aria-label="Breadcrumb">
+        <span><a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-13" aria-current="page">2026/11/13</time></span>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/13</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+    <section class="paper problem-statement" lang="en" aria-labelledby="english">
+        <h2 id="english">English</h2>
+        <p>Between two buildings of height \(n\), arrange one building of each height \(1,2,\ldots,n-1\) in a row.
+        Two buildings can communicate if and only if every building between them is shorter than both.</p>
+        <p>Find all integers \(n\ge 2\) for which some arrangement gives every building, including the two at the ends, an even number of communication partners.</p>
+    </section>
+    <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+        <h2 id="japanese">日本語</h2>
+        <p>高さ \(n\) のビル二棟の間に，高さ \(1,2,\ldots,n-1\) のビルを一棟ずつ一列に並べる．
+        二棟のビルが通信できるのは，間にあるビルがすべて，その二棟のどちらよりも低いときである．</p>
+        <p>両端も含め，各ビルが通信できる相手の数を偶数にしたい．
+        これが可能な整数 \(n\ge 2\) をすべて求めよ．</p>
+    </section>
+    <section id="try-section" aria-labelledby="try-it">
+        <h2 id="try-it">Try it</h2>
+        <noscript><p>Enable JavaScript to play. <span lang="ja">操作にはJavaScriptを有効にしてください．</span></p></noscript>
+        <div id="building-links" class="coin-game building-links" lang="en" hidden>
+            <div class="game-settings">
+                <label><span data-label="heightSetting">End height</span> <select id="sky-size"></select></label>
+                <label><span id="sky-language-label" lang="ja">言語</span>
+                    <select id="sky-language"><option value="en" lang="en">English</option><option value="ja" lang="ja">日本語</option></select>
+                </label>
+            </div>
+            <div class="sky-figure">
+                <div class="sky-board" id="sky-board" role="group" aria-describedby="sky-hint">
+                    <svg class="sky-drawing" aria-hidden="true" focusable="false"></svg>
+                    <div class="sky-targets"></div>
+                </div>
+                <div class="sky-key">
+                    <span class="sky-key-item"><i class="sky-swatch sky-even" aria-hidden="true"></i><span data-label="even">Even</span> <b id="sky-even-count"></b></span>
+                    <span class="sky-key-item"><i class="sky-swatch sky-odd" aria-hidden="true"></i><span data-label="odd">Odd</span> <b id="sky-odd-count"></b></span>
+                    <span id="sky-complete" class="sky-complete" data-label="complete" hidden>Every building has an even number of partners.</span>
+                </div>
+            </div>
+            <p id="sky-hint" class="sky-hint" data-label="hint">Drag an inner building, or select one and use the arrows.</p>
+            <div class="game-actions">
+                <div class="sky-arrows">
+                    <button type="button" id="sky-left" disabled>←</button>
+                    <button type="button" id="sky-right" disabled>→</button>
+                </div>
+                <div class="sky-history">
+                    <button type="button" id="sky-undo" data-label="undo" disabled>Undo</button>
+                    <button type="button" id="sky-reset" data-label="reset" disabled>Reset</button>
+                </div>
+            </div>
+            <span id="sky-announcement" class="sky-sr-only" role="status" aria-atomic="true"></span>
+        </div>
+    </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-12.html" rel="prev">&larr; 2026/11/12</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
