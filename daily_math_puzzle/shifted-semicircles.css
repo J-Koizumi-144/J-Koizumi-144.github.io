@@ -1,0 +1,76 @@
+.arcs-preview {
+    box-sizing: border-box;
+    max-width: 844px;
+    padding: 48px clamp(12px, 6vw, 72px);
+}
+
+.shifted-arcs, .shifted-arcs * { box-sizing: border-box; }
+.shifted-arcs[hidden], .shifted-arcs [hidden] { display: none; }
+.shifted-arcs {
+    --ink: #333;
+    --teal: #087b7f;
+    --copper: #8a3d20;
+}
+.shifted-arcs .game-stats { grid-template-columns: 1fr; }
+.shifted-arcs .game-settings label { font-size: 16px; }
+.shifted-arcs .game-message { font-size: 15px; }
+.shifted-arcs .game-stats dd { font-variant-numeric: tabular-nums; }
+.shifted-arcs .arc-board { position: relative; width: 100%; }
+.shifted-arcs .arc-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 18px;
+    font-size: 15px;
+}
+.shifted-arcs .arc-legend > span { display: inline-flex; align-items: center; gap: 6px; }
+.shifted-arcs .arc-legend i { width: 17px; border-top: 2px solid var(--teal); }
+.shifted-arcs #arc-copy-key i { border-top: 2px dashed var(--copper); }
+.shifted-arcs #arc-svg { display: block; width: 100%; }
+.shifted-arcs .arc-axis { stroke: #a5b5b0; stroke-width: 1.3; }
+.shifted-arcs .arc-edge { fill: none; stroke: var(--teal); stroke-width: 2.1; }
+.shifted-arcs .arc-edge.lower { stroke: var(--copper); stroke-dasharray: 4.5 3; }
+.shifted-arcs .arc-edge.walked { stroke-width: 4.2; stroke-linecap: round; stroke-dasharray: none; }
+.shifted-arcs .arc-edge.walked.in-progress { stroke-dasharray: 1 1; }
+.shifted-arcs .walk-marker { fill: #263d40; stroke: #fff; stroke-width: 1.7; pointer-events: none; }
+.shifted-arcs .arc-edge.selected { stroke-width: 5; }
+.shifted-arcs .arc-hit { fill: none; stroke: transparent; pointer-events: stroke; cursor: pointer; touch-action: manipulation; }
+.shifted-arcs .point { fill: #fff; stroke: #7a908d; stroke-width: 1.25; }
+.shifted-arcs .point.terminal { fill: #bcbcbc; stroke: #888; cursor: default; }
+.shifted-arcs .point.marked { fill: var(--ink); stroke: var(--ink); }
+.shifted-arcs .point.selected { fill: #d0eae5; stroke: var(--teal); stroke-width: 2; }
+.shifted-arcs .point-ring { fill: none; stroke: var(--teal); stroke-width: 1.5; }
+.shifted-arcs .point-label {
+    fill: #253e40;
+    font: 650 14px system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+    text-anchor: middle;
+}
+.shifted-arcs .point-label.marked { fill: #fff; }
+.shifted-arcs .arc-target {
+    position: absolute;
+    min-height: 0;
+    height: 44px;
+    padding: 0;
+    transform: translate(-50%, -50%);
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    touch-action: manipulation;
+}
+.shifted-arcs .arc-target:not(:disabled):hover { background: #0d787114; }
+.shifted-arcs .arc-target:focus-visible { outline-offset: -2px; }
+.shifted-arcs .arc-route { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 4px; font-size: 15px; }
+.shifted-arcs .arc-route span { white-space: nowrap; }
+.shifted-arcs .arc-route .arrival::before { content: '→'; margin-inline-end: 4px; color: #667e76; }
+.shifted-arcs .arc-route { margin-top: 16px; }
+.shifted-arcs #arc-status.error { color: #8a3d20; }
+
+@media (max-width: 520px) {
+    .arcs-preview { padding: 28px 12px; }
+    .shifted-arcs { padding: 14px 8px; }
+    .shifted-arcs .game-settings { gap: 10px 14px; }
+    .shifted-arcs .game-settings label { font-size: 15px; }
+    .shifted-arcs .game-actions { gap: 8px; }
+    .shifted-arcs .game-actions button { padding: 6px 10px; }
+}

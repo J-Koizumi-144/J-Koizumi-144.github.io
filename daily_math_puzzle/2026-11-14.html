@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/14: shifted semicircles. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/14</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="shifted-semicircles.css" type="text/css">
+    <script type="module" src="shifted-semicircles.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body class="arcs-preview">
+    <nav class="navigation" aria-label="Breadcrumb">
+        <span><a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-14" aria-current="page">2026/11/14</time></span>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/14</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+    <section class="paper problem-statement" lang="en" aria-labelledby="english">
+        <h2 id="english">English</h2>
+        <p>Draw one or more nonintersecting semicircles above a line, with all their endpoints equally spaced along the line.
+        Reflect a copy of the drawing across the line, then slide the copy one space to the right.
+        Prove that if you start at the leftmost point and follow the arcs without turning back, you visit every point and finish at the rightmost point.</p>
+    </section>
+    <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+        <h2 id="japanese">日本語</h2>
+        <p>直線の上側に，互いに交わらない半円を何本か描く．すべての半円の両端は，この直線上に等間隔に並んでいる．図の写しを上下に裏返し，点一つ分だけ右にずらして重ねる．左端の点から半円を引き返さずにたどると，すべての点を通って右端の点に着くことを示せ．</p>
+    </section>
+    <section id="try-section" aria-labelledby="try-it">
+        <h2 id="try-it">Try it</h2>
+        <noscript><p>Enable JavaScript to try the diagram. <span lang="ja">図を操作するにはJavaScriptを有効にしてください．</span></p></noscript>
+        <div id="arc-app" class="coin-game shifted-arcs" hidden lang="en">
+            <div class="game-settings">
+                <label><span data-label="size">Upper semicircles</span> <select id="arc-size"></select></label>
+                <label><span id="arc-language-label" lang="ja">言語</span> <select id="arc-language"><option value="en" lang="en">English</option><option value="ja" lang="ja">日本語</option></select></label>
+            </div>
+            <dl class="game-stats">
+                <div><dt id="arc-count-label"></dt><dd id="arc-count"></dd></div>
+            </dl>
+            <div id="arc-board" class="arc-board" role="group" aria-describedby="arc-status">
+                <svg id="arc-svg" aria-hidden="true" focusable="false"></svg>
+                <div id="arc-targets"></div>
+            </div>
+            <div class="arc-legend"><span><i aria-hidden="true"></i><span data-label="original">Original</span></span><span id="arc-copy-key"><i aria-hidden="true"></i><span data-label="copy">Shifted copy</span></span></div>
+            <div id="arc-route" class="arc-route" hidden></div>
+            <p id="arc-status" class="game-message" role="status" aria-atomic="true"></p>
+            <div class="game-actions">
+                <button type="button" id="arc-play" class="merge-button" data-label="play">Play</button>
+                <button type="button" id="arc-delete" data-label="remove" disabled>Delete arc</button>
+                <button type="button" id="arc-undo" data-label="undo" disabled>Undo</button>
+                <button type="button" id="arc-clear" data-label="clear">Clear all</button>
+            </div>
+        </div>
+    </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-13.html" rel="prev">&larr; 2026/11/13</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
