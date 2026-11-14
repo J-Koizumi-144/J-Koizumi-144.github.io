@@ -1,9 +1,3 @@
-.arcs-preview {
-    box-sizing: border-box;
-    max-width: 844px;
-    padding: 48px clamp(12px, 6vw, 72px);
-}
-
 .shifted-arcs, .shifted-arcs * { box-sizing: border-box; }
 .shifted-arcs[hidden], .shifted-arcs [hidden] { display: none; }
 .shifted-arcs {
@@ -67,7 +61,6 @@
 .shifted-arcs #arc-status.error { color: #8a3d20; }
 
 @media (max-width: 520px) {
-    .arcs-preview { padding: 28px 12px; }
     .shifted-arcs { padding: 14px 8px; }
     .shifted-arcs .game-settings { gap: 10px 14px; }
     .shifted-arcs .game-settings label { font-size: 15px; }

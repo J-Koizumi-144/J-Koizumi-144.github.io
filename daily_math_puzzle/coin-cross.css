@@ -1,9 +1,3 @@
-.coin-cross-preview {
-    box-sizing: border-box;
-    max-width: 844px;
-    padding: 48px clamp(14px, 6vw, 72px);
-}
-
 .coin-cross, .coin-cross * { box-sizing: border-box; }
 .coin-cross[hidden], .coin-cross [hidden] { display: none; }
 
@@ -159,7 +153,6 @@
     white-space: nowrap;
 }
 @media (max-width: 600px) {
-    .coin-cross-preview { padding: 28px 12px; }
     .coin-cross { padding: 14px 10px; }
     .coin-cross .game-settings { gap: 8px 12px; padding-bottom: 12px; }
     .coin-cross .game-settings label { gap: 5px; font-size: 15px; }
