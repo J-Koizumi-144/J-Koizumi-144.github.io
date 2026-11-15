@@ -1,0 +1,124 @@
+.stone-ring, .stone-ring * { box-sizing: border-box; }
+.stone-ring[hidden] { display: none; }
+.stone-ring {
+    --teal: #086c70;
+    --stone: #234d50;
+    border-color: #cbd7d3;
+    padding: 18px;
+}
+.stone-ring .game-settings { gap: 8px 20px; padding: 0 2px 14px; }
+.stone-ring .game-settings label { font-size: 16px; }
+.stone-ring select { min-width: 58px; padding: 3px 8px; }
+.stone-ring .ring-field {
+    border-block: 1px solid #d9e3df;
+    background: #f6f9f7;
+    padding: 8px 0;
+}
+.stone-ring .ring-board {
+    --orbit-inset: 12.5%;
+    --box-width: 22%;
+    --box-height: 13.5%;
+    --stone-step: 3.35%;
+    --stone-diameter: 2.35%;
+    position: relative;
+    width: min(100%, 416px);
+    aspect-ratio: 1;
+    margin: 0 auto;
+    isolation: isolate;
+}
+.stone-ring .ring-board[data-density="medium"] {
+    --orbit-inset: 11%;
+    --box-width: 20%;
+    --box-height: 12%;
+    --stone-step: 3.25%;
+}
+.stone-ring .ring-board[data-density="compact"] {
+    --orbit-inset: 9.5%;
+    --box-width: 17.5%;
+    --box-height: 11.6%;
+    --stone-step: 3.15%;
+    --stone-diameter: 2.25%;
+}
+.stone-ring .ring-orbit {
+    position: absolute;
+    inset: var(--orbit-inset);
+    border: 1.5px solid #aec3bd;
+    border-radius: 50%;
+    pointer-events: none;
+}
+.stone-ring .ring-counter {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: 0;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+}
+.stone-ring .ring-counter dt { color: #475f59; font-size: 15px; line-height: 1.35; }
+.stone-ring .ring-counter dd {
+    margin: 0;
+    color: #244643;
+    font-size: clamp(32px, 6vw, 44px);
+    line-height: 1.15;
+    font-variant-numeric: tabular-nums;
+}
+.stone-ring .ring-box {
+    position: absolute;
+    width: var(--box-width);
+    height: var(--box-height);
+    min-height: 44px;
+    transform: translate(-50%, -50%);
+    padding: 0;
+    border: 2px solid var(--teal);
+    border-radius: 3px;
+    background: #e0f0eb;
+    box-shadow: 0 2px 0 #d4e0db;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+.stone-ring .ring-box[aria-disabled="true"],
+.stone-ring .ring-box[aria-disabled="true"]:hover {
+    border: 1px solid #83978f;
+    background: #fff;
+    box-shadow: 0 1px 0 #dce5e0;
+    cursor: default;
+}
+.stone-ring .ring-box[aria-disabled="false"]:hover { background: #cbe7df; }
+.stone-ring .ring-box:focus-visible { outline: 2px solid #343e39; outline-offset: 2px; }
+.stone-ring .ring-stones { position: absolute; inset: 0; pointer-events: none; }
+.stone-ring .ring-stone {
+    position: absolute;
+    width: var(--stone-diameter);
+    height: var(--stone-diameter);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: var(--stone);
+    border: 1px solid #193e41;
+}
+.stone-ring .ring-board[data-animate] .ring-stone {
+    transition: left 190ms cubic-bezier(.32, .08, .24, 1), top 190ms cubic-bezier(.32, .08, .24, 1);
+}
+.stone-ring .ring-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px 16px;
+    padding-top: 14px;
+}
+.stone-ring #ring-status { margin: 0; font-size: 15px; line-height: 1.45; }
+.stone-ring #ring-status[data-finished] { color: var(--teal); font-weight: bold; }
+.stone-ring .game-actions { gap: 6px; }
+.stone-ring .game-actions button { min-width: 60px; padding: 5px 12px; }
+
+@media (max-width: 520px) {
+    .stone-ring { padding: 12px; }
+    .stone-ring .game-settings { gap: 6px 10px; padding-inline: 0; }
+    .stone-ring .game-settings label { font-size: 15px; gap: 5px; }
+    .stone-ring .ring-footer { justify-content: center; text-align: center; }
+    .stone-ring #ring-status { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .stone-ring .ring-board[data-animate] .ring-stone { transition: none; }
+}

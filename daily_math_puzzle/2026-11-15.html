@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/15: boxes and stones on a circle. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/15</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="stone-ring.css" type="text/css">
+    <script type="module" src="stone-ring.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <span><a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-15" aria-current="page">2026/11/15</time></span>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/15</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+    <section class="paper problem-statement" lang="en" aria-labelledby="english">
+        <h2 id="english">English</h2>
+        <p>Let \(n\geq 3\) be an odd integer.
+        There are \(n\) boxes arranged in a circle, and initially all \(n\) stones are in one box.
+        Repeat the following move until no further move is possible.</p>
+        <p><strong>Move:</strong> Choose a box containing at least \(2\) stones.
+        Take \(2\) stones from it and put \(1\) in each neighboring box.</p>
+        <p>Prove that the process ends after finitely many moves, no matter which eligible box is chosen at each step.</p>
+    </section>
+    <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+        <h2 id="japanese">日本語</h2>
+        <p>\(n\) を \(3\) 以上の奇数とする．
+        円周上に \(n\) 個の箱が並んでおり，初めは \(n\) 個の石がすべて一つの箱に入っている．
+        次の操作を，操作できなくなるまで繰り返す．</p>
+        <p><strong>操作</strong>：石が \(2\) 個以上入っている箱を一つ選び，その箱から石を \(2\) 個取り出して，両隣の箱に \(1\) 個ずつ入れる．</p>
+        <p>操作する箱をどのように選んでも，必ず有限回で終了することを示せ．</p>
+    </section>
+    <section id="try-section" aria-labelledby="try-it">
+        <h2 id="try-it">Try it</h2>
+        <noscript><p>Enable JavaScript to move the stones. <span lang="ja">石を動かすにはJavaScriptを有効にしてください．</span></p></noscript>
+        <div id="stone-ring" class="coin-game stone-ring" lang="en" hidden>
+            <div class="game-settings">
+                <label><span data-label="size">Boxes</span> <select id="ring-size"></select></label>
+                <label><span id="ring-language-label" lang="ja">言語</span>
+                    <select id="ring-language"><option value="en" lang="en">English</option><option value="ja" lang="ja">日本語</option></select>
+                </label>
+            </div>
+            <div class="ring-field">
+                <div class="ring-board" id="ring-board" role="group" aria-describedby="ring-status">
+                    <div class="ring-orbit" aria-hidden="true"></div>
+                    <dl class="ring-counter" aria-live="polite" aria-atomic="true">
+                        <dt data-label="moves">Moves</dt><dd id="ring-moves">0</dd>
+                    </dl>
+                    <div class="ring-boxes" id="ring-boxes"></div>
+                    <div class="ring-stones" id="ring-stones" aria-hidden="true"></div>
+                </div>
+            </div>
+            <div class="ring-footer">
+                <p id="ring-status" role="status" aria-atomic="true"></p>
+                <div class="game-actions">
+                    <button type="button" id="ring-undo" data-label="undo" disabled>Undo</button>
+                    <button type="button" id="ring-reset" data-label="reset" disabled>Reset</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-14.html" rel="prev">&larr; 2026/11/14</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
