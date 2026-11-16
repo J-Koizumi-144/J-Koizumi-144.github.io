@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/16: boundaries in a painted grid. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/16</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="paint-grid.css" type="text/css">
+    <script type="module" src="paint-grid.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <span><a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-16" aria-current="page">2026/11/16</time></span>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/16</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+    <section class="paper problem-statement" lang="en" aria-labelledby="english">
+        <h2 id="english">English</h2>
+        <p>Let \(n\) be a positive integer.
+        A \(2n\times 2n\) grid consists of white squares, each with side length \(1\).
+        Paint each entire row red and each entire column blue, exactly once per row and once per column, in any order.
+        Each square takes the color of the later operation that paints it.</p>
+        <p>After all the operations, what is the greatest possible total length of the boundary between red and blue squares?
+        Express your answer in terms of \(n\).</p>
+    </section>
+    <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+        <h2 id="japanese">日本語</h2>
+        <p>\(n\) を正の整数とする．
+        縦横 \(2n\) マスずつの白い方眼がある．
+        各マスは一辺の長さが \(1\) の正方形である．
+        各行全体を赤く塗る操作と，各列全体を青く塗る操作を，それぞれの行・列について1回ずつ，好きな順番で行う．
+        重なったマスは，後から塗った色になる．</p>
+        <p>すべての操作を終えたとき，赤と青の境界線の長さの合計は最大でいくつになるか．
+        \(n\) を用いて表せ．</p>
+    </section>
+    <section aria-labelledby="try-it">
+        <h2 id="try-it">Try it</h2>
+        <noscript><p>Enable JavaScript to paint the grid. <span lang="ja">方眼を塗るにはJavaScriptを有効にしてください．</span></p></noscript>
+        <div class="coin-game paint-game" id="paint-game" lang="en" hidden>
+            <div class="game-settings">
+                <label><span data-text="size">Grid size</span><select id="paint-size"></select></label>
+                <label><span id="paint-lang-label" lang="ja">言語</span>
+                    <select id="paint-language">
+                        <option value="en" lang="en">English</option>
+                        <option value="ja" lang="ja">日本語</option>
+                    </select>
+                </label>
+            </div>
+            <p id="paint-instruction"></p>
+            <div class="paint-workspace">
+                <div class="paint-field">
+                    <table id="paint-board" aria-describedby="paint-instruction"></table>
+                </div>
+                <div class="paint-readout">
+                    <dl class="paint-stats">
+                        <div class="paint-length">
+                            <dt data-text="length">Boundary length</dt>
+                            <dd id="paint-length">0</dd>
+                        </div>
+                        <div class="paint-count">
+                            <dt data-text="moves">Moves</dt>
+                            <dd><span id="paint-moves">0</span><span id="paint-total"></span></dd>
+                        </div>
+                    </dl>
+                    <div class="game-actions">
+                        <button type="button" id="paint-undo" data-text="undo" disabled>Undo</button>
+                        <button type="button" id="paint-reset" data-text="reset" disabled>Reset</button>
+                    </div>
+                </div>
+            </div>
+            <p class="paint-sr" role="status" id="paint-status" aria-atomic="true"></p>
+        </div>
+    </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-15.html" rel="prev">&larr; 2026/11/15</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
