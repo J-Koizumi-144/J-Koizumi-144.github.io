@@ -1,0 +1,201 @@
+.ball-game, .ball-game * { box-sizing: border-box; }
+.ball-game[hidden], .ball-game [hidden] { display: none; }
+.ball-game {
+    --teal: #087478;
+    --ink: #303a3a;
+    --box-height: clamp(52px, 8vw, 70px);
+    padding: clamp(12px, 2.8vw, 22px);
+    border: 1px solid #c9cecb;
+    border-radius: 9px;
+    background: #fff;
+    color: var(--ink);
+}
+.ball-game .game-settings { gap: 8px 18px; font-size: 16px; }
+.ball-game .game-settings label { gap: 7px; }
+.ball-game select, .ball-game .game-actions button {
+    min-height: 44px;
+    border-color: #a4b2af;
+    border-radius: 5px;
+    background: #fff;
+}
+.ball-game select { padding: 4px 8px; }
+.ball-game .ball-tray {
+    margin-top: 17px;
+    padding: 12px clamp(6px, 2%, 14px) 15px;
+    border: 1px solid #deded5;
+    border-radius: 7px;
+    background: #f6f5ef;
+}
+.ball-game .ball-tray-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    min-height: 24px;
+    margin: 0 3px 11px;
+    color: #46514d;
+    font-size: 15px;
+    line-height: 1.35;
+}
+.ball-game #ball-count { font-weight: bold; }
+.ball-game #ball-ratio-key { font-size: 13px; }
+.ball-game .ball-board {
+    position: relative;
+    container-type: inline-size;
+    width: min(100%, calc(var(--slots) * 78px));
+    height: calc(var(--box-height) + 28px);
+    margin-inline: 0 auto;
+    isolation: isolate;
+}
+.ball-game .ball-frames, .ball-game .ball-slots {
+    position: absolute;
+    inset: 0 0 auto;
+    display: grid;
+    grid-template-columns: repeat(var(--slots), minmax(0, 1fr));
+}
+.ball-game .ball-slots { height: var(--box-height); pointer-events: none; }
+.ball-game .box-target, .ball-game .ball-slot {
+    grid-row: 1;
+    min-width: 0;
+    min-height: 0;
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    -webkit-tap-highlight-color: transparent;
+}
+.ball-game .box-target:not(:disabled):hover, .ball-game .ball-slot:not(:disabled):hover {
+    background: transparent;
+}
+.ball-game .box-target {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    container-type: inline-size;
+    gap: 7px;
+    padding-inline: clamp(1px, .35vw, 3px);
+    touch-action: manipulation;
+}
+.ball-game .box-outline {
+    position: relative;
+    width: 100%;
+    height: var(--box-height);
+    border: 1.5px solid #929b95;
+    border-radius: 6px;
+    background: #fffefa;
+    box-shadow: 0 2px 0 #253b3511;
+}
+.ball-game .box-target:hover .box-outline { border-color: #506e66; }
+.ball-game .box-target[aria-pressed="true"] .box-outline {
+    border-color: var(--teal);
+    box-shadow: inset 0 0 0 1.5px var(--teal);
+    background: #e5f3ee;
+}
+.ball-game .box-target[aria-pressed="true"] .box-outline::after {
+    content: '✓';
+    position: absolute;
+    right: 2px;
+    top: 1px;
+    color: var(--teal);
+    font: 700 12px/1 system-ui, sans-serif;
+}
+.ball-game .box-percent {
+    font: 600 clamp(9px, 30cqi, 14px)/1.25 Arial, sans-serif;
+    color: #4e5854;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+.ball-game .box-target[aria-pressed="true"] .box-percent { color: var(--teal); }
+.ball-game .box-target:focus-visible { outline: none; }
+.ball-game .box-target:focus-visible .box-outline {
+    outline: 2px dashed var(--teal);
+    outline-offset: 2px;
+}
+.ball-game .ball-slot, .ball-game .ball-slot:disabled {
+    position: relative;
+    display: grid;
+    place-items: center;
+    height: var(--box-height);
+    border: 0;
+    padding: 0;
+    background: transparent;
+    opacity: 1;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.ball-game .ball-orb {
+    display: block;
+    width: min(64%, 38px);
+    aspect-ratio: 1;
+    border: 1px solid;
+    border-radius: 50%;
+    pointer-events: none;
+}
+.ball-game .ball-slot[data-color="red"] .ball-orb {
+    border-color: #b63335;
+    background-color: #d94a4c;
+}
+.ball-game .ball-slot[data-color="white"] .ball-orb {
+    border-color: #747c78;
+    background-color: #fff;
+}
+.ball-game[data-editing="true"] .ball-slots { pointer-events: auto; }
+.ball-game[data-editing="true"] .ball-slot {
+    cursor: grab;
+    border-radius: 6px;
+    touch-action: none;
+}
+.ball-game .ball-slot:focus-visible { outline: none; }
+.ball-game .ball-slot:focus-visible .ball-orb {
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
+}
+.ball-game[data-editing="true"] .ball-slot[aria-pressed="true"] .ball-orb {
+    outline: 2px dashed var(--teal);
+    outline-offset: 3px;
+}
+.ball-game .ball-slot.dragging {
+    z-index: 2;
+    cursor: grabbing;
+}
+.ball-game .ball-slot.dragging .ball-orb {
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+    translate: 0 -3px;
+}
+.ball-game .ball-slots.reordering .ball-slot:not(.dragging) { transition: transform .12s ease-out; }
+.ball-game .ball-message {
+    min-height: 1.5em;
+    margin: 11px 0 15px;
+    color: #465451;
+    font-size: 15px;
+    line-height: 1.45;
+}
+.ball-game .ball-message[data-kind="blocked"] { color: #894a2f; }
+.ball-game .ball-message[data-kind="ready"], .ball-game .ball-message[data-kind="complete"] {
+    color: #006769;
+}
+.ball-game .game-actions { gap: 8px; }
+.ball-game .game-actions button { padding: 5px 12px; }
+.ball-game .game-actions button:disabled { background: #f2f3f1; border-color: #cdcfcb; color: #68716d; }
+.ball-game .game-actions .edit-action { margin-inline-start: auto; }
+.ball-game .game-actions .edit-action[aria-pressed="true"] {
+    margin-inline-start: 0;
+    background: var(--teal);
+    color: white;
+    border-color: var(--teal);
+}
+@media (max-width: 520px) {
+    .ball-game { padding: 10px 8px 12px; }
+    .ball-game .ball-tray { padding-inline: 4px; }
+    .ball-game .game-settings { font-size: 15px; }
+    .ball-game .game-actions { gap: 6px; }
+    .ball-game .game-actions button { font-size: 15px; flex: 1 1 auto; padding-inline: 7px; }
+    .ball-game .game-actions .merge-button { width: auto; }
+    .ball-game .game-actions .edit-action { flex-basis: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .ball-game .ball-slots.reordering .ball-slot:not(.dragging) { transition: none; }
+}

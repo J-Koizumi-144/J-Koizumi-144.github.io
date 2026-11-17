@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/17: boxes of red and white balls. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/17</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="ball-boxes.css" type="text/css">
+    <script type="module" src="ball-boxes.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <span><a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-17" aria-current="page">2026/11/17</time></span>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/17</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+    <section class="paper problem-statement" lang="en" aria-labelledby="english">
+        <h2 id="english">English</h2>
+        <p>Let \(n\geq 1\) be an integer.
+        Place \(n\) red balls and \(n\) white balls in a row of \(2n\) boxes, one ball per box.
+        You may replace two adjacent boxes with a single box holding all their balls if the fraction of red balls in the left box is at most that in the right box.</p>
+        <p>How many initial arrangements allow you to gather all the balls in one box by repeating this move?</p>
+    </section>
+    <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+        <h2 id="japanese">日本語</h2>
+        <p>赤玉と白玉が \(n\) 個ずつある（\(n\geq 1\)）．
+        横一列に並んだ \(2n\) 個の箱に，これらの玉を1個ずつ入れる．
+        隣り合う二つの箱で赤玉の割合を比べ，左の割合が右の割合以下なら，二つの箱をその場で一つにまとめてよい．</p>
+        <p>最初の玉の並べ方のうち，この操作を繰り返してすべての玉を一つの箱にまとめられるものは何通りあるか．</p>
+    </section>
+    <section aria-labelledby="try-it">
+        <h2 id="try-it">Try it</h2>
+        <noscript><p>Enable JavaScript to try the puzzle. <span lang="ja">遊ぶにはJavaScriptを有効にしてください．</span></p></noscript>
+        <div class="coin-game ball-game" id="ball-game" lang="en" hidden>
+            <div class="game-settings">
+                <label><span data-copy="size">Balls per color</span><select id="ball-size"></select></label>
+                <label><span id="ball-language-label" lang="ja">言語</span>
+                    <select id="ball-language">
+                        <option value="en" lang="en">English</option>
+                        <option value="ja" lang="ja">日本語</option>
+                    </select>
+                </label>
+            </div>
+            <div class="ball-tray">
+                <div class="ball-tray-heading">
+                    <span id="ball-count"></span>
+                    <span id="ball-ratio-key" data-copy="redPercent">Red balls (%)</span>
+                </div>
+                <div class="ball-board" id="ball-board" role="group" aria-describedby="ball-message">
+                    <div class="ball-frames" id="ball-frames"></div>
+                    <div class="ball-slots" id="ball-slots"></div>
+                </div>
+            </div>
+            <p class="ball-message" role="status" aria-live="polite" aria-atomic="true" id="ball-message"></p>
+            <div class="game-actions">
+                <button type="button" id="ball-merge" class="merge-button" data-copy="merge" disabled>Merge</button>
+                <button type="button" id="ball-undo" data-copy="undo" disabled>Undo</button>
+                <button type="button" id="ball-reset" data-copy="reset" disabled>Reset</button>
+                <button type="button" id="ball-edit" class="edit-action">Edit starting arrangement</button>
+            </div>
+        </div>
+    </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-16.html" rel="prev">&larr; 2026/11/16</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
