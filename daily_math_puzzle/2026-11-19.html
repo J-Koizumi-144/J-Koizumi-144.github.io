@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/19: domino flips. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/19</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="domino-flips.css" type="text/css">
+    <script type="module" src="domino-flips.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-19" aria-current="page">2026/11/19</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/19</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>A rectangular grid with its cells colored in a black-and-white checkerboard pattern is tiled with \(1\times2\) tiles.
+Two tiles filling a \(2\times2\) square may be turned from vertical to horizontal if the top-left cell is black, and from horizontal to vertical if the top-left cell is white.
+Prove that the process must stop after finitely many moves, regardless of the choices made.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>白黒の市松模様に塗られた長方形のマス目が，\(1\times2\) のタイルで敷き詰められている．
+\(2\times2\) の正方形を埋める2枚のタイルに対し，左上のマスが黒なら縦から横へ，左上のマスが白なら横から縦へ置き直せる．
+どの順に操作しても，必ず有限回で操作できなくなることを示せ．</p>
+        </section>
+
+    <section aria-labelledby="try-it">
+        <h2 id="try-it">Try it</h2>
+        <noscript><p>Enable JavaScript to try the puzzle. <span lang="ja">操作するにはJavaScriptを有効にしてください．</span></p></noscript>
+        <div id="domino-flips" class="coin-game domino-flips" lang="en" hidden>
+            <div class="game-settings">
+                <label><span data-copy="size">Board</span><select id="flip-size"></select></label>
+                <label><span id="flip-language-label" data-copy="language" lang="ja">言語</span>
+                    <select id="flip-language">
+                        <option value="en" lang="en">English</option>
+                        <option value="ja" lang="ja">日本語</option>
+                    </select>
+                </label>
+            </div>
+            <p class="flip-instruction" id="flip-instruction" data-copy="instruction">Tap a marked square to turn the two tiles.</p>
+            <dl class="game-stats">
+                <div><dt data-copy="moves">Moves</dt><dd id="flip-moves">0</dd></div>
+                <div><dt data-copy="available">Available flips</dt><dd id="flip-available">0</dd></div>
+            </dl>
+            <div id="flip-board" class="flip-board" role="group" aria-describedby="flip-instruction flip-status"></div>
+            <p id="flip-status" class="flip-status" role="status" aria-live="polite" aria-atomic="true"></p>
+            <div class="game-actions">
+                <button type="button" id="flip-auto" class="flip-auto" aria-pressed="false">Autoplay</button>
+                <button type="button" id="flip-undo" data-copy="undo" disabled>Undo</button>
+                <button type="button" id="flip-reset" data-copy="reset" disabled>Reset</button>
+            </div>
+            <button type="button" id="flip-new" class="flip-new" data-copy="newBoard">New tiling</button>
+        </div>
+    </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-18.html" rel="prev">&larr; 2026/11/18</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
