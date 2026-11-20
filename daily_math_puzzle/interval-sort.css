@@ -1,0 +1,82 @@
+.interval-sort, .interval-sort * { box-sizing: border-box; }
+.interval-sort[hidden], .interval-sort [hidden] { display: none; }
+.interval-sort {
+    --sort-accent: #087b7f;
+    padding: 20px;
+    border-radius: 5px;
+    background: #fff;
+}
+.interval-sort .game-settings { gap: 12px 20px; }
+.interval-sort select {
+    appearance: none;
+    padding-right: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%23555' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+.interval-sort .sort-instruction { margin: 18px 0; font-size: 15px; color: #566260; }
+.interval-sort .sort-row { margin: 18px 0; }
+.interval-sort .sort-row-heading {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 12px;
+    margin-bottom: 7px;
+    font-size: 16px;
+}
+.interval-sort .sort-row-state { font-size: 14px; color: #606865; }
+.interval-sort .sort-row-state[data-sorted="true"] { color: #08666a; font-weight: bold; }
+.interval-sort .sort-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--sort-columns), minmax(0, 1fr));
+    gap: 6px;
+}
+.interval-sort .sort-cell {
+    width: 100%;
+    min-width: 0;
+    min-height: 58px;
+    padding: 8px 0;
+    border: 1px solid #99a9a6;
+    border-radius: 3px;
+    background: white;
+    font: 26px/1.2 "Computer Modern", serif;
+    font-variant-numeric: tabular-nums;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.interval-sort .sort-cell[aria-pressed="true"] {
+    border: 2px solid var(--sort-accent);
+    background: #e0f0ee;
+    box-shadow: inset 0 -3px 0 var(--sort-accent);
+    font-weight: bold;
+    color: #075d60;
+}
+.interval-sort .sort-cell[aria-pressed="true"]:hover { background: #d5eae7; }
+.interval-sort .sort-cell:focus-visible { outline-offset: -5px; }
+.interval-sort .sort-cell:disabled { background: #f6f8f7; color: #333; border-color: #99a9a6; }
+.interval-sort .sort-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 32px;
+    margin: 22px 0 0;
+    padding-top: 14px;
+    border-top: 1px solid #dce2df;
+}
+.interval-sort .sort-stats > div { display: flex; align-items: baseline; gap: 12px; }
+.interval-sort .sort-stats dt { font-size: 14px; color: #58635f; }
+.interval-sort .sort-stats dd { margin: 0; font-size: 20px; }
+.interval-sort .game-message { margin: 12px 0 16px; font-size: 16px; }
+.interval-sort .game-actions { gap: 8px; }
+.interval-sort .sort-apply:not(:disabled) { background: var(--sort-accent); border-color: var(--sort-accent); color: white; }
+.interval-sort .sort-apply:not(:disabled):hover { background: #066165; }
+.interval-sort .sort-shuffle { margin-top: 12px; }
+@media (max-width: 520px) {
+    .interval-sort { padding: 14px 10px; }
+    .interval-sort .game-settings { font-size: 16px; }
+    .interval-sort .sort-grid { gap: 3px; }
+    .interval-sort .sort-cell { min-height: 48px; font-size: 22px; }
+    .interval-sort .game-actions .sort-apply { width: 100%; }
+    .interval-sort .game-actions #sort-undo, .interval-sort .game-actions #sort-reset { flex: 1; }
+    .interval-sort .sort-shuffle { width: 100%; }
+}

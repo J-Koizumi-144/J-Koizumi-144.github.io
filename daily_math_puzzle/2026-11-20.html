@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/20: sorting two rows. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/20</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="interval-sort.css" type="text/css">
+    <script type="module" src="interval-sort.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-20" aria-current="page">2026/11/20</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/20</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+<p>Let \(n\) be a positive integer.
+In a grid with \(2\) rows and \(n\) columns, write \(1,2,\dots,n\) from left to right in the top row and arrange the same numbers in any order in the bottom row.
+In one move, choose two or more consecutive columns and rearrange the numbers within those columns in each row separately into decreasing order from left to right.</p>
+<p>Prove that, however the moves are chosen, whenever the top row is in decreasing order, so is the bottom row.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+<p>\(n\) を正の整数とする．
+\(2\) 行 \(n\) 列のマス目の上の行に，左から \(1,2,\dots,n\) と書き，下の行にはこれらを好きな順に書く．
+1回の操作では，連続する2列以上を選び，その範囲内で，上下それぞれの行の数を左から大きい順に並べ替える．</p>
+<p>どのように操作を繰り返しても，上の行が大きい順に並んだとき，下の行も大きい順に並んでいることを示せ．</p>
+        </section>
+
+        <section aria-labelledby="try-it"><h2 id="try-it">Try it</h2>
+        <noscript><p>Enable JavaScript to try the puzzle. <span lang="ja">操作するにはJavaScriptを有効にしてください．</span></p></noscript>
+        <div id="interval-sort" class="coin-game interval-sort" lang="en" hidden>
+            <div class="game-settings">
+                <label><span data-copy="size">Columns</span><select id="sort-size"></select></label>
+                <label><span id="sort-language-label" data-copy="language" lang="ja">言語</span>
+                    <select id="sort-language">
+                        <option value="en" lang="en">English</option>
+                        <option value="ja" lang="ja">日本語</option>
+                    </select>
+                </label>
+            </div>
+            <p id="sort-instruction" class="sort-instruction" data-copy="instruction">Choose the two ends of an interval.</p>
+            <div class="sort-row">
+                <div class="sort-row-heading"><span id="sort-top-label" data-copy="top">Top row</span><span id="sort-top-state" class="sort-row-state"></span></div>
+                <div id="sort-top" class="sort-grid" role="group" aria-labelledby="sort-top-label" aria-describedby="sort-instruction"></div>
+            </div>
+            <div class="sort-row">
+                <div class="sort-row-heading"><span id="sort-bottom-label" data-copy="bottom">Bottom row</span><span id="sort-bottom-state" class="sort-row-state"></span></div>
+                <div id="sort-bottom" class="sort-grid" role="group" aria-labelledby="sort-bottom-label" aria-describedby="sort-instruction"></div>
+            </div>
+            <dl class="sort-stats">
+                <div><dt data-copy="moves">Moves</dt><dd id="sort-moves">0</dd></div>
+                <div><dt data-copy="selection">Selected columns</dt><dd id="sort-selection">None</dd></div>
+            </dl>
+            <p id="sort-message" class="game-message" role="status" aria-live="polite" aria-atomic="true"></p>
+            <div class="game-actions">
+                <button id="sort-apply" class="sort-apply" type="button" data-copy="sort" disabled>Sort interval</button>
+                <button id="sort-undo" type="button" data-copy="undo" disabled>Undo</button>
+                <button id="sort-reset" type="button" data-copy="reset" disabled>Reset</button>
+            </div>
+            <button id="sort-shuffle" class="sort-shuffle" type="button" data-copy="shuffle">Shuffle &amp; restart</button>
+        </div>
+    </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-19.html" rel="prev">&larr; 2026/11/19</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
