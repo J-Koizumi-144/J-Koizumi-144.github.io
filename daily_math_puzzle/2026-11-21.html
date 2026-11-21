@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/21: three colored paths. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/21</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="three-paths.css" type="text/css">
+    <script type="module" src="three-paths.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-21" aria-current="page">2026/11/21</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/21</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>Mark some points inside triangle \(ABC\) and triangulate it using exactly those points and \(A,B,C\) as vertices.
+Color each edge except the three outer sides red, blue, or green.
+Prove that there is a coloring in which every marked point can reach \(A\) along red edges alone, \(B\) along blue edges alone, and \(C\) along green edges alone.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>三角形 \(ABC\) の内部にいくつかの点を打ち，それらと \(A,B,C\) を頂点として三角形分割する．
+外周の3辺を除く各辺を，赤・青・緑のいずれか1色に塗る．
+打ったどの点からも，赤い辺だけで \(A\) に，青い辺だけで \(B\) に，緑の辺だけで \(C\) に行ける塗り方があることを示せ．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+        <h2 id="try-it">Try it</h2>
+        <noscript><p>Enable JavaScript to play. <span lang="ja">操作するには JavaScript を有効にしてください。</span></p></noscript>
+        <div id="three-paths" lang="en" hidden>
+            <div class="tp-settings">
+                <div class="tp-config">
+                    <label><span data-word="points">Interior points</span> <select id="tp-size"></select></label>
+                    <button type="button" id="tp-next" data-word="next">Change layout</button>
+                </div>
+                <label><span data-word="language">言語</span>
+                    <select id="tp-language"><option value="en">English</option><option value="ja">日本語</option></select>
+                </label>
+            </div>
+            <p id="tp-guide" data-word="guide">Choose a color, then click an edge to paint it.</p>
+            <div class="tp-tools" role="group" id="tp-tools">
+                <button type="button" data-brush="red"><i></i><span data-word="red">Red</span></button>
+                <button type="button" data-brush="blue"><i></i><span data-word="blue">Blue</span></button>
+                <button type="button" data-brush="green"><i></i><span data-word="green">Green</span></button>
+                <button type="button" data-brush="erase"><i></i><span data-word="erase">Erase</span></button>
+            </div>
+            <div class="tp-sheet">
+                <svg id="tp-board" viewBox="0 0 460 344" role="group" aria-describedby="tp-guide"></svg>
+            </div>
+            <p class="tp-caption" data-word="reached">Interior points reached</p>
+            <div class="tp-counts" id="tp-counts" role="status" aria-live="polite" aria-atomic="true"></div>
+            <div class="tp-bottom">
+                <span id="tp-message" role="status"></span>
+                <div class="tp-actions">
+                    <button type="button" id="tp-undo" data-word="undo" disabled>Undo</button>
+                    <button type="button" id="tp-reset" data-word="reset" disabled>Reset</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-20.html" rel="prev">&larr; 2026/11/20</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
