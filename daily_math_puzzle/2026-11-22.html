@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/22: runs of consecutive integers. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/22</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="integer-runs.css" type="text/css">
+    <script type="module" src="integer-runs.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-22" aria-current="page">2026/11/22</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/22</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>There are \(n\geq 1\) distinct positive integers written in increasing order from left to right.
+In each round, go through the numbers from left to right, replacing each with the smallest integer that is larger than its current value and different from all the other numbers at that moment.
+Prove that, after sufficiently many rounds, the maximal runs of consecutive integers are arranged from left to right in nondecreasing order of length.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>\(n\geq 1\) 個の互いに異なる正整数が左から小さい順に書かれている．
+1回の操作では左から順に，各数を「今よりも大きく，その時点で他の数と異なる最小の整数」に書き換える．
+この操作を十分に繰り返すと，連続する数のかたまりが，左から短い順に並ぶことを示せ．</p>
+        </section>
+
+        <section aria-labelledby="try-it"><h2 id="try-it">Try it</h2>
+        <noscript><p>Enable JavaScript to try the puzzle. <span lang="ja">操作するにはJavaScriptを有効にしてください．</span></p></noscript>
+        <div id="integer-game" class="coin-game integer-game" lang="en" hidden>
+            <div class="game-settings">
+                <label><span data-copy="count">Numbers</span><select id="integer-count"></select></label>
+                <label><span id="integer-language-label" data-copy="language" lang="ja">言語</span>
+                    <select id="integer-language">
+                        <option value="en" lang="en">English</option>
+                        <option value="ja" lang="ja">日本語</option>
+                    </select>
+                </label>
+            </div>
+            <div class="round-line">
+                <span class="round-counter"><span data-copy="rounds">Rounds completed</span> <strong id="integer-rounds">0</strong></span>
+                <span id="integer-progress" class="round-progress"></span>
+            </div>
+            <p class="instruction" data-copy="instruction">Press the highlighted round button.</p>
+            <ol id="integer-row" class="number-row"></ol>
+            <div class="run-summary">
+                <div class="run-summary-top">
+                    <span id="integer-run-label" class="run-summary-label"></span>
+                    <span id="integer-order" class="run-order"></span>
+                </div>
+                <div id="integer-lengths" class="run-lengths" role="group" aria-labelledby="integer-run-label"></div>
+            </div>
+            <div class="game-actions">
+                <button id="integer-auto" class="primary-action" type="button" aria-pressed="false">Run one round</button>
+                <button id="integer-random" type="button" data-copy="random">New random row</button>
+            </div>
+            <div class="game-actions secondary-actions">
+                <button id="integer-undo" type="button" data-copy="undo" disabled>Undo</button>
+                <button id="integer-reset" type="button" data-copy="reset" disabled>Reset</button>
+            </div>
+            <p id="integer-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+        </div>
+    </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-21.html" rel="prev">&larr; 2026/11/21</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
