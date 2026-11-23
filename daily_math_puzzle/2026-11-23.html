@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/23: room schedules. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/23</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="room-schedule.css" type="text/css">
+    <script type="module" src="room-schedule.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-23" aria-current="page">2026/11/23</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/23</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>During a certain 60-minute period, \(n\) groups wish to use two rooms, A and B.
+Group \(k\) requests \(a_k\) minutes in room A and \(b_k\) minutes in room B.
+Assume that \(a_k+b_k\leq60\) for every \(k\), and that the total time requested for each room is 60 minutes.
+Prove that the order of use in each room can be chosen so that no group's use of the two rooms overlaps in time.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>ある60分間に，二つの部屋A，Bを \(n\) 個の団体が使おうとしている．
+団体 \(k\) は，部屋Aを \(a_k\) 分，部屋Bを \(b_k\) 分使いたい．
+各 \(k\) について \(a_k+b_k\leq60\) であり，各部屋の希望時間の合計は60分である．
+両室の使用順序をうまく決めれば，同じ団体の使用時間が二部屋で重ならないようにできることを示せ．</p>
+        </section>
+
+    <section aria-labelledby="try-it">
+        <h2 id="try-it">Try it</h2>
+        <noscript><p>Enable JavaScript to try the puzzle. <span lang="ja">操作するにはJavaScriptを有効にしてください．</span></p></noscript>
+        <div id="room-schedule" class="coin-game room-schedule" lang="en" hidden>
+            <div class="game-settings">
+                <label><span data-copy="groups">Groups</span>
+                    <select id="rooms-count"></select>
+                </label>
+                <label><span data-copy="language">言語</span>
+                    <select id="rooms-language" aria-label="Language / 言語">
+                        <option value="en" lang="en">English</option>
+                        <option value="ja" lang="ja">日本語</option>
+                    </select>
+                </label>
+            </div>
+            <p class="drag-instruction" data-copy="instruction">Drag the groups to reorder each room.</p>
+            <p id="rooms-keyboard-help" class="sr-only" data-copy="keyboardHelp">Focus a group and use the arrow keys to move it. Home and End move it to the first and last positions.</p>
+            <div class="room-row">
+                <h3 id="room-a-label" data-copy="roomA">Room A</h3>
+                <ol id="room-a-order" class="order-lane" data-room="A" aria-labelledby="room-a-label"></ol>
+            </div>
+            <div class="room-row">
+                <h3 id="room-b-label" data-copy="roomB">Room B</h3>
+                <ol id="room-b-order" class="order-lane" data-room="B" aria-labelledby="room-b-label"></ol>
+            </div>
+            <div class="timeline-heading">
+                <span data-copy="schedule">Schedule</span>
+                <span data-copy="minutes">minutes</span>
+            </div>
+            <div id="rooms-timeline" class="timeline"></div>
+            <div class="status-line">
+                <p id="rooms-status" role="status" aria-live="polite" aria-atomic="true"></p>
+            </div>
+            <div class="game-actions">
+                <button id="rooms-undo" type="button" data-copy="undo" disabled>Undo</button>
+                <button id="rooms-reset" type="button" data-copy="reset" disabled>Reset</button>
+                <button id="rooms-new" type="button" data-copy="newTimes">Random times</button>
+            </div>
+            <p id="rooms-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+        </div>
+    </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-22.html" rel="prev">&larr; 2026/11/22</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
