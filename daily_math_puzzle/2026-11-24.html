@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/24: swapping and flipping cards. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/24</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="swap-flip.css" type="text/css">
+    <script type="module" src="swap-flip.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-24" aria-current="page">2026/11/24</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/24</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+<h2 id="english">English</h2>
+<p>There are \(n\geq2\) cards, with one card for each number from \(1\) to \(n\).
+Each card has the same number on both sides, with a white front and a black back.
+The cards are arranged in a row in some order, all with their white sides facing up.
+In one move, swap two adjacent cards and turn both of them over.</p>
+<p>Prove that, after the cards have been rearranged in increasing order from left to right, the color facing up on each card is independent of the sequence of moves.</p>
+</section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+<h2 id="japanese">日本語</h2>
+<p>\(n\geq2\) 枚のカードがあり，両面に同じ番号が書かれ，表は白，裏は黒である．
+番号は \(1\) から \(n\) まで一つずつで，カードはすべて白い面を上にして横一列に並んでいる．
+1回の操作では，隣り合う2枚の位置を交換し，同時にその2枚を裏返す．</p>
+<p>番号を左から小さい順に並べ直したとき，各カードの上を向く面の色は，操作の手順によらず決まることを示せ．</p>
+</section>
+
+        <section aria-labelledby="try-it">
+            <h2 id="try-it">Try it</h2>
+            <noscript><p>Enable JavaScript to play. <span lang="ja">JavaScriptを有効にしてください．</span></p></noscript>
+            <div id="swap-flip" lang="en" hidden>
+                <div class="sf-settings">
+                    <label><span data-label="language">言語</span> <select id="sf-language" aria-label="Language / 言語"><option value="en">English</option><option value="ja">日本語</option></select></label>
+                    <label><span data-label="size">Cards</span> <select id="sf-size"><option>2</option><option>3</option><option>4</option><option selected>5</option><option>6</option></select></label>
+                </div>
+                <p class="sf-initial"><span data-label="initial">Initial order</span>: <span id="sf-start"></span></p>
+                <div id="sf-board" class="sf-board"></div>
+                <div id="sf-pairs" class="sf-pairs"></div>
+                <p data-label="help">Press ↔ below two neighboring cards.</p>
+                <p><span data-label="moves">Moves</span>: <span id="sf-moves">0</span></p>
+                <p id="sf-message" class="sf-message" role="status" aria-live="polite"></p>
+                <div class="sf-actions"><button id="sf-undo" data-label="undo" type="button">Undo</button><button id="sf-reset" data-label="reset" type="button">Reset</button><button id="sf-random" data-label="random" type="button">New order</button></div>
+            </div>
+        </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+<a href="2026-11-23.html" rel="prev">&larr; 2026/11/23</a>
+<a href="../daily_math_puzzle.html">All Problems</a>
+</nav>
+</body>
+</html>

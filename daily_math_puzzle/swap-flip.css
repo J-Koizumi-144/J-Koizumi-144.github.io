@@ -1,0 +1,24 @@
+#swap-flip { border:1px solid #cbd5d5; border-radius:10px; padding:18px; background:#f7faf9; margin:16px 0 26px; }
+#swap-flip[hidden] { display:none; }
+#swap-flip .sf-settings, #swap-flip .sf-actions { display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+#swap-flip select, #swap-flip button { font:inherit; }
+#swap-flip select { padding:6px; }
+#swap-flip button { min-height:44px; border:1px solid #526c72; border-radius:7px; background:#fff; color:#173d48; cursor:pointer; padding:7px 12px; }
+#swap-flip button:disabled { opacity:.45; cursor:default; }
+#swap-flip button:focus-visible, #swap-flip select:focus-visible { outline:3px solid #e87500; outline-offset:2px; }
+#swap-flip .sf-initial { font-size:.95em; margin:18px 0 8px; }
+#swap-flip .sf-board { display:grid; gap:6px; margin:16px 0 8px; }
+#swap-flip .sf-card { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; min-width:0; height:100px; border:2px solid #303737; border-radius:8px; background:#fff; color:#111; }
+#swap-flip .sf-card.black { background:#242a2a; color:#fff; }
+#swap-flip .sf-number { font-size:2rem; line-height:1.2; }
+#swap-flip .sf-face { font-size:.8rem; }
+#swap-flip .sf-pairs { display:grid; gap:4px; margin:0 0 14px; }
+#swap-flip .sf-pair { padding:4px 0; font-size:1.3rem; }
+#swap-flip .sf-message { min-height:1.6em; font-weight:600; }
+@media(max-width:480px) {
+ #swap-flip { padding:12px; }
+ #swap-flip .sf-board { gap:4px; }
+ #swap-flip .sf-card { height:78px; border-radius:6px; }
+ #swap-flip .sf-number { font-size:1.65rem; }
+ #swap-flip .sf-face { font-size:.7rem; }
+}
