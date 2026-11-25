@@ -1,0 +1,249 @@
+.station-fares {
+    --rail-ink: #213e40;
+    --rail-teal: #08777b;
+    --rail-border: #c4d1cd;
+    --rail-rust: #9d462d;
+    padding: clamp(12px, 3vw, 22px);
+    border-color: var(--rail-border);
+    border-radius: 8px;
+    color: var(--rail-ink);
+    background: #fff;
+}
+
+.station-fares .rail-toolbar {
+    justify-content: flex-start;
+    gap: 8px 12px;
+    margin-bottom: 15px;
+}
+
+.station-fares .rail-language { margin-inline-start: auto; }
+.station-fares .rail-toolbar label { gap: 6px; }
+.station-fares .rail-toolbar select,
+.station-fares .rail-toolbar button,
+.station-fares .rail-actions button {
+    border-color: #a9bcb7;
+    border-radius: 5px;
+    background: #fff;
+    font-size: 16px;
+}
+
+.station-fares #rail-new {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #075c60;
+    border-color: #9dbcb5;
+    background: #f1f7f5;
+}
+
+.station-fares #rail-new:hover { background: #e2efe9; }
+.station-fares .rail-frame {
+    border: 1px solid var(--rail-border);
+    border-radius: 6px;
+}
+
+.station-fares .rail-map {
+    position: relative;
+    isolation: isolate;
+    border-radius: 5px 5px 0 0;
+    background-color: #f6f8f4;
+    background-image: radial-gradient(#cedbd3 0.8px, transparent 0.9px);
+    background-size: 15px 15px;
+}
+
+.station-fares #rail-tracks {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.station-fares .track {
+    fill: none;
+    stroke: #86aaa0;
+    stroke-width: max(1.5px, calc(3.5px * var(--rail-station-scale, 1)));
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.station-fares .track.main { stroke: #568b80; stroke-width: max(2px, calc(5px * var(--rail-main-scale, 1))); }
+.station-fares .track.priced { stroke: var(--rail-teal); }
+.station-fares .track.repeated {
+    stroke: var(--rail-rust);
+    stroke-dasharray: 6 5;
+}
+.station-fares .fare-leader { stroke: #78938d; stroke-width: 1px; }
+
+.station-fares .fare-tag rect { fill: #fff; stroke: #478581; stroke-width: 1.25px; }
+.station-fares .fare-tag text {
+    fill: #115d61;
+    font: bold 13px/1 "Computer Modern", serif;
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+.station-fares .fare-tag.repeated rect { fill: #fff5ed; stroke: var(--rail-rust); }
+.station-fares .fare-tag.repeated text { fill: #7f351f; }
+.station-fares .fare-warning {
+    fill: none;
+    stroke: #873b24;
+    stroke-width: 1.3;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+.station-fares button.rail-station {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--rail-hit-width, 44px);
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    touch-action: manipulation;
+}
+
+.station-fares button.rail-station:hover { background: transparent; }
+.station-fares button.main-station {
+    --rail-station-scale: var(--rail-main-scale, 1);
+    width: var(--rail-main-hit-width, 44px);
+}
+.station-fares .station-disc {
+    box-sizing: border-box;
+    flex: none;
+    transform: scale(var(--rail-station-scale, 1));
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border: 2px solid #759184;
+    border-radius: 50%;
+    background: #f2f7f3;
+    color: #759184;
+    font: 22px/1 "Computer Modern Bold", serif;
+}
+.station-fares .main-station .station-disc {
+    width: 42px;
+    height: 42px;
+    border: 3px solid #347b77;
+    background: #c6e1d7;
+    color: #397970;
+    font-size: 24px;
+}
+.station-fares .station-disc:empty::after {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+}
+.station-fares .rail-station.numbered .station-disc {
+    background: #d7eade;
+    color: #204e40;
+}
+.station-fares .main-station.numbered .station-disc {
+    background: #195f63;
+    border-color: #195f63;
+    color: #fff;
+}
+.station-fares .rail-station:hover .station-disc { box-shadow: 0 0 0 3px #c3dcd4; }
+.station-fares .rail-station[aria-pressed="true"] .station-disc {
+    outline: 2px dashed #204f53;
+    outline-offset: 3px;
+}
+.station-fares .rail-station:focus-visible { outline-offset: 1px; }
+
+.station-fares .rail-readout {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2px 12px;
+    padding: 7px 13px;
+    border-top: 1px solid var(--rail-border);
+    border-radius: 0 0 5px 5px;
+    background: #f1f5f1;
+    font-size: 15px;
+}
+.station-fares .rail-meter { display: inline-flex; align-items: baseline; gap: 10px; }
+.station-fares .rail-meter strong { font: 19px/1 "Computer Modern Bold", serif; }
+.station-fares #rail-result[data-state="duplicate"] { color: #84391f; }
+.station-fares #rail-result[data-state="complete"] { color: #075c49; font-weight: bold; }
+
+.station-fares .rail-card-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 16px 0 8px;
+}
+.station-fares #rail-cards-label { font-weight: bold; }
+.station-fares #rail-stock { color: #516864; font-size: 15px; }
+.station-fares .rail-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(44px, 58px));
+    gap: 7px;
+}
+.station-fares button.number-card {
+    position: relative;
+    min-height: 49px;
+    padding: 0 0 5px;
+    border: 1px solid #96aca3;
+    border-radius: 5px;
+    background: #fdfbf4;
+    box-shadow: 0 2px 0 #dce2d9;
+    color: var(--rail-ink);
+    font: 23px/1 "Computer Modern Bold", serif;
+    touch-action: manipulation;
+}
+.station-fares .number-card::after {
+    content: "";
+    position: absolute;
+    inset: auto 5px 5px;
+    border-bottom: 1px dashed #adbbb0;
+}
+.station-fares .number-card[aria-pressed="true"],
+.station-fares .number-card[aria-pressed="true"]:hover {
+    color: #fff;
+    background: #195f63;
+    border-color: #195f63;
+    outline: 2px solid #195f63;
+    outline-offset: 1px;
+}
+.station-fares .number-card[aria-pressed="true"]::after { border-color: #bdcfca; }
+.station-fares .number-card:disabled {
+    background: #f0f2ed;
+    color: #67766e;
+    border: 1px dashed #b8c3b9;
+    box-shadow: none;
+}
+.station-fares .number-card:disabled::before {
+    content: "✓";
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    font: bold 10px/1 sans-serif;
+}
+.station-fares #rail-instruction { margin: 15px 0 9px; font-size: 16px; }
+.station-fares .rail-actions { gap: 8px; }
+.station-fares .rail-actions button:disabled {
+    background: #f0f2ef;
+    color: #6e7771;
+    border-color: #d3dbd4;
+}
+.station-fares #rail-remove:not(:disabled) { background: #195f63; color: #fff; border-color: #195f63; }
+.station-fares #rail-remove:not(:disabled):hover { background: #104e51; }
+
+@media (max-width: 560px) {
+    .station-fares .rail-toolbar { justify-content: space-between; gap: 8px; }
+    .station-fares .rail-language { margin-inline-start: 0; }
+    .station-fares .rail-toolbar label { font-size: 15px; }
+    .station-fares .rail-toolbar select,
+    .station-fares .rail-toolbar button,
+    .station-fares .rail-actions button { padding-inline: 8px; font-size: 15px; }
+    .station-fares .rail-cards { grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); }
+}

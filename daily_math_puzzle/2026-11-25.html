@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/25: numbering stations on a branched route. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/25</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="station-fares.css" type="text/css">
+    <script type="module" src="station-fares.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-25" aria-current="page">2026/11/25</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/25</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>The main line has one or more stations in a row, with a track joining each pair of consecutive stations.
+Any number of additional tracks may branch off from each station on the main line.
+Each such track leads directly to a station served only by that track.
+Let \(n\geq 2\) be the total number of stations, and assign the numbers \(1\) through \(n\) to the stations, using each number once.
+The fare for a track is the larger of the two numbers at its ends minus the smaller.
+Prove that the stations can be numbered so that all the fares are different.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>本線には一つ以上の駅が一直線に並び，隣り合う駅どうしが線路で結ばれている．
+本線の各駅からは，さらに何本かの線路が延びていてもよい．
+それぞれの先には，その線路だけが通じる駅が一つある．
+駅の総数を \(n\)（\(n\geq 2\)）とし，各駅に \(1\) から \(n\) までの番号を重複なく一つずつ付ける．
+各線路の料金は，両端の駅の番号のうち，大きい方から小さい方を引いた値とする．
+すべての線路の料金が互いに異なるように番号を付けられることを示せ．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+        <h2 id="try-it">Try it</h2>
+        <noscript><p>Enable JavaScript to try the puzzle. <span lang="ja">操作するにはJavaScriptを有効にしてください．</span></p></noscript>
+        <div id="station-fares" class="coin-game station-fares" lang="en" hidden>
+            <div class="game-settings rail-toolbar">
+                <label><span data-copy="stations">Stations</span><select id="rail-size"></select></label>
+                <button type="button" id="rail-new">
+                    <svg aria-hidden="true" viewBox="0 0 20 20" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5h2c5 0 5 10 10 10h3m-3-3 3 3-3 3M2 15h2c1.6 0 2.8-1.1 3.9-2.7M10.7 7.2C11.8 5.7 12.9 5 14 5h3m-3-3 3 3-3 3"/></svg>
+                    <span data-copy="newMap">New map</span>
+                </button>
+                <label class="rail-language"><span data-copy="language">言語</span>
+                    <select id="rail-language"><option value="en" lang="en">English</option><option value="ja" lang="ja">日本語</option></select>
+                </label>
+            </div>
+            <div class="rail-frame">
+                <div id="rail-map" class="rail-map" role="group" aria-label="Route map">
+                    <svg id="rail-tracks" role="img" aria-label="Tracks"></svg>
+                </div>
+                <div class="rail-readout" role="status" aria-atomic="true">
+                    <span class="rail-meter"><span data-copy="distinct">Distinct fares</span> <strong id="rail-tally"></strong></span>
+                    <span id="rail-result"></span>
+                </div>
+            </div>
+            <div class="rail-card-heading">
+                <span id="rail-cards-label" data-copy="cards">Number cards</span>
+                <span id="rail-stock"></span>
+            </div>
+            <div id="rail-cards" class="rail-cards" role="group" aria-labelledby="rail-cards-label"></div>
+            <p id="rail-instruction" role="status" aria-atomic="true"></p>
+            <div class="game-actions rail-actions">
+                <button type="button" id="rail-remove" data-copy="remove" disabled>Remove number</button>
+                <button type="button" id="rail-undo" data-copy="undo" disabled>Undo</button>
+                <button type="button" id="rail-reset" data-copy="reset" disabled>Reset numbers</button>
+            </div>
+        </div>
+    </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-24.html" rel="prev">&larr; 2026/11/24</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
