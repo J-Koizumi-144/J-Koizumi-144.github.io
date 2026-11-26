@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/26: red and blue columns. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/26</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="column-colors.css" type="text/css">
+    <script type="module" src="column-colors.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-26" aria-current="page">2026/11/26</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/26</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+<p>Let \(n\) be a positive integer.
+The top row of a \(2\times 3n\) table contains \(1,2,\ldots,3n\) from left to right.
+Player A writes an integer from \(1\) to \(3n\) in each bottom cell, different from the number directly above it.
+Numbers may be repeated in the bottom row.
+After seeing the table, player B colors each cell red or blue so that cells containing the same number have the same color.
+B's score is the number of columns whose top cell is red and bottom cell is blue.</p>
+<p>Prove that B can always score at least \(n\) points, regardless of how A fills the bottom row.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+<p>\(n\) を正の整数とする．
+\(2\) 行 \(3n\) 列の表の上の行には，左から \(1,2,\ldots,3n\) と書かれている．
+Aさんは下の各マスに，真上の数とは異なる \(1\) 以上 \(3n\) 以下の整数を一つずつ書く．
+下の行では，同じ数を何度使ってもよい．
+Bさんはその表を見て，同じ数が書かれたマスを同じ色にするように，各マスを赤か青に塗る．
+上のマスが赤，下のマスが青になった列の数をBさんの得点とする．</p>
+<p>Aさんがどのように数を書き込んでも，Bさんが必ず \(n\) 点以上を取れることを示せ．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+        <h2 id="try-it">Try it</h2>
+        <noscript><p>Enable JavaScript to try the puzzle. <span lang="ja">操作するにはJavaScriptを有効にしてください．</span></p></noscript>
+        <div id="column-colors" class="coin-game column-colors" lang="en" hidden>
+            <div class="game-settings colors-settings">
+                <label>n <select id="colors-size"></select></label>
+                <label class="colors-language-setting"><span id="colors-language-label" data-copy="language" lang="ja">言語</span>
+                    <select id="colors-language">
+                        <option value="en" lang="en">English</option>
+                        <option value="ja" lang="ja">日本語</option>
+                    </select>
+                </label>
+            </div>
+            <p id="colors-instruction" class="colors-instruction" data-copy="instruction">Tap a number to switch all its cells between red and blue.</p>
+            <dl class="game-stats">
+                <div><dt data-copy="score">Score</dt><dd id="colors-score">0</dd></div>
+                <div><dt data-copy="target">Target</dt><dd id="colors-target">4</dd></div>
+            </dl>
+            <div class="colors-legend" aria-hidden="true">
+                <span class="colors-red-key">● <span data-copy="red">Red</span></span>
+                <span class="colors-blue-key">◆ <span data-copy="blue">Blue</span></span>
+                <span class="colors-point-key">✓ <span data-copy="point">Scoring column</span></span>
+            </div>
+            <div id="colors-board" class="colors-board" role="group" aria-describedby="colors-instruction colors-status"></div>
+            <p id="colors-status" class="colors-status" role="status" aria-live="polite" aria-atomic="true"></p>
+            <div class="game-actions">
+                <button type="button" id="colors-undo" data-copy="undo" disabled>Undo</button>
+                <button type="button" id="colors-reset" data-copy="reset" disabled>Reset colors</button>
+                <button type="button" id="colors-new" class="colors-new" data-copy="newTable">New table</button>
+            </div>
+        </div>
+    </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-25.html" rel="prev">&larr; 2026/11/25</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
