@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/27: Young diagram reflections. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/27</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="young-reflections.css" type="text/css">
+    <script type="module" src="young-reflections.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-27" aria-current="page">2026/11/27</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/27</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>A Young diagram is an arrangement of square boxes in left-aligned rows, with the row lengths in nonincreasing order from top to bottom.
+Color only the top-left box black and all the other boxes white.
+We want the black box to visit every box by repeatedly reversing the row containing it from left to right or the column containing it from top to bottom.
+Find all possible numbers of boxes in such a Young diagram.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>ヤング図形とは，正方形の箱を各行左詰めで並べ，行の長さが上から長い順に並んだ図形である．
+ヤング図形の左上の一箱だけを黒く，他の箱を白く塗る．
+黒い箱を含む行を左右反転する操作と，黒い箱を含む列を上下反転する操作を繰り返し，黒い箱が全ての箱を訪れるようにしたい．
+このようなヤング図形の箱の数としてあり得る値を全て求めよ．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+        <h2 id="try-it">Try it</h2>
+        <noscript><p>Enable JavaScript to try the puzzle. <span lang="ja">操作するにはJavaScriptを有効にしてください．</span></p></noscript>
+        <div id="young-reflections" class="coin-game young-reflections" lang="en" hidden>
+            <div class="game-settings young-settings">
+                <form id="young-generation" class="young-generation" novalidate>
+                    <label for="young-box-count"><span data-copy="boxes">Boxes</span>
+                        <input id="young-box-count" type="number" min="1" max="64" step="1" value="15" inputmode="numeric" aria-describedby="young-count-error">
+                    </label>
+                    <button id="young-random" type="submit" data-copy="random">Random</button>
+                </form>
+                <label class="young-language"><span id="young-language-label" data-copy="language" lang="ja">言語</span>
+                    <select id="young-language">
+                        <option value="en" lang="en">English</option>
+                        <option value="ja" lang="ja">日本語</option>
+                    </select>
+                </label>
+            </div>
+            <p id="young-count-error" class="young-count-error" role="status" hidden></p>
+            <p id="young-instruction" class="young-instruction" data-copy="instruction">Use + / − to edit; the walk restarts.</p>
+            <dl class="young-stats">
+                <div><dt data-copy="visited">Visited</dt><dd id="young-visited">1 / 15</dd></div>
+                <div><dt data-copy="moves">Moves</dt><dd id="young-moves">0</dd></div>
+            </dl>
+            <div id="young-board" class="young-board" role="grid" aria-rowcount="8" aria-colcount="8" aria-describedby="young-instruction young-status"></div>
+            <p id="young-status" class="young-status" role="status" aria-live="polite" aria-atomic="true"></p>
+            <div class="young-flips">
+                <button type="button" id="young-horizontal" class="young-flip"><span aria-hidden="true">↔ </span><span data-copy="horizontal">Flip row</span></button>
+                <button type="button" id="young-vertical" class="young-flip"><span aria-hidden="true">↕ </span><span data-copy="vertical">Flip column</span></button>
+            </div>
+            <div class="game-actions young-secondary">
+                <button type="button" id="young-undo" data-copy="undo" disabled>Undo</button>
+                <button type="button" id="young-reset" data-copy="reset" disabled>Reset walk</button>
+            </div>
+        </div>
+    </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-26.html" rel="prev">&larr; 2026/11/26</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
