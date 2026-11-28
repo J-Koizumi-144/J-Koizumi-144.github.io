@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Math Puzzle 2026/11/28: Black cell pairs. Problem in English and Japanese.">
+    <title>Daily Math Puzzle 2026/11/28</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="black-cell-pairs.css" type="text/css">
+    <script type="module" src="black-cell-pairs.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKET2GEYCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VKET2GEYCJ');
+    </script>
+</head>
+<body>
+    <nav class="navigation" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a> &gt; <a href="../daily_math_puzzle.html">Daily Math Puzzle</a> &gt; <time datetime="2026-11-28" aria-current="page">2026/11/28</time>
+    </nav>
+    <main>
+        <h2>Daily Math Puzzle 2026/11/28</h2>
+        <p class="puzzle-meta"><a href="https://x.com/DailyMathPuzzle">Daily Math Puzzle on X</a></p>
+
+        <section class="paper problem-statement" lang="en" aria-labelledby="english">
+            <h2 id="english">English</h2>
+            <p>Let \(n\) be a positive integer.
+Color at least one cell of an \(n\times n\) grid black and all the other cells white.
+In each black cell, write the ordered pair \((r,c)\), where \(r\) is the number of black cells in its row and \(c\) is the number of black cells in its column.
+We want the pairs written in any two black cells to be different.
+Find the maximum possible number of black cells.</p>
+        </section>
+
+        <section class="paper problem-statement" lang="ja" aria-labelledby="japanese">
+            <h2 id="japanese">日本語</h2>
+            <p>\(n\) を正整数とする．
+\(n\times n\) のマス目のうち \(1\) マス以上を黒く塗り，他のマスを白く塗る．
+それぞれの黒いマスに，「同じ行にある黒いマスの個数 \(r\)」と「同じ列にある黒いマスの個数 \(c\)」の組 \((r,c)\) を書き込む．
+どの二つの黒いマスにも異なる組が書き込まれるようにしたい．
+黒いマスの個数の最大値を求めよ．</p>
+        </section>
+
+        <section aria-labelledby="try-it">
+        <h2 id="try-it">Try it</h2>
+        <noscript><p>Enable JavaScript to try the puzzle. <span lang="ja">操作するにはJavaScriptを有効にしてください．</span></p></noscript>
+        <div id="black-cell-pairs" class="black-cell-pairs" lang="en" hidden>
+            <div class="pairs-settings">
+                <label><i>n</i>
+                    <select id="pairs-size" aria-label="Grid size">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4" selected>4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                </label>
+                <label><span id="pairs-language-label" data-copy="language" lang="ja">言語</span>
+                    <select id="pairs-language" aria-label="Language">
+                        <option value="en" lang="en">English</option>
+                        <option value="ja" lang="ja">日本語</option>
+                    </select>
+                </label>
+            </div>
+            <p id="pairs-instruction" class="pairs-instruction" data-copy="instruction">Click a cell to switch between black and white.</p>
+            <dl class="pairs-stats"><dt data-copy="black">Black cells</dt><dd id="pairs-black">0</dd></dl>
+            <div id="pairs-board" class="pairs-board" role="group" aria-describedby="pairs-instruction pairs-status"></div>
+            <p id="pairs-status" class="pairs-status" role="status" aria-live="polite" aria-atomic="true"></p>
+            <div class="pairs-actions">
+                <button type="button" id="pairs-undo" data-copy="undo" disabled>Undo</button>
+                <button type="button" id="pairs-reset" data-copy="reset" disabled>Reset</button>
+            </div>
+        </div>
+    </section>
+    </main>
+    <nav class="puzzle-footer" aria-label="Problem navigation">
+        <a href="2026-11-27.html" rel="prev">&larr; 2026/11/27</a>
+        <a href="../daily_math_puzzle.html">All Problems</a>
+    </nav>
+</body>
+</html>
